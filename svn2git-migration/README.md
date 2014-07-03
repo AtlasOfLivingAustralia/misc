@@ -18,6 +18,7 @@
 
 ---
 
+```
 git svn clone http://ala-collectory.googlecode.com/svn --trunk=trunk/collectory --tags=tags --authors-file=./authors-file.out -s collectory.git
 
 git svn clone http://ala-hubs.googlecode.com/svn --trunk=trunk/ala-hub       --tags=tags --authors-file=./authors-file.out -s ala-hub.git
@@ -34,3 +35,4 @@ git svn clone http://ala-hubs.googlecode.com/svn --trunk=trunk/tepapa-hub    --t
 git svn clone http://ala-portal.googlecode.com/svn --trunk=trunk/biocache-jms     --tags=tags --authors-file=./authors-file.out -s biocache-jms.git
 git svn clone http://ala-portal.googlecode.com/svn --trunk=trunk/biocache-service --tags=tags --authors-file=./authors-file.out -s biocache-service.git
 git svn clone http://ala-portal.googlecode.com/svn --trunk=trunk/biocache-store   --tags=tags --authors-file=./authors-file.out -s biocache-store.git
+```
