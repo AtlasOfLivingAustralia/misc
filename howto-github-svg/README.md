@@ -7,7 +7,7 @@
 - create a SVG file and store it on an external fileserver, like for example amazon s3
 - in your github markdown file (for example README.md) use the `<img>` HTML element with the `src` attribute set to the SVG file amazon s3 URL: `<img src="https://s3-ap-southeast-2.amazonaws.com/atlasoflivingaustralia.github.io/ala-hub/gfx/architecture-01.dot.svg"></img>` 
 
-example (click and/or zoom in/out this page to see that this is REALLY a GENUINE SVG diagram):
+_example (click and/or zoom in/out this page to see that this is REALLY a GENUINE SVG diagram):_
 
 <img src="https://s3-ap-southeast-2.amazonaws.com/atlasoflivingaustralia.github.io/ala-hub/gfx/architecture-01.dot.svg"></img>
 
