@@ -37,7 +37,7 @@ the `authors-file.out` mapping file is used in the `git svn clone ...` step; see
 * etc.
 
 ---
-
+so far the following svn modules/apps were migrated from googlecode.com to git/github:
 ```
 git svn clone http://ala-collectory.googlecode.com/svn --trunk=trunk/collectory --tags=tags --authors-file=./authors-file.out -s collectory.git
 
