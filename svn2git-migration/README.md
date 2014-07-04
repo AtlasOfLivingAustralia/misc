@@ -16,7 +16,7 @@ chris.flemming.ala@gmail.com = cflemming <chris.flemming.github@gmail.com>
 ...
 (no author) = no author <no.author@author.no>
 ```
-this `~/src/ala-dashboard_users-svn2git.out` mapping file is used in the `git svn clone ...` step; see the step `3.` bellow. NOTE: _It is a good idea (in fact required if your svn repo contains commits from '(no author)' to set a mapping for '(no author)' as shown in the example above)._
+the `authors-file.out` mapping file is used in the `git svn clone ...` step; see the step `3.` bellow. NOTE: _It is a good idea (in fact required if your svn repo contains commits from '(no author)' to set a mapping for '(no author)' as shown in the example above)._
 
 ###migrate
 1. in the web browser go to your github page and create a new repository, in this case: `ala-hub` `git@github.com:AtlasOfLivingAustralia/ala-hub.git`
