@@ -55,4 +55,10 @@ git svn clone http://ala-hubs.googlecode.com/svn --trunk=trunk/tepapa-hub    --t
 git svn clone http://ala-portal.googlecode.com/svn --trunk=trunk/biocache-jms     --tags=tags --authors-file=./authors-file.out -s biocache-jms.git
 git svn clone http://ala-portal.googlecode.com/svn --trunk=trunk/biocache-service --tags=tags --authors-file=./authors-file.out -s biocache-service.git
 git svn clone http://ala-portal.googlecode.com/svn --trunk=trunk/biocache-store   --tags=tags --authors-file=./authors-file.out -s biocache-store.git
+
+git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/alaspatial --tags=tags --authors-file=./authors-file.out -s alaspatial.git
+git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/webportal --tags=tags --authors-file=./authors-file.out -s webportal.git
+git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/layer-ingestion --tags=tags --authors-file=./authors-file.out -s layer-ingestion.git
+git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/layers-service --tags=tags --authors-file=./authors-file.out -s layers-service
+git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/layers-store --tags=tags --authors-file=./authors-file.out -s layers-store
 ```
