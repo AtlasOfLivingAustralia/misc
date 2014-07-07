@@ -61,4 +61,16 @@ git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/webpor
 git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/layer-ingestion --tags=tags --authors-file=./authors-file.out -s layer-ingestion.git
 git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/layers-service  --tags=tags --authors-file=./authors-file.out -s layers-service.git
 git svn clone http://alageospatialportal.googlecode.com/svn --trunk=trunk/layers-store    --tags=tags --authors-file=./authors-file.out -s layers-store.git
+
+git svn clone http://ala-fieldcapture.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/FieldCapture -s fieldcapture.git                
+git svn clone http://ala-fieldcapture.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ecodata      -s ecodata.git                     
+                                                                                                                                                                     
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/ozatlas             -s ozatlas.git              
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/ozatlas-android     -s ozatlas-android.git      
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/userdetails         -s userdetails.git          
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/fieldcapture-mobile -s fieldcapture-mobile.git  
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/fielddata-android   -s fielddata-android.git    
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/fielddata-mobile    -s fielddata-mobile.git     
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/fielddata-proxy     -s fielddata-proxy.git      
+git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/mobile-auth         -s ozatlas-proxy.git
 ```
