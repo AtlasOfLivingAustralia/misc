@@ -73,4 +73,10 @@ git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-f
 git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/fielddata-mobile    -s fielddata-mobile.git     
 git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/fielddata-proxy     -s fielddata-proxy.git      
 git svn clone http://ala-mobile.googlecode.com/svn       --tags=tags --authors-file=./authors-file.out --trunk=trunk/mobile-auth         -s ozatlas-proxy.git
+
+git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/image-loader         -s image-loader.git            
+git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/image-service        -s image-service.git           
+git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/image-tiling-agent   -s image-tiling-agent.git      
+git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/image-utils          -s image-utils.git             
+git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/images-client-plugin -s images-client-plugin.git
 ```
