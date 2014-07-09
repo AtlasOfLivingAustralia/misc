@@ -85,4 +85,15 @@ git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./
 git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-names-generator -s ala-names-generator.git
 git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sds-webapp2         -s sds-webapp2.git
 git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sensitive-species   -s sensitive-species.git
+
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-cas            -s ala-cas.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-cas-client     -s ala-cas-client.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-downloads      -s ala-downloads.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-fieldguide     -s ala-fieldguide.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-logger         -s ala-logger.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-logger-service -s ala-logger-service.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/bie-profile        -s bie-profile.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/bie-service        -s bie-service.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/bie-webapp2        -s bie-webapp2.git
+git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/specieslist-webapp -s specieslist-webapp.git
 ```
