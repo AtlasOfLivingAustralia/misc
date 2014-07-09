@@ -79,4 +79,10 @@ git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./
 git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/image-tiling-agent   -s image-tiling-agent.git      
 git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/image-utils          -s image-utils.git             
 git svn clone http://ala-images.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/images-client-plugin -s images-client-plugin.git
+
+git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-datacheck       -s sandbox.git
+git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-name-matching   -s ala-name-matching.git
+git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-names-generator -s ala-names-generator.git
+git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sds-webapp2         -s sds-webapp2.git
+git svn clone http://ala-portal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sensitive-species   -s sensitive-species.git
 ```
