@@ -96,4 +96,9 @@ git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./aut
 git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/bie-service        -s bie-service.git
 git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/bie-webapp2        -s bie-webapp2.git
 git svn clone http://ala-bie.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/specieslist-webapp -s specieslist-webapp.git
+
+git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/bhl-ftindex-manage -s bhl-ftindex-manage.git
+git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/demo-app           -s demo-app.git
+git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ftindexer          -s ftindexer.git
+git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/solr-plugin        -s solr-plugin.git
 ```
