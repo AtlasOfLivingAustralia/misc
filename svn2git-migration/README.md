@@ -36,7 +36,9 @@ the `authors-file.out` mapping file is used in the `git svn clone ...` step; see
 * `git remote show origin`
 * etc.
 
-###advanced - pre-processing/filtering the svn repo with svndumpfilter prior to importing to git/github
+###advanced
+
+####pre-processing/filtering the svn repo with svndumpfilter prior to importing to git/github
 
 ```BASH
 # PROBLEM:
