@@ -192,4 +192,14 @@ git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-fil
 git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/demo-app           -s bhl-demo-app.git
 git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ftindexer          -s bhl-ftindexer.git
 git svn clone http://bhl-au-ftindex.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/solr-plugin        -s bhl-solr-plugin.git
+
+git svn clone http://ala-expert.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/expert      -s ala-expert.git
+
+git svn clone http://specimen-browser.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/specimenbrowser -s specimenbrowser.git
+
+git svn clone http://ala-volunteer.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/volunteer-portal -s volunteer-portal.git
+
+git svn clone http://ala-dashboard.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/dashboard -s dashboard.git
+
+git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sightings -s sightings.git
 ```
