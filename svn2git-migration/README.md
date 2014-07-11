@@ -36,6 +36,95 @@ the `authors-file.out` mapping file is used in the `git svn clone ...` step; see
 * `git remote show origin`
 * etc.
 
+###advanced - pre-processing/filtering the svn repo with svndumpfilter prior to importing to git/github
+
+```BASH
+# PROBLEM:
+#
+# bash-3.2$ git remote add origin git@github.com:AtlasOfLivingAustralia/ecodata.git
+# bash-3.2$ git push origin --all
+# Counting objects: 6216, done.
+# Delta compression using up to 4 threads.
+# Compressing objects: 100% (3094/3094), done.
+# Writing objects: 100% (6216/6216), 5.01 MiB | 1.24 MiB/s, done.
+# Total 6216 (delta 3011), reused 2195 (delta 907)
+# remote: error: GH001: Large files detected.
+# remote: error: Trace: f783125ec9eea68ed1cf360875aa0590
+# remote: error: See http://git.io/iEPt8g for more information.
+# remote: error: File target/stacktrace.log is 353.79 MB; this exceeds GitHub's file size limit of 100 MB
+# remote: error: File target/stacktrace.log is 353.29 MB; this exceeds GitHub's file size limit of 100 MB
+# To git@github.com:AtlasOfLivingAustralia/ecodata.git
+# ! [remote rejected] master -> master (pre-receive hook declined)
+# ! [remote rejected] trunk -> trunk (pre-receive hook declined)
+# error: failed to push some refs to 'git@github.com:AtlasOfLivingAustralia/ecodata.git'
+# bash-3.2$
+#
+
+# first take a dump
+mbohun@firewolf:~/src> svnrdump dump http://ala-fieldcapture.googlecode.com/svn > svn_ala-fieldcapture.dump
+#
+# [...]
+#
+# * Dumped revision 1696.
+# * Dumped revision 1697.
+# * Dumped revision 1698.
+# * Dumped revision 1699.
+# mbohun@firewolf:~/src> cp svn_ala-fieldcapture.dump svn_ala-fieldcapture.dump.bak
+# mbohun@firewolf:~/src> ls -lah svn_ala-fieldcapture.dump
+# -rw-r--r-- 1 mbohun users 369M Jul 10 21:20 svn_ala-fieldcapture.dump
+
+# use svndumpfilter to remove the 353.79mb stacktrace.log from the dump
+mbohun@firewolf:~/src> svndumpfilter exclude --pattern "*/stacktrace.log" < svn_ala-fieldcapture.dump > svn_ala-fieldcapture-without-stacktrace_log.dump
+# Excluding prefix patterns:
+#    '/*/stacktrace.log'
+# 
+# Revision 0 committed as 0.
+# Revision 1 committed as 1.
+# Revision 2 committed as 2.
+# Revision 3 committed as 3.
+# Revision 4 committed as 4.
+# Revision 5 committed as 5.
+# Revision 6 committed as 6.
+# [...]
+#
+# Revision 1696 committed as 1696.
+# Revision 1697 committed as 1697.
+# Revision 1698 committed as 1698.
+# Revision 1699 committed as 1699.
+# 
+# Dropped 1 node:
+#    '/trunk/ecodata/target/stacktrace.log'
+# 
+# mbohun@firewolf:~/src>
+
+# a simplistic verification
+mbohun@firewolf:~/src> ls -lah *.dump
+# -rw-r--r-- 1 mbohun users 369M Jul 10 21:20 svn_ala-fieldcapture.dump
+# -rw-r--r-- 1 mbohun users  15M Jul 11 10:29 svn_ala-fieldcapture-without-stacktrace_log.dump
+
+# create a (tmp) svn repo to import/load our filtered version of our dump
+mbohun@firewolf:~/src> svnadmin create svn_ala-fieldcapture-local
+
+# load the filtered dump
+mbohun@firewolf:~/src> svnadmin load ./svn_ala-fieldcapture-local < svn_ala-fieldcapture-without-stacktrace_log.dump
+
+# svnserve the new repo
+mbohun@firewolf:~/src> svnserve -d -r ./svn_ala-fieldcapture-local
+
+# ...and we are ready to migrate to git/github
+mbohun@firewolf:~/src> git svn clone svn://localhost --tags=tags --authors-file=./authors-file.out --trunk=trunk/ecodata -s ecodata.git
+
+# ...resuming our interrupted migration:
+mbohun@firewolf:~/src> cd ecodata.git
+mbohun@firewolf:~/src/ecodata.git> git for-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | while read tagname; do git tag "$tagname" "tags/$tagname"; git branch -r -d "tags/$tagname"; done
+mbohun@firewolf:~/src/ecodata.git> git for-each-ref refs/remotes | cut -d / -f 3- | grep -v @ | while read branchname; do git branch "$branchname" "refs/remotes/$branchname"; git branch -r -d "$branchname"; done
+mbohun@firewolf:~/src/ecodata.git> git remote add origin git@github.com:AtlasOfLivingAustralia/ecodata.git
+mbohun@firewolf:~/src/ecodata.git> git push origin --all
+mbohun@firewolf:~/src/ecodata.git> git push origin --tags
+
+# done :-)
+```
+
 ---
 so far the following svn modules/apps were migrated from googlecode.com to git/github:
 ```
