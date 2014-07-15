@@ -203,4 +203,6 @@ git svn clone http://ala-dashboard.googlecode.com/svn --tags=tags --authors-file
 
 git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/fielddata -s fielddata.git
 git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sightings -s sightings.git
+
+git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-web-theme -s ala-web-theme.git
 ```
