@@ -205,4 +205,8 @@ git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file
 git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sightings -s sightings.git
 
 git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/ala-web-theme -s ala-web-theme.git
+
+git svn clone http://ala-alerts.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk -s alerts.git
+
+git svn clone http://ala-regions.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk -s regions.git
 ```
