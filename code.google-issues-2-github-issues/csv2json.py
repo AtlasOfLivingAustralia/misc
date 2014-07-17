@@ -3,6 +3,36 @@ import csv
 import json
 import unicodedata
 
+def extract_project_labels(str):
+    text = unicodedata.normalize('NFKD', str).encode('ascii', 'ignore')
+    labels = text.strip().split(",")
+
+    project = []
+
+    # remove empty and non project label-s like Type-, Priority-
+    for label_text in labels:
+        label = label_text.strip()
+        if len(label) == 0:
+            continue
+
+        if label.find("Type") > -1:
+            continue
+
+        if label.find("Priority") > -1:
+            continue
+
+        # remove synonyms like SpatialPortal Spatial-Portal, replacing it with one label: SpatialPortal
+        if label.find("Spatial-Portal") > -1:
+            continue
+
+        project.append(label)
+
+    # TODO: do it properly/cleanly
+    # remove synonyms like SpatialPortal Spatial-Portal, replacing it with one label: SpatialPortal
+    # project.index("Spatial-Portal")
+        
+    return project
+
 def create_json(file_name, column_names):
     csv_file = open(file_name[0], 'r')
 
@@ -18,22 +48,8 @@ def create_json(file_name, column_names):
     print '<table border="1">'
 
     for issue in data:
-        text = unicodedata.normalize('NFKD', issue["AllLabels"]).encode('ascii', 'ignore')
-        labels = text.strip().split(",")
 
-        project = []
-        for label_text in labels:
-            label = label_text.strip()
-            if len(label) == 0:
-                continue
-
-            if label.find("Type") > -1:
-                continue
-
-            if label.find("Priority") > -1:
-                continue
-
-            project.append(label)
+        project = extract_project_labels(issue["AllLabels"]);
 
         # for issues that have 0 or multiple number of projects, print them out:
         if len(project) != 1:
