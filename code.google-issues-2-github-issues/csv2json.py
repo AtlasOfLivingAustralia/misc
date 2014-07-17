@@ -2,6 +2,8 @@ import sys
 import csv
 import json
 import unicodedata
+import requests
+from lxml import html
 
 def extract_project_labels(str):
     text = unicodedata.normalize('NFKD', str).encode('ascii', 'ignore')
@@ -32,6 +34,13 @@ def extract_project_labels(str):
 
     return project
 
+def get_issue_details(id):
+    page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + id)
+    tree = html.fromstring(page.text)
+    details = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
+    print details
+    return details
+
 def create_json(file_name, column_names):
     csv_file = open(file_name[0], 'r')
 
@@ -61,6 +70,7 @@ def create_json(file_name, column_names):
             print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
         else:
             issue["project"] = project[0]
+            issue["details"] = get_issue_details(issue["ID"])
 
     print '</table>'
     print '</body>'
