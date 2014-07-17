@@ -21,16 +21,15 @@ def extract_project_labels(str):
         if label.find("Priority") > -1:
             continue
 
-        # remove synonyms like SpatialPortal Spatial-Portal, replacing it with one label: SpatialPortal
-        if label.find("Spatial-Portal") > -1:
-            continue
-
         project.append(label)
 
     # TODO: do it properly/cleanly
     # remove synonyms like SpatialPortal Spatial-Portal, replacing it with one label: SpatialPortal
-    # project.index("Spatial-Portal")
-        
+    if "Spatial-Portal" in project:
+        project.pop(project.index("Spatial-Portal"))
+        if not "SpatialPortal" in project:
+            project.append("SpatialPortal")
+
     return project
 
 def create_json(file_name, column_names):
