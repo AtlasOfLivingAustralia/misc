@@ -59,10 +59,14 @@ def create_json(file_name, column_names):
             if len(project) > 1:
                 err = "MULTIPLE ({}) PROJECTS".format(project);
             print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
+        else:
+            issue["project"] = project[0]
 
     print '</table>'
     print '</body>'
     print '</html>'
+
+    out = json.dumps(data)
 
     json_file = open(file_name[0] + ".json", 'w')
     json_file.write(out);
