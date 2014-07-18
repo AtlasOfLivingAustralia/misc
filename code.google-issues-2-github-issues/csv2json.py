@@ -38,7 +38,9 @@ def get_issue_details(id):
     page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + id)
     tree = html.fromstring(page.text)
     details = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
-    print details
+    comments = tree.xpath('//div[@class="cursor_off vt issuecomment"]/div/span[@class="date"]/@title')
+    #print "COMMENTS:" + str(comments)
+
     return details
 
 def create_json(file_name, column_names):
