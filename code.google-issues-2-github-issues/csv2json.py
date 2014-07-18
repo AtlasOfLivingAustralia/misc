@@ -46,8 +46,9 @@ def get_issue_details(id):
 
     # issue comment/change text
 
-    # issue comment/change Labels change, for example change in priority: -Priority-Medium Priority-Low
-
+    # issue comment/change "Owner:"  change, for example: "chris.godwin.ala"; TODO: this needs mapping to github username
+    # issue comment/change "Cc:"     change, for example: "-chris.godwin.ala CoolDad67"; TODO: this needs mapping to github username
+    # issue comment/change "Labels:" change, for example change in priority: -Priority-Medium Priority-Low
 
     #print "COMMENTS:" + str(comments)
 
