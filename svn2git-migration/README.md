@@ -209,4 +209,7 @@ git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors
 git svn clone http://ala-alerts.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk -s alerts.git
 
 git svn clone http://ala-regions.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk -s regions.git
+
+git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/apikey -s apikey.git
+git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/webapi -s webapi.git
 ```
