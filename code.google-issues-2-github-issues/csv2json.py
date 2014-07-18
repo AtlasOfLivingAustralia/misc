@@ -37,8 +37,18 @@ def extract_project_labels(str):
 def get_issue_details(id):
     page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + id)
     tree = html.fromstring(page.text)
+
+    # issue description
     details = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
+
+    # issue comment/change date string
     comments = tree.xpath('//div[@class="cursor_off vt issuecomment"]/div/span[@class="date"]/@title')
+
+    # issue comment/change text
+
+    # issue comment/change Labels change, for example change in priority: -Priority-Medium Priority-Low
+
+
     #print "COMMENTS:" + str(comments)
 
     return details
