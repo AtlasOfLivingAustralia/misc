@@ -42,7 +42,16 @@ def get_issue_details(id):
     details = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
 
     # issue comment/change date string
-    comments = tree.xpath('//div[@class="cursor_off vt issuecomment"]/div/span[@class="date"]/@title')
+    box_tags   = tree.xpath('//div[@class="cursor_off vt issuecomment"]/div[@class="updates"]/div[@class="box-inner"]/b/text()')
+    box_values = tree.xpath('//div[@class="cursor_off vt issuecomment"]/div[@class="updates"]/div[@class="box-inner"]/text()')
+
+    # strip the strings in the list
+    box_values_stripped = [str.strip(object) for object in box_values]
+
+    # remove empty strings ''
+    for object in box_values_stripped[:]:
+        if not len(str(object)):
+            del box_values_stripped[box_values_stripped.index(object)]
 
     # issue comment/change text
 
@@ -50,7 +59,9 @@ def get_issue_details(id):
     # issue comment/change "Cc:"     change, for example: "-chris.godwin.ala CoolDad67"; TODO: this needs mapping to github username
     # issue comment/change "Labels:" change, for example change in priority: -Priority-Medium Priority-Low
 
-    #print "COMMENTS:" + str(comments)
+    print 'BOX ({}): {}'.format(id, str(box_tags))
+    print 'BOX ({}): {}'.format(id, str(box_values))
+    print 'BOX ({}): {}'.format(id, str(box_values_stripped))
 
     return details
 
