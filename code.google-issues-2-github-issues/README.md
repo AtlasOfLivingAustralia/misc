@@ -11,7 +11,7 @@ grep 'id: ' ala_issues.out
 grep 'id: ' ala_issues.out | sort | uniq | wc -l => 100
 ```
 
-##### to clean the id string info from " id: 539}," to "539" (that is sort-able, etc.)
+##### to cleanup the id string info from " id: 539}," to "539" (that is sort-able, etc.)
 ```BASH
 grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
 ```
@@ -42,7 +42,7 @@ python csv2json.py ala-issues-all-2014-07-15.csv
 ```BASH
 cat ala-issues-all-2014-07-15.csv.json | python -m json.tool
 ```
-##### get the name-s of all available projects
+##### get the name-s of all available project-s extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a destination - a github repo name where you want to migrate the issue for that project
 ```BASH
 cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"project\"" | sort |uniq
         "project": "Alerts"
@@ -124,8 +124,8 @@ Enter host password for user 'mbohun':
   }
 }
 ```
+##### GET all issues for atlasoflivingaustralia biocache-hubs repo
 ```BASH
-# GET all issues for atlasoflivingaustralia biocache-hubs repo
 curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
 Enter host password for user 'mbohun':
 [
@@ -193,8 +193,8 @@ Enter host password for user 'mbohun':
   }
 ]
 ```
+##### POST to create an issue test 
 ```BASH
-# POST to create an issue test 
 curl --user "mbohun" --request POST --data '{ "title": "only a test issue, created using github api v3 from BASH and curl", "body": "This is the issues body, description, very deep in all important details.", "assignee": "nickdos", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
 Enter host password for user 'mbohun':
 {
@@ -266,8 +266,8 @@ Enter host password for user 'mbohun':
   "closed_by": null
 }
 ```
+##### POST to edit/modify an existing issue
 ```BASH
-# POST to edit/modify an existing issue
 mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "title": "Only a TEST issue, created from the commandline using github api v3 from BASH and curl", "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.", "assignee": "djtfmartin", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
 Enter host password for user 'mbohun':
 {
@@ -339,8 +339,8 @@ Enter host password for user 'mbohun':
   "closed_by": null
 }
 ```
+##### POST to comment on an issue
 ```BASH
-# POST to comment on an issue
 curl --user "mbohun" --request POST --data '{ "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen." }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
 Enter host password for user 'mbohun':
 {
@@ -372,8 +372,8 @@ Enter host password for user 'mbohun':
   "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen."
 }
 ```
+##### POST to change the label-s of an issue to (one of the predefined labels) "enhancement"
 ```BASH
-# POST to change the label-s of an issue to (one of the predefined labels) "enhancement"
 curl --user "mbohun" --request POST --data '{ "labels": ["enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
 Enter host password for user 'mbohun':
 {
@@ -440,8 +440,8 @@ Enter host password for user 'mbohun':
   "closed_by": null
 }
 ```
+##### GET all labels for atlasoflivingaustralia biocache-hubs
 ```BASH
-# GET all labels for atlasoflivingaustralia biocache-hubs
 curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/labels
 Enter host password for user 'mbohun':
 [
