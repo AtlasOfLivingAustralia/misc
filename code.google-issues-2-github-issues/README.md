@@ -1,9 +1,15 @@
-# some preliminary investigation in case google does not give us access to their deprecated/disabled issues API
+###PROBLEM
 
-# extracting issue IDs
+###SOLUTION
+
+#### some preliminary investigation in case google does not give us access to their deprecated/disabled issues API
+
+extracting issue IDs
+```BASH
 curl https://code.google.com/p/ala/issues/list > ala_issues.out
 grep 'id: ' ala_issues.out
 grep 'id: ' ala_issues.out | sort | uniq | wc -l => 100
+```
 
 # to clean the id string info from " id: 539}," to "539" (that is sort-able, etc.)
 grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
