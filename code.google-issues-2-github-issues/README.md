@@ -1,20 +1,17 @@
 ###OBJECTIVE
-migrate [Atlas of Living Australia](http://www.ala.org.au) issues (issue tracker) from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list) to [https://github.com/AtlasOfLivingAustralia](https://github.com/AtlasOfLivingAustralia)
+Migrate [Atlas of Living Australia](http://www.ala.org.au) issues (issue tracker) from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list) to [https://github.com/AtlasOfLivingAustralia](https://github.com/AtlasOfLivingAustralia)
 
 ###PROBLEM
 Google did disable the API for google code issues one year ago, so we can't simply use their API to get the issues in JSON format - we will have to roll our own, and most likely 'scrape' the information we want to migrate from the google code issues HTML pages.
 
 ###SOLUTION
-
-##### some preliminary investigation in case google does not give us access to their deprecated/disabled issues API
-
-extracting issue IDs
+Some preliminary investigation in case google does not give us access to their deprecated/disabled issues API
+##### extracting issue IDs
 ```BASH
 curl https://code.google.com/p/ala/issues/list > ala_issues.out
 grep 'id: ' ala_issues.out
 grep 'id: ' ala_issues.out | sort | uniq | wc -l => 100
 ```
-
 ##### to cleanup the id string info from " id: 539}," to "539" (that is sort-able, etc.)
 ```BASH
 grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
@@ -272,7 +269,7 @@ Enter host password for user 'mbohun':
 ```
 ##### POST to edit/modify an existing issue
 ```BASH
-mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "title": "Only a TEST issue, created from the commandline using github api v3 from BASH and curl", "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.", "assignee": "djtfmartin", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
+curl --user "mbohun" --request POST --data '{ "title": "Only a TEST issue, created from the commandline using github api v3 from BASH and curl", "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.", "assignee": "djtfmartin", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
 Enter host password for user 'mbohun':
 {
   "url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4",
