@@ -16,16 +16,14 @@ grep 'id: ' ala_issues.out | sort | uniq | wc -l => 100
 ```BASH
 grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
 ```
-
 ##### good news the google issue page offers download of the issues summary table in CSV format; [see the CSV link in the right bottom corner](https://code.google.com/p/ala/issues/list)
-
-##### single issue page/details is accessible like:
-```BASH
-curl https://code.google.com/p/ala/issues/detail?id=77 >> issue-77.html
-```
 ##### join the 4 separate .csv file-s downloaded from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list)
 ```BASH
 cat ala-issues.csv ala-issues\ \(1\).csv ala-issues\ \(2\).csv ala-issues\ \(3\).csv >> ala-issues-all-2014-07-15.csv
+```
+##### single issue page/details is accessible like:
+```BASH
+curl https://code.google.com/p/ala/issues/detail?id=77 >> issue-77.html
 ```
 ##### wrote [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py)
 ```BASH
