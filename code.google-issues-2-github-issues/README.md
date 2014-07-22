@@ -338,6 +338,74 @@ Enter host password for user 'mbohun':
   "closed_by": null
 }
 ```
+##### PATCH to modify an issue
+```BASH
+curl --user "mbohun" --request PATCH --data '{ "title": "Changed title using HTTP PATCH (instead of HTTP POST)" }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
+Enter host password for user 'mbohun':
+{
+  "url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4",
+  "labels_url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4/labels{/name}",
+  "comments_url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4/comments",
+  "events_url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4/events",
+  "html_url": "https://github.com/AtlasOfLivingAustralia/biocache-hubs/issues/4",
+  "id": 38279675,
+  "number": 4,
+  "title": "Changed title using HTTP PATCH (instead of HTTP POST)",
+  "user": {
+    "login": "mbohun",
+    "id": 1772897,
+    "avatar_url": "https://avatars.githubusercontent.com/u/1772897?",
+    "gravatar_id": "dcdbc4e57c547efe72932b586079d9d6",
+    "url": "https://api.github.com/users/mbohun",
+    "html_url": "https://github.com/mbohun",
+    "followers_url": "https://api.github.com/users/mbohun/followers",
+    "following_url": "https://api.github.com/users/mbohun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/mbohun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/mbohun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/mbohun/subscriptions",
+    "organizations_url": "https://api.github.com/users/mbohun/orgs",
+    "repos_url": "https://api.github.com/users/mbohun/repos",
+    "events_url": "https://api.github.com/users/mbohun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/mbohun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/labels/enhancement",
+      "name": "enhancement",
+      "color": "84b6eb"
+    }
+  ],
+  "state": "open",
+  "assignee": {
+    "login": "djtfmartin",
+    "id": 444897,
+    "avatar_url": "https://avatars.githubusercontent.com/u/444897?",
+    "gravatar_id": "8fccf27675dce1089c7db391650ec09d",
+    "url": "https://api.github.com/users/djtfmartin",
+    "html_url": "https://github.com/djtfmartin",
+    "followers_url": "https://api.github.com/users/djtfmartin/followers",
+    "following_url": "https://api.github.com/users/djtfmartin/following{/other_user}",
+    "gists_url": "https://api.github.com/users/djtfmartin/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/djtfmartin/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/djtfmartin/subscriptions",
+    "organizations_url": "https://api.github.com/users/djtfmartin/orgs",
+    "repos_url": "https://api.github.com/users/djtfmartin/repos",
+    "events_url": "https://api.github.com/users/djtfmartin/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/djtfmartin/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "milestone": null,
+  "comments": 3,
+  "created_at": "2014-07-21T06:48:35Z",
+  "updated_at": "2014-07-22T09:04:34Z",
+  "closed_at": null,
+  "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.",
+  "closed_by": null
+}
+```
 ##### POST to comment on an issue
 ```BASH
 curl --user "mbohun" --request POST --data '{ "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen." }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
