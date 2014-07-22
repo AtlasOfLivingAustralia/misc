@@ -283,7 +283,7 @@ Enter host password for user 'mbohun':
   "closed_by": null
 }
 ```
-
+```BASH
 # POST to edit/modify an existing issue
 mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "title": "Only a TEST issue, created from the commandline using github api v3 from BASH and curl", "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.", "assignee": "djtfmartin", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
 Enter host password for user 'mbohun':
@@ -355,7 +355,8 @@ Enter host password for user 'mbohun':
   "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.",
   "closed_by": null
 }
-
+```
+```BASH
 # POST to comment on an issue
 mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen." }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
 Enter host password for user 'mbohun':
@@ -387,7 +388,8 @@ Enter host password for user 'mbohun':
   "updated_at": "2014-07-21T07:15:11Z",
   "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen."
 }
-
+```
+```BASH
 # POST to change the label-s of an issue to (one of the predefined labels) "enhancement"
 mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "labels": ["enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
 Enter host password for user 'mbohun':
@@ -454,7 +456,8 @@ Enter host password for user 'mbohun':
   "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.",
   "closed_by": null
 }
-
+```
+```BASH
 # GET all labels for atlasoflivingaustralia biocache-hubs
 mbohun@firewolf:~/src> curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/labels
 Enter host password for user 'mbohun':
@@ -505,3 +508,4 @@ Enter host password for user 'mbohun':
     "color": "ededed"
   }
 ]
+```
