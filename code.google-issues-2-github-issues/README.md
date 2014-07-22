@@ -2,7 +2,7 @@
 
 ###SOLUTION
 
-#### some preliminary investigation in case google does not give us access to their deprecated/disabled issues API
+##### some preliminary investigation in case google does not give us access to their deprecated/disabled issues API
 
 extracting issue IDs
 ```BASH
