@@ -22,17 +22,7 @@ grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
 ```BASH
 curl https://code.google.com/p/ala/issues/detail?id=77 >> issue-77.html
 ```
-```BASH
-grep "list?q=label:" issue-*
-# issue-511.html: <a href="list?q=label:Type-Enhancement"
-# issue-511.html: <a href="list?q=label:Priority-High"
-# issue-511.html: <a href="list?q=label:SpatialPortal"
-# issue-77.html: <a href="list?q=label:Priority-Medium"
-# issue-77.html: <a href="list?q=label:Type-Enhancement"
-# issue-77.html: <a href="list?q=label:Spatial-Portal"
-# issue-77.html: <a href="list?q=label:SpatialPortal"
-```
-##### join the 4 separate .csv file-s downloaded from https://code.google.com/p/ala/issues/list
+##### join the 4 separate .csv file-s downloaded from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list)
 ```BASH
 cat ala-issues.csv ala-issues\ \(1\).csv ala-issues\ \(2\).csv ala-issues\ \(3\).csv >> ala-issues-all-2014-07-15.csv
 ```
@@ -86,7 +76,6 @@ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"projec
         "project": "SpatialPortal"
         "project": "WEBAPI"
 ```
-
 ##### using the [github api v3](https://developer.github.com/v3)
 ```BASH
 curl --user "mbohun" https://api.github.com/users/mbohun
@@ -137,7 +126,7 @@ Enter host password for user 'mbohun':
 ```
 ```BASH
 # GET all issues for atlasoflivingaustralia biocache-hubs repo
-mbohun@firewolf:~/src> curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
+curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
 Enter host password for user 'mbohun':
 [
   {
@@ -206,7 +195,7 @@ Enter host password for user 'mbohun':
 ```
 ```BASH
 # POST to create an issue test 
-mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "title": "only a test issue, created using github api v3 from BASH and curl", "body": "This is the issues body, description, very deep in all important details.", "assignee": "nickdos", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
+curl --user "mbohun" --request POST --data '{ "title": "only a test issue, created using github api v3 from BASH and curl", "body": "This is the issues body, description, very deep in all important details.", "assignee": "nickdos", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
 Enter host password for user 'mbohun':
 {
   "url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4",
@@ -352,7 +341,7 @@ Enter host password for user 'mbohun':
 ```
 ```BASH
 # POST to comment on an issue
-mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen." }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
+curl --user "mbohun" --request POST --data '{ "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen." }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
 Enter host password for user 'mbohun':
 {
   "url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/comments/49577117",
@@ -385,7 +374,7 @@ Enter host password for user 'mbohun':
 ```
 ```BASH
 # POST to change the label-s of an issue to (one of the predefined labels) "enhancement"
-mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "labels": ["enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
+curl --user "mbohun" --request POST --data '{ "labels": ["enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
 Enter host password for user 'mbohun':
 {
   "url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4",
@@ -453,7 +442,7 @@ Enter host password for user 'mbohun':
 ```
 ```BASH
 # GET all labels for atlasoflivingaustralia biocache-hubs
-mbohun@firewolf:~/src> curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/labels
+curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/labels
 Enter host password for user 'mbohun':
 [
   {
