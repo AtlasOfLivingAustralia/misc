@@ -16,13 +16,12 @@ grep 'id: ' ala_issues.out | sort | uniq | wc -l => 100
 grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
 ```
 
-##### good news the google issue page offers download of the issues summary in CSV format
+##### good news the google issue page offers download of the issues summary table in CSV format; [see the CSV link in the right bottom corner](https://code.google.com/p/ala/issues/list)
 
 ##### single issue page/details is accessible like:
 ```BASH
 curl https://code.google.com/p/ala/issues/detail?id=77 >> issue-77.html
 ```
-
 ```BASH
 grep "list?q=label:" issue-*
 # issue-511.html: <a href="list?q=label:Type-Enhancement"
@@ -33,23 +32,11 @@ grep "list?q=label:" issue-*
 # issue-77.html: <a href="list?q=label:Spatial-Portal"
 # issue-77.html: <a href="list?q=label:SpatialPortal"
 ```
-
 ##### join the 4 separate .csv file-s downloaded from https://code.google.com/p/ala/issues/list
 ```BASH
 cat ala-issues.csv ala-issues\ \(1\).csv ala-issues\ \(2\).csv ala-issues\ \(3\).csv >> ala-issues-all-2014-07-15.csv
 ```
-
-##### translate the .csv into json format (creates ala-issues-all-2014-07-15.csv.json
-```BASH
-python csv2json.py ala-issues-all-2014-07-15.csv
-```
-
-##### examine the output json file
-```BASH
-cat ala-issues-all-2014-07-15.csv.json | python -m json.tool
-```
-
-wrote [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py)
+##### wrote [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py)
 ```BASH
 # that generates
 #    - ala-issues-all-2014-07-15.csv.json for migration
@@ -57,7 +44,14 @@ wrote [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/c
 #
 python csv2json.py ala-issues-all-2014-07-15.csv > ala-issues-all-2014-07-15.csv.html
 ```
-
+##### translate the .csv into json format (creates ala-issues-all-2014-07-15.csv.json
+```BASH
+python csv2json.py ala-issues-all-2014-07-15.csv
+```
+##### examine the output json file
+```BASH
+cat ala-issues-all-2014-07-15.csv.json | python -m json.tool
+```
 ##### get the name-s of all available projects
 ```BASH
 cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"project\"" | sort |uniq
