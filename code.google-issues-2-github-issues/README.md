@@ -11,18 +11,19 @@ grep 'id: ' ala_issues.out
 grep 'id: ' ala_issues.out | sort | uniq | wc -l => 100
 ```
 
-# to clean the id string info from " id: 539}," to "539" (that is sort-able, etc.)
+##### to clean the id string info from " id: 539}," to "539" (that is sort-able, etc.)
+```BASH
 grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
+```
 
-# google page offers download in CSV
+##### good news the google issue page offers download of the issues summary in CSV format
 
-# single issue page/details is accessible like:
+##### single issue page/details is accessible like:
+```BASH
 curl https://code.google.com/p/ala/issues/detail?id=77 >> issue-77.html
+```
 
-# looking at single issue-s details
-ls
-# ala_issues.out  issue-511.html  issue-77.html
-
+```BASH
 grep "list?q=label:" issue-*
 # issue-511.html: <a href="list?q=label:Type-Enhancement"
 # issue-511.html: <a href="list?q=label:Priority-High"
@@ -31,24 +32,35 @@ grep "list?q=label:" issue-*
 # issue-77.html: <a href="list?q=label:Type-Enhancement"
 # issue-77.html: <a href="list?q=label:Spatial-Portal"
 # issue-77.html: <a href="list?q=label:SpatialPortal"
+```
 
-# join the 4 separate .csv file-s downloaded from https://code.google.com/p/ala/issues/list
+##### join the 4 separate .csv file-s downloaded from https://code.google.com/p/ala/issues/list
+```BASH
 cat ala-issues.csv ala-issues\ \(1\).csv ala-issues\ \(2\).csv ala-issues\ \(3\).csv >> ala-issues-all-2014-07-15.csv
+```
 
-# translate the .csv into json format (creates ala-issues-all-2014-07-15.csv.json
+##### translate the .csv into json format (creates ala-issues-all-2014-07-15.csv.json
+```BASH
 python csv2json.py ala-issues-all-2014-07-15.csv
+```
 
-# examine the output json file
+##### examine the output json file
+```BASH
 cat ala-issues-all-2014-07-15.csv.json | python -m json.tool
+```
 
-# generates:
+wrote [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py)
+```BASH
+# that generates
 #    - ala-issues-all-2014-07-15.csv.json for migration
 #    - and HTML table problem report is stored in ala-issues-all-2014-07-15.csv.html
 #
 python csv2json.py ala-issues-all-2014-07-15.csv > ala-issues-all-2014-07-15.csv.html
+```
 
-# get the name-s of all available projects
-mbohun@firewolf:~/src/ala-misc.git/code.google-issues-2-github-issues> cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"project\"" | sort |uniq
+##### get the name-s of all available projects
+```BASH
+cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"project\"" | sort |uniq
         "project": "Alerts"
         "project": "ASBP"
         "project": "AUTH"
@@ -79,12 +91,12 @@ mbohun@firewolf:~/src/ala-misc.git/code.google-issues-2-github-issues> cat ala-i
         "project": "Sightings"
         "project": "SpatialPortal"
         "project": "WEBAPI"
+```
 
-# github api v3
-#
-mbohun@firewolf:~/src> curl --user "mbohun" https://api.github.com/users/mbohun
+##### using the [github api v3](https://developer.github.com/v3)
+```BASH
+curl --user "mbohun" https://api.github.com/users/mbohun
 Enter host password for user 'mbohun':
-
 {
   "login": "mbohun",
   "id": 1772897,
@@ -128,8 +140,8 @@ Enter host password for user 'mbohun':
     "private_repos": 0
   }
 }
-mbohun@firewolf:~/src>
-
+```
+```BASH
 # GET all issues for atlasoflivingaustralia biocache-hubs repo
 mbohun@firewolf:~/src> curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
 Enter host password for user 'mbohun':
@@ -197,7 +209,8 @@ Enter host password for user 'mbohun':
     "body": "Records that have a duplication_status value do NOT currently link through to the associated records - the record page simply states there are associated records. E.g. http://biocache.ala.org.au/occurrences/34096adc-4d86-4fed-9d56-14d4603d05c4 has:\r\n\r\nAssociated Occurrence Status:\t Representative record\r\n\r\nWe need to create a link to also show a list of all the associated records."
   }
 ]
-
+```
+```BASH
 # POST to create an issue test 
 mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "title": "only a test issue, created using github api v3 from BASH and curl", "body": "This is the issues body, description, very deep in all important details.", "assignee": "nickdos", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues
 Enter host password for user 'mbohun':
@@ -269,6 +282,7 @@ Enter host password for user 'mbohun':
   "body": "This is the issues body, description, very deep in all important details.",
   "closed_by": null
 }
+```
 
 # POST to edit/modify an existing issue
 mbohun@firewolf:~/src> curl --user "mbohun" --request POST --data '{ "title": "Only a TEST issue, created from the commandline using github api v3 from BASH and curl", "body": "see https://gist.github.com/mbohun/af110bcd6e6178b7def3 for beautiful details how this issue was created and edited.", "assignee": "djtfmartin", "labels": ["Label1", "Label2"] }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4
