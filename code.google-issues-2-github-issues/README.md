@@ -41,7 +41,7 @@ python csv2json.py ala-issues-all-2014-07-15.csv
 ```BASH
 cat ala-issues-all-2014-07-15.csv.json | python -m json.tool
 ```
-##### get the name-s of all available project-s extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a destination - a github repo name where you want to migrate the issue for that project
+##### get the name-s of all available project-s extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a destination - a github repo name where you want to migrate the issue for that project (for example all issues from our code.google.com issue tracker tagged with `"project": "FieldCapture"` will be migrated to [https://github.com/AtlasOfLivingAustralia/fieldcapture/issues](https://github.com/AtlasOfLivingAustralia/fieldcapture/issues))
 ```BASH
 cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"project\"" | sort |uniq
         "project": "Alerts"
