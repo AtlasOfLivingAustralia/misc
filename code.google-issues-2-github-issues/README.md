@@ -98,6 +98,15 @@ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Owner\":
         "Owner": "snomelf",
         "Owner": "waterandbirds",
 ```
+##### get all available issue statuses (statii) extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a github status
+```BASH
+cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Status\":"|sort|uniq
+        "Status": "Accepted",
+        "Status": "Blocked",
+        "Status": "New",
+        "Status": "OnDev",
+        "Status": "Started",
+```
 
 #### using the [github api v3](https://developer.github.com/v3)
 ```BASH
