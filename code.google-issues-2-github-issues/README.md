@@ -107,6 +107,15 @@ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Status\"
         "Status": "OnDev",
         "Status": "Started",
 ```
+##### get all available issue types extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a github issue type
+```BASH
+cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Type\":"|sed -e "s/,//"|sort|uniq
+        "Type": ""
+        "Type": "Defect"
+        "Type": "Enhancement"
+        "Type": "Review"
+        "Type": "Task"
+```
 
 #### using the [github api v3](https://developer.github.com/v3)
 ```BASH
