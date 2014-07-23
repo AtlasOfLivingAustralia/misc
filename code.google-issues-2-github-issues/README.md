@@ -75,7 +75,31 @@ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"projec
         "project": "SpatialPortal"
         "project": "WEBAPI"
 ```
-##### using the [github api v3](https://developer.github.com/v3)
+##### get all available issue owners extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a github user
+```BASH
+cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Owner\":"|sort|uniq
+        "Owner": "",
+        "Owner": "adam.collins832",
+        "Owner": "chris.flemming.ala",
+        "Owner": "chris.godwin.ala",
+        "Owner": "CoolDad67",
+        "Owner": "david.baird.ala",
+        "Owner": "drdavematthews",
+        "Owner": "john.tann@austmus.gov.au",
+        "Owner": "Kristen.williams@csiro.au",
+        "Owner": "leebelbin",
+        "Owner": "linda.riq",
+        "Owner": "mark.woolston@csiro.au",
+        "Owner": "milo_nicholls@hotmail.com",
+        "Owner": "moyesyside",
+        "Owner": "nickdos",
+        "Owner": "Sathish.Sathyamoorthy",
+        "Owner": "simon.bear@csiro.au",
+        "Owner": "snomelf",
+        "Owner": "waterandbirds",
+```
+
+#### using the [github api v3](https://developer.github.com/v3)
 ```BASH
 curl --user "mbohun" https://api.github.com/users/mbohun
 Enter host password for user 'mbohun':
