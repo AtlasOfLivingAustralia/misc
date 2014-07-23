@@ -130,6 +130,8 @@ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Priority
         "Priority": "Medium"
 ```
 
+---
+
 #### using the [github api v3](https://developer.github.com/v3)
 ```BASH
 curl --user "mbohun" https://api.github.com/users/mbohun
