@@ -116,6 +116,19 @@ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Type\":"
         "Type": "Review"
         "Type": "Task"
 ```
+##### get all available issue priorities extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a github issue priority
+NOTE: obviously synonyms like `high, High, HIgh` and/or `low, Low` are going to be merged into only one priority type High and Low respectively.  
+```BASH
+cat ala-issues-all-2014-07-17.csv.json | python -m json.tool|grep -e "\"Priority\":"|sed -e "s/,//"|sort|uniq
+        "Priority": ""
+        "Priority": "Critical"
+        "Priority": "high"
+        "Priority": "High"
+        "Priority": "HIgh"
+        "Priority": "low"
+        "Priority": "Low"
+        "Priority": "Medium"
+```
 
 #### using the [github api v3](https://developer.github.com/v3)
 ```BASH
