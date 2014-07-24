@@ -58,7 +58,8 @@ def get_issue_details(issue):
     tree = html.fromstring(page.text)
 
     # issue description, id="hc0"
-    details = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
+    details_xpath_element = tree.xpath('//div[@class="cursor_off vt issuedescription"]')
+    details = details_xpath_element[0].xpath('//pre/text()')
 
     # issue comments, id="hc1", "hc2", "hc3" and so on
     comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]')
