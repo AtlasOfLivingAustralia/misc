@@ -564,7 +564,49 @@ Enter host password for user 'mbohun':
   "closed_by": null
 }
 ```
-##### GET all labels for atlasoflivingaustralia biocache-hubs
+##### GET all (default) github issue labels
+```BASH
+curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/labels
+Enter host password for user 'mbohun':
+[
+  {
+    "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/bug",
+    "name": "bug",
+    "color": "fc2929"
+  },
+  {
+    "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/duplicate",
+    "name": "duplicate",
+    "color": "cccccc"
+  },
+  {
+    "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/enhancement",
+    "name": "enhancement",
+    "color": "84b6eb"
+  },
+  {
+    "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/help+wanted",
+    "name": "help wanted",
+    "color": "159818"
+  },
+  {
+    "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/invalid",
+    "name": "invalid",
+    "color": "e6e6e6"
+  },
+  {
+    "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/question",
+    "name": "question",
+    "color": "cc317c"
+  },
+  {
+    "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/wontfix",
+    "name": "wontfix",
+    "color": "ffffff"
+  }
+]
+```
+##### GET all labels for atlasoflivingaustralia biocache-hubs (where we previously created two custom labels `Label1` and `Label2`); are we going to use custom labels for issue priority (Priority-Low, Priority-Medium, Priority-High, Priority-Critical) and other code.google.com Label-s that do not have a github counterpart?
 ```BASH
 curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/labels
 Enter host password for user 'mbohun':
