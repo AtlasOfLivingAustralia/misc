@@ -34,22 +34,39 @@ def extract_project_labels(str):
 
     return project
 
-def get_issue_details(id):
-    page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + id)
+def get_issue_details(issue):
+
+    project = extract_project_labels(issue["AllLabels"]);
+
+    # for issues that have 0 or multiple number of projects, print them out:
+    if len(project) != 1:
+        #print 'id: {}, project_label({}): {}'.format(issue["ID"], len(project), project)
+        if len(project) == 0:
+            err = "NO PROJECT"
+                
+        if len(project) > 1:
+            err = "MULTIPLE ({}) PROJECTS".format(project);
+
+        print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
+
+        return
+
+    page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + issue["ID"])
     tree = html.fromstring(page.text)
 
     # issue description, id="hc0"
     details = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
 
     # issue comments, id="hc1", "hc2", "hc3" and so on
-    # '//div[@class="cursor_off vt issuedescription"]/pre/i/text()' => <pre><i>(No comments)</i></pre>
-    # '//div[@class="cursor_off vt issuecomment"]/pre/a/@href' => link in format '/p/ala/issues/detail?id=434' is link to other issue
+    comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]')
+    comments = []
 
-    comments = tree.xpath('//div[@class="cursor_off vt issuecomment"]')
-    for comment in comments:
-        print 'comment id: {}'.format(comment.xpath('@id'))
- 
-    return details
+    for c in comment_xpath_elements:
+        comments.append(c.xpath('@id'))
+
+    issue["project"] = project[0]
+    issue["details"] = details
+    issue["comments"] = comments
 
 def create_json(file_name, column_names):
     csv_file = open(file_name[0], 'r')
@@ -66,21 +83,7 @@ def create_json(file_name, column_names):
     print '<table border="1">'
 
     for issue in data:
-
-        project = extract_project_labels(issue["AllLabels"]);
-
-        # for issues that have 0 or multiple number of projects, print them out:
-        if len(project) != 1:
-            #print 'id: {}, project_label({}): {}'.format(issue["ID"], len(project), project)
-            if len(project) == 0:
-                err = "NO PROJECT"
-            
-            if len(project) > 1:
-                err = "MULTIPLE ({}) PROJECTS".format(project);
-            print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
-        else:
-            issue["project"] = project[0]
-            issue["details"] = get_issue_details(issue["ID"])
+        get_issue_details(issue)
 
     print '</table>'
     print '</body>'
