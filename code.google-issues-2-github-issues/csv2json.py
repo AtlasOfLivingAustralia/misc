@@ -48,7 +48,7 @@ def get_issue_details(issue):
             err = "NO PROJECT"
                 
         if len(project) > 1:
-            err = "MULTIPLE ({}) PROJECTS".format(project);
+            err = "MULTIPLE PROJECTS ({})".format(project);
 
         print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
 
@@ -84,6 +84,7 @@ def create_json(file_name, column_names):
     print '<html>'
     print '<body>'
     print '<table border="1">'
+    print '<tr><th>issue id</th><th>error description</th><th>link to issue</th></tr>'
 
     for issue in data:
         get_issue_details(issue)
