@@ -100,7 +100,7 @@ def create_json(file_name, column_names):
     print '</body>'
     print '</html>'
 
-    out = json.dumps(data)
+    out = json.dumps(data, sort_keys=True)
 
     json_file = open(file_name[0] + ".json", 'w')
     json_file.write(out);
