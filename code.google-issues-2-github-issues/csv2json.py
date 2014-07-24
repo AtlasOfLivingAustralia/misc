@@ -23,6 +23,9 @@ def extract_project_labels(str):
         if label.find("Priority") > -1:
             continue
 
+        if label.find("Milestone") > -1:
+            continue
+
         project.append(label)
 
     # TODO: do it properly/cleanly
