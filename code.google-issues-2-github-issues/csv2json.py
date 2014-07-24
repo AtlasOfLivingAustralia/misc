@@ -61,6 +61,13 @@ def get_issue_details(issue):
     details_xpath_element = tree.xpath('//div[@class="cursor_off vt issuedescription"]')
     details = details_xpath_element[0].xpath('pre/text()')
 
+    details_ahref = details_xpath_element[0].xpath('pre/a/@href')
+
+    # does the details section contains any links ?
+    if len(details_ahref):
+        # yes - process them - for now print them out
+        print 'DETAILS ({}) LINKS({}): {}'.format(issue["ID"], len(details_ahref), str(details_ahref))
+
     # issue comments, id="hc1", "hc2", "hc3" and so on
     comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]')
     comments = []
