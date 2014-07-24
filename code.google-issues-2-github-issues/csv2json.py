@@ -38,31 +38,17 @@ def get_issue_details(id):
     page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + id)
     tree = html.fromstring(page.text)
 
-    # issue description
+    # issue description, id="hc0"
     details = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
 
-    # issue comment/change date string
-    box_tags   = tree.xpath('//div[@class="cursor_off vt issuecomment"]/div[@class="updates"]/div[@class="box-inner"]/b/text()')
-    box_values = tree.xpath('//div[@class="cursor_off vt issuecomment"]/div[@class="updates"]/div[@class="box-inner"]/text()')
+    # issue comments, id="hc1", "hc2", "hc3" and so on
+    # '//div[@class="cursor_off vt issuedescription"]/pre/i/text()' => <pre><i>(No comments)</i></pre>
+    # '//div[@class="cursor_off vt issuecomment"]/pre/a/@href' => link in format '/p/ala/issues/detail?id=434' is link to other issue
 
-    # strip the strings in the list
-    box_values_stripped = [str.strip(object) for object in box_values]
-
-    # remove empty strings ''
-    for object in box_values_stripped[:]:
-        if not len(str(object)):
-            del box_values_stripped[box_values_stripped.index(object)]
-
-    # issue comment/change text
-
-    # issue comment/change "Owner:"  change, for example: "chris.godwin.ala"; TODO: this needs mapping to github username
-    # issue comment/change "Cc:"     change, for example: "-chris.godwin.ala CoolDad67"; TODO: this needs mapping to github username
-    # issue comment/change "Labels:" change, for example change in priority: -Priority-Medium Priority-Low
-
-    print 'BOX ({}): {}'.format(id, str(box_tags))
-    print 'BOX ({}): {}'.format(id, str(box_values))
-    print 'BOX ({}): {}'.format(id, str(box_values_stripped))
-
+    comments = tree.xpath('//div[@class="cursor_off vt issuecomment"]')
+    for comment in comments:
+        print 'comment id: {}'.format(comment.xpath('@id'))
+ 
     return details
 
 def create_json(file_name, column_names):
