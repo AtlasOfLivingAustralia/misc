@@ -58,15 +58,12 @@ def get_issue_details(issue):
     tree = html.fromstring(page.text)
 
     # issue description, id="hc0"
-    details_xpath_element = tree.xpath('//div[@class="cursor_off vt issuedescription"]')
-    details = details_xpath_element[0].xpath('pre/text()')
+    details_xpath_element = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre')
+    details_pre_full_text = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
+    print 'DETAILS ({}) pre FULL: {}'.format(issue["ID"], str(details_pre_full_text))
 
-    details_ahref = details_xpath_element[0].xpath('pre/a/@href')
-
-    # does the details section contains any links ?
-    if len(details_ahref):
-        # yes - process them - for now print them out
-        print 'DETAILS ({}) LINKS({}): {}'.format(issue["ID"], len(details_ahref), str(details_ahref))
+    for di in details_xpath_element[0].getiterator():
+        print 'DETAILS ({}): {}: {}'.format(issue["ID"], di.tag, di.text.encode('utf8'))
 
     # issue comments, id="hc1", "hc2", "hc3" and so on
     comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]')
@@ -76,7 +73,7 @@ def get_issue_details(issue):
         comments.append(c.xpath('@id'))
 
     issue["project"] = project[0]
-    issue["details"] = details
+    #issue["details"] = details
     issue["comments"] = comments
 
 def create_json(file_name, column_names):
