@@ -5,6 +5,31 @@ import unicodedata
 import requests
 from lxml import html
 
+#TODO: if element.attrib.has_key('href'): safer?
+
+def handler_element_a(element, result):
+    result.append({ "a" : { "text" : element.text.encode('utf8'), "link": element.get('href')}})
+
+def handler_element_b(element, result):
+    result.append({ "b" : { "text" : element.text.encode('utf8')}})
+
+def handler_element_i(element, result):
+    result.append({ "i" : { "text" : element.text.encode('utf8')}})
+
+def handler_element_pre(element, result):
+    result.append({ "pre" : { "text" : element.text.encode('utf8')}})
+
+element_handler_table = {
+    "a"        : handler_element_a,
+    "b"        : handler_element_b,
+    "i"        : handler_element_i,
+    "pre"      : handler_element_pre
+}
+
+def handle_element(element, result):
+    # try-catch for unknown element.tag
+    element_handler_table[element.tag](element, result)
+
 def extract_project_labels(str):
     text = unicodedata.normalize('NFKD', str).encode('ascii', 'ignore')
     labels = text.strip().split(",")
@@ -59,11 +84,13 @@ def get_issue_details(issue):
 
     # issue description, id="hc0"
     details_xpath_element = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre')
+    details = []
+
     details_pre_full_text = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
-    print 'DETAILS ({}) pre FULL: {}'.format(issue["ID"], str(details_pre_full_text))
+    details.append({ "pre-full" : str(details_pre_full_text)})
 
     for di in details_xpath_element[0].getiterator():
-        print 'DETAILS ({}): {}: {}'.format(issue["ID"], di.tag, di.text.encode('utf8'))
+        handle_element(di, details)
 
     # issue comments, id="hc1", "hc2", "hc3" and so on
     comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]')
@@ -73,7 +100,7 @@ def get_issue_details(issue):
         comments.append(c.xpath('@id'))
 
     issue["project"] = project[0]
-    #issue["details"] = details
+    issue["details"] = details
     issue["comments"] = comments
 
 def create_json(file_name, column_names):
