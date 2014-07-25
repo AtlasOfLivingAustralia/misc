@@ -26,3 +26,5 @@ b: What is the expected output? What do you see instead?
 '\nThat this wiki markup is stripped out.\r\n\r\nWhat version of the product are you us ing? On what operating system?\r\n9-3-11 build 89\r\n\r\nPlease provide any additional information below
 .\r\n\r\n\r\n Mar 8, 2011 Project Member #1 m ark.woolston@csiro.au \r\n(No comment was entered for this change.)\r\n Status: Accepted\n'
 ```
+
+see [https://code.google.com/p/ala/issues/detail?id=184](https://code.google.com/p/ala/issues/detail?id=184) for visual check/comparison.
