@@ -14,6 +14,7 @@ DETAILS (184): b: What is the expected output? What do you see instead?
 ```
 
 RE-CONSTRUCTED:
+(a: meas HTML link, b: means text will be in bold)
 ```
 '\nOriginal Issue reported by Project Member Reported by waterand...@gmail.com, Mar 8, 2011 - ',
 a: https://code.google.com/p/ala-collectory/issues/detail?id=23
