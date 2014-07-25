@@ -86,7 +86,7 @@ def get_issue_details(issue):
     details_xpath_element = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre')
     details = []
 
-    details_pre_full_text = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre/text()')
+    details_pre_full_text = details_xpath_element[0].xpath('text()')
     details.append({ "pre-full" : str(details_pre_full_text)})
 
     for di in details_xpath_element[0].getiterator():
