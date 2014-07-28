@@ -8,12 +8,12 @@ GITHUB_REQUEST_RATE=2
 temp=`basename $0`
 TMPFILE=`mktemp /tmp/${temp}.XXXXXX` || exit 1
 
-last_page=`curl -s -I "https://api.github.com/orgs/atlasoflivingaustralia/repos" | grep '^Link:' | sed -e 's/^Link:.*page=//g' | sed -e 's/>.*$//g'`
+last_page=`curl -s -I "https://api.github.com/orgs/$1/repos" | grep '^Link:' | sed -e 's/^Link:.*page=//g' | sed -e 's/>.*$//g'`
 sleep $GITHUB_REQUEST_RATE
 
 p=1
 while [ "$p" -le "$last_page" ]; do
-    curl -s -i "https://api.github.com/orgs/atlasoflivingaustralia/repos?page=$p" | grep '"name":' | sed -e 's/^.*name"://g' >> $TMPFILE
+    curl -s -i "https://api.github.com/orgs/$1/repos?page=$p" | grep '"name":' | sed -e 's/^.*name"://g' >> $TMPFILE
     p=$(($p + 1))
     sleep $GITHUB_REQUEST_RATE
 done
