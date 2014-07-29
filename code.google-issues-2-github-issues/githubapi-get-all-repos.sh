@@ -34,4 +34,4 @@ else
     done
 fi
 
-cat $TMPFILE | sed -e 's/^.*name"://g' | sed -e 's/^ "//g' | sed -e 's/",$//g'| sort
+cat $TMPFILE | sed -e 's/^ *"name": "//g' | sed -e 's/",$//g' | sort
