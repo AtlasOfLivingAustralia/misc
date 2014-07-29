@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$1" ]; then
+    echo "usage: ./githubapi-get-all-repos.sh [github username]"
+    exit 1;
+fi
+
 # "For unauthenticated requests, the rate limit allows you to make up to 60 requests per hour."
 # https://developer.github.com/v3/#rate-limiting
 #
@@ -8,6 +13,7 @@ GITHUB_REQUEST_RATE=2
 temp=`basename $0`
 TMPFILE=`mktemp /tmp/${temp}.XXXXXX` || exit 1
 
+# single page result-s (no pagination), have no Link: section, the grep result is empty
 last_page=`curl -s -I "https://api.github.com/users/$1/repos" | grep '^Link:' | sed -e 's/^Link:.*page=//g' | sed -e 's/>.*$//g'`
 sleep $GITHUB_REQUEST_RATE
 
