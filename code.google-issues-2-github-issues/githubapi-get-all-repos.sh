@@ -24,7 +24,7 @@ if [ -z "$last_page" ]; then
 
 else
     # yes - this result is on multiple pages; extract the last_page number
-    last_page=`echo $last_page | sed -e 's/^Link:.*page=//g' | sed -e 's/>.*$//g'`
+    last_page=`echo $last_page | sed -e 's/^Link:.*page=//g' -e 's/>.*$//g'`
 
     p=1
     while [ "$p" -le "$last_page" ]; do
