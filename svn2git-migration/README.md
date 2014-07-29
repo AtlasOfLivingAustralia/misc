@@ -212,4 +212,7 @@ git svn clone http://ala-regions.googlecode.com/svn --tags=tags --authors-file=.
 
 git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/apikey -s apikey.git
 git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/webapi -s webapi.git
+
+# NOTE: ala-soils2sat had no tags, and the trunk was nested in trunk/ala-soils2sat/trunk
+git svn clone http://ala-soils2sat.googlecode.com/svn --trunk=trunk/ala-soils2sat/trunk --authors-file=./authors-file.out -s ala-soils2sat.git
 ```
