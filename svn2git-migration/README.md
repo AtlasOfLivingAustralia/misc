@@ -217,4 +217,7 @@ git svn clone http://ala.googlecode.com/svn --tags=tags --authors-file=./authors
 
 # NOTE: ala-soils2sat had no tags, and the trunk was nested in trunk/ala-soils2sat/trunk
 git svn clone http://ala-soils2sat.googlecode.com/svn --trunk=trunk/ala-soils2sat/trunk --authors-file=./authors-file.out -s ala-soils2sat.git
+
+git svn clone http://alageospatialportal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/actions  -s spatial-logger.git
+git svn clone http://alageospatialportal.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/database -s database.git
 ```
