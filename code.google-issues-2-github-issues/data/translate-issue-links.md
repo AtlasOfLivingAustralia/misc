@@ -1,3 +1,5 @@
+### PROBLEM
+Some of the code.google.com issues are referring (link) to other issue-s; for example the issue [747](https://code.google.com/p/ala/issues/detail?id=747) is referring to the issue [561](https://code.google.com/p/ala/issues/detail?id=561)
 
 ```JSON
 {
