@@ -64,3 +64,20 @@ Some of the code.google.com issues are referring (link) to other issue-s; for ex
     project: "FieldCapture"
 }
 ```
+
+Simple grep search for `"/p/ala/issues/detail?id="`
+```BASH
+bash-3.2$ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -n "/p/ala/issues/detail?id="
+89:                    "link": "/p/ala/issues/detail?id=62",
+416:                    "link": "/p/ala/issues/detail?id=538",
+422:                    "link": "/p/ala/issues/detail?id=538",
+428:                    "link": "/p/ala/issues/detail?id=538",
+929:                    "link": "/p/ala/issues/detail?id=489",
+4988:                    "link": "/p/ala/issues/detail?id=650",
+5479:                    "link": "/p/ala/issues/detail?id=333",
+5508:                    "link": "/p/ala/issues/detail?id=333",
+7825:                    "link": "/p/ala/issues/detail?id=124",
+7880:                    "link": "/p/ala/issues/detail?id=561",
+8039:                    "link": "/p/ala/issues/detail?id=543",
+```
+
