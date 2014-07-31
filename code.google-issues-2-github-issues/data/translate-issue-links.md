@@ -79,5 +79,109 @@ bash-3.2$ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -n
 7825:                    "link": "/p/ala/issues/detail?id=124",
 7880:                    "link": "/p/ala/issues/detail?id=561",
 8039:                    "link": "/p/ala/issues/detail?id=543",
+
+bash-3.2$ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -n "/p/ala/issues/detail?id=" | wc -l
+      11
 ```
 
+Unfortunately 73 (84 - 11 = 73) issues are referring to "disabled" issue tracker-s:
+```BASH
+bash-3.2$ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep "/issues/detail?id=" | grep '"link":' | grep 'https://' | sed -e 's/^.*"link": "//g' -e 's/\/detail\?id.*$//g' | sort | uniq
+https://code.google.com/p/ala-bie/issues
+https://code.google.com/p/ala-collectory/issues
+https://code.google.com/p/ala-hubs/issues
+https://code.google.com/p/ala-portal/issues
+https://code.google.com/p/ala-sightings/issues
+https://code.google.com/p/ala-volunteer/issues
+https://code.google.com/p/alageospatialportal/issues
+```
+
+```BASH
+bash-3.2$ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep "/issues/detail?id=" | grep '"link":' | sort
+                    "link": "/p/ala/issues/detail?id=124",
+                    "link": "/p/ala/issues/detail?id=333",
+                    "link": "/p/ala/issues/detail?id=333",
+                    "link": "/p/ala/issues/detail?id=489",
+                    "link": "/p/ala/issues/detail?id=538",
+                    "link": "/p/ala/issues/detail?id=538",
+                    "link": "/p/ala/issues/detail?id=538",
+                    "link": "/p/ala/issues/detail?id=543",
+                    "link": "/p/ala/issues/detail?id=561",
+                    "link": "/p/ala/issues/detail?id=62",
+                    "link": "/p/ala/issues/detail?id=650",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=333",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=333#c13",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=347",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=353",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=355",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=358",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=374",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=380",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=384",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=386",
+                    "link": "https://code.google.com/p/ala-bie/issues/detail?id=389",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=14",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=23",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=25",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=26",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=3",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=30",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=36",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=45",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=5",
+                    "link": "https://code.google.com/p/ala-collectory/issues/detail?id=6",
+                    "link": "https://code.google.com/p/ala-hubs/issues/detail?id=12",
+                    "link": "https://code.google.com/p/ala-hubs/issues/detail?id=21",
+                    "link": "https://code.google.com/p/ala-hubs/issues/detail?id=84",
+                    "link": "https://code.google.com/p/ala-hubs/issues/detail?id=88",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=129",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=142",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=161",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=168",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=171",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=185",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=191",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=194",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=208",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=220",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=229",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=247",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=251",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=254",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=285",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=298",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=299",
+                    "link": "https://code.google.com/p/ala-portal/issues/detail?id=300",
+                    "link": "https://code.google.com/p/ala-sightings/issues/detail?id=3",
+                    "link": "https://code.google.com/p/ala-volunteer/issues/detail?id=26",
+                    "link": "https://code.google.com/p/ala-volunteer/issues/detail?id=32",
+                    "link": "https://code.google.com/p/ala-volunteer/issues/detail?id=37",
+                    "link": "https://code.google.com/p/ala-volunteer/issues/detail?id=56",
+                    "link": "https://code.google.com/p/ala-volunteer/issues/detail?id=58",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=1022",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=1069",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=1070",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=1071",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=1075",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=304",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=428",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=442",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=538",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=565",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=575",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=632",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=717",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=737",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=767",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=811",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=898",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=914",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=922",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=952",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=953",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=972",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=991",
+                    "link": "https://code.google.com/p/alageospatialportal/issues/detail?id=994",
+bash-3.2$ cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep "/issues/detail?id=" | grep '"link":' | sort | wc -l
+      84
+```
