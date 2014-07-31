@@ -27,8 +27,11 @@ element_handler_table = {
 }
 
 def handle_element(element, result):
-    # try-catch for unknown element.tag
-    element_handler_table[element.tag](element, result)
+    try:
+        element_handler_table[element.tag](element, result)
+
+    except KeyError:
+        result.append({ "error" : { "text" : element.text.encode('utf8'), "error": element.tag}})
 
 def extract_project_labels(str):
     text = unicodedata.normalize('NFKD', str).encode('ascii', 'ignore')
