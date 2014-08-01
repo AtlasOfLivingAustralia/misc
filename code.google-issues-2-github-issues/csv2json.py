@@ -96,11 +96,18 @@ def get_issue_details(issue):
         handle_element(di, details)
 
     # issue comments, id="hc1", "hc2", "hc3" and so on
-    comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]/pre/text()')
+    comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]/pre')
     comments = []
 
     for c in comment_xpath_elements:
-        comments.append(c.encode('utf8'))
+        c_pre_full_text = c.xpath('text()')
+        comments.append({ "pre-full" : str(c_pre_full_text)})
+
+        c_raw = []
+        for ci in c.getiterator():
+            handle_element(ci, c_raw)
+
+        comments.append(c_raw)
 
     issue["project"] = project[0]
     issue["details"] = details
