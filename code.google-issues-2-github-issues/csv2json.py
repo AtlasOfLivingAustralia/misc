@@ -85,36 +85,32 @@ def get_issue_details(issue):
     page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + issue["ID"])
     tree = html.fromstring(page.text)
 
-    # issue description, id="hc0"
-    details_xpath_element = tree.xpath('//div[@id="hc0"]')
-    details = []
+    details = {}
+    i = 0
 
-    details_xpath_element_attachments = details_xpath_element[0].xpath('div[@class="attachments"]')
+    while True:
+        comment_element = tree.xpath('//div[@id="hc{}"]'.format(str(i)))
+        if len(comment_element) == 0: break
 
-    details_pre_full_text = details_xpath_element[0].xpath('pre/text()')
-    details.append({ "pre-full" : str(details_pre_full_text)})
+        result = {}
 
-    for di in details_xpath_element[0].xpath('pre')[0].getiterator():
-        handle_element(di, details)
+        attachments = comment_element[0].xpath('div[@class="attachments"]')
+        result["has-attachments"] = len(attachments) > 0
 
-    # issue comments, id="hc1", "hc2", "hc3" and so on
-    comment_xpath_elements = tree.xpath('//div[@class="cursor_off vt issuecomment"]/pre')
-    comments = []
+        pre_full_text = comment_element[0].xpath('pre/text()')
+        result["pre-full"] = str(pre_full_text)
 
-    for c in comment_xpath_elements:
-        c_pre_full_text = c.xpath('text()')
-        comments.append({ "pre-full" : str(c_pre_full_text)})
+        r = []
+        for di in comment_element[0].xpath('pre')[0].getiterator():
+            handle_element(di, r)
 
-        c_raw = []
-        for ci in c.getiterator():
-            handle_element(ci, c_raw)
+        result["pre"] = r
 
-        comments.append(c_raw)
+        details['hc{}'.format(str(i))] = result
+        i += 1
 
     issue["project"] = project[0]
     issue["details"] = details
-    issue["details-has-attachments"] = len(details_xpath_element_attachments) > 0
-    issue["comments"] = comments
 
 def create_json(file_name, column_names):
     csv_file = open(file_name[0], 'r')
