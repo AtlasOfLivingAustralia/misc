@@ -86,13 +86,15 @@ def get_issue_details(issue):
     tree = html.fromstring(page.text)
 
     # issue description, id="hc0"
-    details_xpath_element = tree.xpath('//div[@class="cursor_off vt issuedescription"]/pre')
+    details_xpath_element = tree.xpath('//div[@id="hc0"]')
     details = []
 
-    details_pre_full_text = details_xpath_element[0].xpath('text()')
+    details_xpath_element_attachments = details_xpath_element[0].xpath('div[@class="attachments"]')
+
+    details_pre_full_text = details_xpath_element[0].xpath('pre/text()')
     details.append({ "pre-full" : str(details_pre_full_text)})
 
-    for di in details_xpath_element[0].getiterator():
+    for di in details_xpath_element[0].xpath('pre')[0].getiterator():
         handle_element(di, details)
 
     # issue comments, id="hc1", "hc2", "hc3" and so on
@@ -111,6 +113,7 @@ def get_issue_details(issue):
 
     issue["project"] = project[0]
     issue["details"] = details
+    issue["details-has-attachments"] = len(details_xpath_element_attachments) > 0
     issue["comments"] = comments
 
 def create_json(file_name, column_names):
