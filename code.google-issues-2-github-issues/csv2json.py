@@ -111,7 +111,7 @@ def get_issue_details(issue):
 
         # unlike the <pre> element in description/comments the updates are optional, and this is to guard against NO UPDATES case
         if len(updates_full_text):
-            result["updates-full"] = str(updates_full_text)
+            result["updates-full"] = updates_full_text
 
             children = comment_element[0].xpath('div[@class="updates"]/div[@class="box-inner"]')[0].getchildren()
             updates_elements = []
@@ -125,7 +125,7 @@ def get_issue_details(issue):
         result["has-attachments"] = len(attachments) > 0
 
         pre_full_text = comment_element[0].xpath('pre/text()')
-        result["pre-full"] = str(pre_full_text)
+        result["pre-full"] = pre_full_text
 
         r = []
         for di in comment_element[0].xpath('pre')[0].getiterator():
