@@ -29,3 +29,37 @@ b: What is the expected output? What do you see instead?
 ```
 
 see [https://code.google.com/p/ala/issues/detail?id=184](https://code.google.com/p/ala/issues/detail?id=184) for visual check/comparison.
+
+---
+
+```JSON
+{
+updates-elements: [
+{
+b: {
+text: "Owner:"
+}
+},
+{
+br: { }
+},
+{
+b: {
+text: "Cc:"
+}
+},
+{
+br: { }
+},
+{
+b: {
+text: "Labels:"
+}
+},
+{
+br: { }
+}
+],
+updates-full: ['\n \n ', '\n Sathish....@gmail.com\n \n ', '\n \n ', '\n chris.go...@gmail.com\n \n ', '\n \n ', '\n -Priority-Low Priority-Critical\n \n ', '\n \n ']
+}
+```
