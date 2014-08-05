@@ -100,6 +100,9 @@ def get_issue_details(issue):
         author = comment_element[0].xpath('*[@class="author"]/a[@class="userlink"]/text()')
         result["author"] = author[0]
 
+        date = comment_element[0].xpath('div/span[@class="date"]/@title')
+        result["date"] = date[0]
+
         #TODO: extract the actual attachment-s instead of only showing true/false
         attachments = comment_element[0].xpath('div[@class="attachments"]')
         result["has-attachments"] = len(attachments) > 0
