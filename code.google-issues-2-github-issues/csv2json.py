@@ -120,9 +120,10 @@ def get_issue_details(issue):
 
             result["updates-elements"] = updates_elements
 
-        #TODO: extract the actual attachment-s instead of only showing true/false
-        attachments = comment_element[0].xpath('div[@class="attachments"]')
-        result["has-attachments"] = len(attachments) > 0
+        attachments = comment_element[0].xpath('div[@class="attachments"]/table/tr[1]/td[2]/a/@href')
+        print "attachments: {}".format(len(attachments))
+        if len(attachments):
+            result["attachments"] = attachments
 
         pre_full_text = comment_element[0].xpath('pre/text()')
         result["pre-full"] = pre_full_text
