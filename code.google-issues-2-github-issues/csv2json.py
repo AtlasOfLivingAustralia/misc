@@ -120,8 +120,8 @@ def get_issue_details(issue):
 
             result["updates-elements"] = updates_elements
 
+        # NOTE: lxml XPath does not like/support the tbody element, that is the reason why it is omitted
         attachments = comment_element[0].xpath('div[@class="attachments"]/table/tr[1]/td[2]/a/@href')
-        print "attachments: {}".format(len(attachments))
         if len(attachments):
             result["attachments"] = attachments
 
@@ -140,8 +140,9 @@ def get_issue_details(issue):
     issue["project"] = project[0]
     issue["details"] = details
 
-    # TODO: find out why '//*[@id="meta-float"]/table/tbody/tr[3]/td/a[@class="userlink"]/text()' does not work
-    cc = tree.xpath('//td/a[@class="userlink"]/text()') #OR: tree.xpath('//td/a[@class="userlink"]/@href')
+    # NOTE: find out why '//*[@id="meta-float"]/table/tbody/tr[3]/td/a[@class="userlink"]/text()' does not work
+    #       ANSWER: looks like lxml XPath engine does NOT like/support tbody element and tbody has to be omitted
+    cc = tree.xpath('//td[@id="issuemeta"]/div[@id="meta-float"]/table/tr[3]/td/a[@class="userlink"]/text()') #OR use @href?
     issue["cc"] = cc
 
 def create_json(file_name, column_names):
