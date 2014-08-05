@@ -104,7 +104,7 @@ def get_issue_details(issue):
         for di in comment_element[0].xpath('pre')[0].getiterator():
             handle_element(di, r)
 
-        result["pre"] = r
+        result["pre-elements"] = r
 
         details['hc{}'.format(str(i))] = result
         i += 1
