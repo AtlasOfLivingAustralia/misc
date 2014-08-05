@@ -94,6 +94,12 @@ def get_issue_details(issue):
 
         result = {}
 
+        # NOTE: the * is used because:
+        #       hc0 has author in a div:  'div[class="author"]/a[@class="userlink"]', while
+        #       hc1, hc2, etc. in a span: 'span[class="author"]/a[@class="userlink"]'
+        author = comment_element[0].xpath('*[@class="author"]/a[@class="userlink"]/text()')
+        result["author"] = author
+
         #TODO: extract the actual attachment-s instead of only showing true/false
         attachments = comment_element[0].xpath('div[@class="attachments"]')
         result["has-attachments"] = len(attachments) > 0
