@@ -94,6 +94,7 @@ def get_issue_details(issue):
 
         result = {}
 
+        #TODO: extract the actual attachment-s instead of only showing true/false
         attachments = comment_element[0].xpath('div[@class="attachments"]')
         result["has-attachments"] = len(attachments) > 0
 
