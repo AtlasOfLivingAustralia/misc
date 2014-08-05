@@ -13,6 +13,9 @@ def handler_element_a(element, result):
 def handler_element_b(element, result):
     result.append({ "b" : { "text" : element.text.encode('utf8')}})
 
+def handler_element_br(element, result):
+    result.append({ "br" : {}})
+
 def handler_element_i(element, result):
     result.append({ "i" : { "text" : element.text.encode('utf8')}})
 
@@ -22,6 +25,7 @@ def handler_element_pre(element, result):
 element_handler_table = {
     "a"        : handler_element_a,
     "b"        : handler_element_b,
+    "br"       : handler_element_br,
     "i"        : handler_element_i,
     "pre"      : handler_element_pre
 }
@@ -102,6 +106,19 @@ def get_issue_details(issue):
 
         date = comment_element[0].xpath('div/span[@class="date"]/@title')
         result["date"] = date[0]
+
+        updates_full_text = comment_element[0].xpath('div[@class="updates"]/div[@class="box-inner"]/text()')
+
+        # unlike the <pre> element in description/comments the updates are optional, and this is to guard against NO UPDATES case
+        if len(updates_full_text):
+            result["updates-full"] = str(updates_full_text)
+
+            children = comment_element[0].xpath('div[@class="updates"]/div[@class="box-inner"]')[0].getchildren()
+            updates_elements = []
+            for c in children:
+                handle_element(c, updates_elements)
+
+            result["updates-elements"] = updates_elements
 
         #TODO: extract the actual attachment-s instead of only showing true/false
         attachments = comment_element[0].xpath('div[@class="attachments"]')
