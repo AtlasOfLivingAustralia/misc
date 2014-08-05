@@ -37,41 +37,41 @@ see [https://code.google.com/p/ala/issues/detail?id=184](https://code.google.com
 PARSED/SCRAPED:
 ```JSON
      {
-	 updates-elements: [
-	     {
-		 b: {
-		     text: "Owner:"
-		 }
-	     },
-	     {
-		 br: { }
-	     },
-	     {
-		 b: {
-		     text: "Cc:"
-		 }
-	     },
-	     {
-		 br: { }
-	     },
-	     {
-		 b: {
-		     text: "Labels:"
-		 }
-	     },
-	     {
-		 br: { }
-	     }
-	 ],
-	 updates-full: [
-	     " ",
-	     " chris.go...@gmail.com ",
-	     " ",
-	     " -chris.go...@gmail.com CoolDa...@gmail.com ",
-	     " ",
-	     " -Priority-Medium Priority-High ",
-	     " "
-	 ]
+         updates-elements: [
+             {
+                 b: {
+                     text: "Owner:"
+                 }
+             },
+             {
+                 br: { }
+             },
+             {
+                 b: {
+                     text: "Cc:"
+                 }
+             },
+             {
+                 br: { }
+             },
+             {
+                 b: {
+                     text: "Labels:"
+                 }
+             },
+             {
+                 br: { }
+             }
+         ],
+         updates-full: [
+             " ",
+             " chris.go...@gmail.com ",
+             " ",
+             " -chris.go...@gmail.com CoolDa...@gmail.com ",
+             " ",
+             " -Priority-Medium Priority-High ",
+             " "
+         ]
      }
 ```
 
