@@ -112,6 +112,10 @@ def get_issue_details(issue):
     issue["project"] = project[0]
     issue["details"] = details
 
+    # TODO: find out why '//*[@id="meta-float"]/table/tbody/tr[3]/td/a[@class="userlink"]/text()' does not work
+    cc = tree.xpath('//td/a[@class="userlink"]/text()') #OR: tree.xpath('//td/a[@class="userlink"]/@href')
+    issue["cc"] = cc
+
 def create_json(file_name, column_names):
     csv_file = open(file_name[0], 'r')
 
