@@ -32,34 +32,57 @@ see [https://code.google.com/p/ala/issues/detail?id=184](https://code.google.com
 
 ---
 
+# UPDATES re-construction/re-assembly
+
+PARSED/SCRAPED:
 ```JSON
-{
-updates-elements: [
-{
-b: {
-text: "Owner:"
-}
-},
-{
-br: { }
-},
-{
-b: {
-text: "Cc:"
-}
-},
-{
-br: { }
-},
-{
-b: {
-text: "Labels:"
-}
-},
-{
-br: { }
-}
-],
-updates-full: ['\n \n ', '\n Sathish....@gmail.com\n \n ', '\n \n ', '\n chris.go...@gmail.com\n \n ', '\n \n ', '\n -Priority-Low Priority-Critical\n \n ', '\n \n ']
-}
+     {
+	 updates-elements: [
+	     {
+		 b: {
+		     text: "Owner:"
+		 }
+	     },
+	     {
+		 br: { }
+	     },
+	     {
+		 b: {
+		     text: "Cc:"
+		 }
+	     },
+	     {
+		 br: { }
+	     },
+	     {
+		 b: {
+		     text: "Labels:"
+		 }
+	     },
+	     {
+		 br: { }
+	     }
+	 ],
+	 updates-full: [
+	     " ",
+	     " chris.go...@gmail.com ",
+	     " ",
+	     " -chris.go...@gmail.com CoolDa...@gmail.com ",
+	     " ",
+	     " -Priority-Medium Priority-High ",
+	     " "
+	 ]
+     }
+```
+
+RE-CONSTRUCTED:
+```
+# Owner was assigned to chris.go...@gmail.com
+ Owner: chris.go...@gmail.com
+
+# Cc chris.go...@gmail.com was removed (-), and CoolDa...@gmail.com was added
+    Cc: -chris.go...@gmail.com CoolDa...@gmail.com
+
+# priority was changed from Medium to High
+Labels: -Priority-Medium Priority-High
 ```
