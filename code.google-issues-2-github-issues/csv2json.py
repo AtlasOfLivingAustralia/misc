@@ -98,7 +98,7 @@ def get_issue_details(issue):
         #       hc0 has author in a div:  'div[class="author"]/a[@class="userlink"]', while
         #       hc1, hc2, etc. in a span: 'span[class="author"]/a[@class="userlink"]'
         author = comment_element[0].xpath('*[@class="author"]/a[@class="userlink"]/text()')
-        result["author"] = author
+        result["author"] = author[0]
 
         #TODO: extract the actual attachment-s instead of only showing true/false
         attachments = comment_element[0].xpath('div[@class="attachments"]')
