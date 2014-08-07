@@ -156,12 +156,25 @@ Mapping from code.google.com JSON issue:
 }
 ```
 
-|code.google.com|github API    |
-|:--------------|:-------------|
-|Summary        |title         |
-|details/hc0/pre|body          |
-|Owner          |assignee      |
-|AllLabels      |labels        |
+|code.google.com    |github API    |
+|:------------------|:-------------|
+|Summary            |title         |
+|details/hc0/pre [1]|body          |
+|Owner           [2]|assignee      |
+|AllLabels       [3]|labels        |
+1. body: is created from the info stored in details/hc0/pre-elements + details/hc0/pre-full 
+2. assignee: can be either directly assigned to the (current) Owner or to the original Owner (and change latter replicating the change of Owner as it was done on code.google.com) 
+3. labels: github API supports by default the following labels:
+  - bug
+  - duplicate
+  - enhancement
+  - help wanted
+  - invalid
+  - question
+  - wontfix
+Custom labels need to be created for the existing code.google.com ALA issue labels, for exmaple: Priority, Status, (some) Type
+
+
 
 ---
 OLDER info:
