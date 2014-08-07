@@ -21,7 +21,7 @@ curl -s https://code.google.com/p/ala/issues/csv?num=500 > `date "+%Y-%m-%d"`-al
 # need for this deletion too.
 tail -n +2 2014-08-06-ala-google-code-issues-raw.csv > 2014-08-06-ala-google-code-issues.csv
 ```
-#####Pass the CVS file to [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py) script to scrape the issue details from code.google.com this will generate a JSON file containing the scraped issues:
+#####Pass the CVS file to [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py) script to scrape the issue details from code.google.com this will generate a JSON output file containing the scraped issues:
 ```BASH
 python csv2json.py 2014-08-06-ala-google-code-issues.csv > 2014-08-06-ala-google-code-issues.csv-scrape-report.html
 # creates:
@@ -34,8 +34,9 @@ see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.c
 
 
 
-OLDER info:
 ---
+OLDER info:
+
 ```BASH
 # that generates
 #    - ala-issues-all-2014-07-15.csv.json for migration
