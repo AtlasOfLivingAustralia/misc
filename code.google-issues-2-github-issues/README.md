@@ -190,9 +190,10 @@ Mapping from code.google.com JSON issue:
   The comment on an issue needs to be done for each of the code.google.com issue comments (stored in hc1, hc2 ... hcN)
 
 # TODO:
-- design/describe how to construct some 'meta' block that will hold important info about the original issue
-- describe how pre-elements + pre-full are used to re-assemble the original issue text with formatting
-- describe how updates-elements + updates-full are used to re-assemble the update-s in owner, cc, priority, etc
+- design/describe how to construct some 'meta' block that will hold important info about/links to the original issue on code.google.com
+- describe how `pre-elements` + `pre-full` are used to re-assemble the original issue text with formatting
+- describe how `updates-elements` + `updates-full` are used to re-assemble the update-s in owner, cc, priority, etc
+- handle/migrate issue attachments
 - translate links to other issues (where possible, useful)
 - describe how github return messages are used to store data about the migration
  - this is required for the migration (create issue returns the created issue id, that is required to comment on an issue)
