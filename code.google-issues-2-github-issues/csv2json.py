@@ -61,7 +61,8 @@ def extract_project_labels(issue):
         project.append(label)
 
     # TODO: do it properly/cleanly
-    # remove synonyms like SpatialPortal Spatial-Portal, replacing it with one label: SpatialPortal
+    # NORMALIZE - remove synonyms like SpatialPortal Spatial-Portal, replacing it with one label: SpatialPortal
+    # This applies to all Labels string: project names (synonyms, typos), priority (high, High, HIgh), etc.
     if "Spatial-Portal" in project:
         project.pop(project.index("Spatial-Portal"))
         if not "SpatialPortal" in project:
