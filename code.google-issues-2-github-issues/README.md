@@ -172,7 +172,8 @@ Mapping from code.google.com JSON issue:
   - invalid
   - question
   - wontfix
-Custom labels need to be created for the existing code.google.com ALA issue labels, for exmaple: Priority, Status, (some) Type
+
+  Custom labels need to be created for the existing code.google.com ALA issue labels, for exmaple: Priority, Status, (some) Type
 
 
 
