@@ -146,12 +146,12 @@ Mapping from code.google.com JSON issue:
 ... to github API JSON:
 ```JSON
 {
-   "title": "only a test issue, created using github api v3 from BASH and curl",
-   "body": "This is the issues body, description, very deep in all important details.",
-   "assignee": "nickdos",
+   "title": "Ability to change the site associated with an activity",
+   "body": "DoE [ issue 62 ](/p/ala/issues/detail?id=62) \nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n",
+   "assignee": "chris.godwin.ala@gmail.com",
    "labels": [
-           "Label1",
-           "Label2"
+           "Priority-Critical",
+           "enhancement"
    ]
 }
 ```
@@ -179,7 +179,7 @@ Mapping from code.google.com JSON issue:
 ##### gihub API comment on an issue
 ```JSON
 {
-    "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen."
+    "body": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
 }
 ```
 |code.google.com    |github API    |
@@ -202,7 +202,7 @@ Mapping from code.google.com JSON issue:
 
 
 ---
-OLDER info:
+OLDER info/notes:
 
 ```BASH
 # that generates
