@@ -37,8 +37,8 @@ def handle_element(element, result):
     except KeyError:
         result.append({ "error" : { "text" : element.text.encode('utf8'), "error": element.tag}})
 
-def extract_project_labels(str):
-    text = unicodedata.normalize('NFKD', str).encode('ascii', 'ignore')
+def extract_project_labels(issue):
+    text = unicodedata.normalize('NFKD', issue["AllLabels"]).encode('ascii', 'ignore')
     labels = text.strip().split(",")
 
     project = []
@@ -71,7 +71,7 @@ def extract_project_labels(str):
 
 def get_issue_details(issue):
 
-    project = extract_project_labels(issue["AllLabels"]);
+    project = extract_project_labels(issue);
 
     # for issues that have 0 or multiple number of projects, print them out:
     if len(project) != 1:
