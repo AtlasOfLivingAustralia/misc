@@ -33,6 +33,117 @@ see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.c
 #####Migrate (map & upload) the issues from the JSON file to your github issues using the [github api v3](https://developer.github.com/v3)
 
 ```JSON
+    {
+        "AllLabels": "FieldCapture, Priority-Critical, Type-Enhancement",
+        "ID": "583",
+        "Modified": "Jul 05, 2014 12:06:25",
+        "ModifiedTimestamp": "1404561985",
+        "Owner": "chris.go...@gmail.com",
+        "Priority": "Critical",
+        "Status": "New",
+        "Summary": "Ability to change the site associated with an activity",
+        "Type": "Enhancement",
+        "cc": [
+            "CoolDa...@gmail.com",
+            "mark.woo...@csiro.au",
+            "moyesyside",
+            "nickdos"
+        ],
+        "details": {
+            "hc0": {
+                "author": "CoolDa...@gmail.com",
+                "date": "Thu Feb 13 16:54:53 2014",
+                "pre-elements": [
+                    {
+                        "pre": {
+                            "text": "\nDoE "
+                        }
+                    },
+                    {
+                        "a": {
+                            "link": "/p/ala/issues/detail?id=62",
+                            "text": " issue #62 "
+                        }
+                    }
+                ],
+                "pre-full": [
+                    "\nDoE ",
+                    "\r\nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 
+14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n"
+                ]
+            },
+            "hc1": {
+                "author": "CoolDa...@gmail.com",
+                "date": "Thu Jul  3 16:14:34 2014",
+                "pre-elements": [
+                    {
+                        "pre": {
+                            "text": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
+                        }
+                    }
+                ],
+                "pre-full": [
+                    "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
+                ],
+                "updates-elements": [
+                    {
+                        "b": {
+                            "text": "Labels:"
+                        }
+                    },
+                    {
+                        "br": {}
+                    }
+                ],
+                "updates-full": [
+                    "\n \n ",
+                    "\n -Priority-High Priority-Critical\n \n ",
+                    "\n \n "
+                ]
+            },
+            "hc2": {
+                "author": "CoolDa...@gmail.com",
+                "date": "Sat Jul  5 05:06:25 2014",
+                "pre-elements": [
+                    {
+                        "pre": {
+                            "text": "\n"
+                        }
+                    },
+                    {
+                        "a": {
+                            "link": "/p/ala/issues/detail?id=457",
+                            "text": " Issue 457 "
+                        }
+                    }
+                ],
+                "pre-full": [
+                    "\n",
+                    " has been merged into this issue.\n"
+                ],
+                "updates-elements": [
+                    {
+                        "b": {
+                            "text": "Cc:"
+                        }
+                    },
+                    {
+                        "br": {}
+                    }
+                ],
+                "updates-full": [
+                    "\n \n ",
+                    "\n CoolDa...@gmail.com mark.woo...@csiro.au moyesyside nickdos\n \n ",
+                    "\n \n "
+                ]
+            }
+        },
+        "project": "FieldCapture"
+    }
+```
+
+
+```JSON
 {
    "title": "only a test issue, created using github api v3 from BASH and curl",
    "body": "This is the issues body, description, very deep in all important details.",
