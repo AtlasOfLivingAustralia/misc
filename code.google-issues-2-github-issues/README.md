@@ -32,7 +32,17 @@ see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.c
 
 #####Migrate (map & upload) the issues from the JSON file to your github issues using the [github api v3](https://developer.github.com/v3)
 
-
+```JSON
+{
+   "title": "only a test issue, created using github api v3 from BASH and curl",
+   "body": "This is the issues body, description, very deep in all important details.",
+   "assignee": "nickdos",
+   "labels": [
+           "Label1",
+           "Label2"
+   ]
+}
+```
 
 ---
 OLDER info:
