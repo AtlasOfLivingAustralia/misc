@@ -32,6 +32,7 @@ see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.c
 
 #####Migrate (map & upload) the issues from the JSON file to your github issues using the [github api v3](https://developer.github.com/v3)
 
+Mapping from code.google.com JSON issue:
 ```JSON
     {
         "AllLabels": "FieldCapture, Priority-Critical, Type-Enhancement",
@@ -142,7 +143,7 @@ see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.c
     }
 ```
 
-
+... to github API JSON:
 ```JSON
 {
    "title": "only a test issue, created using github api v3 from BASH and curl",
