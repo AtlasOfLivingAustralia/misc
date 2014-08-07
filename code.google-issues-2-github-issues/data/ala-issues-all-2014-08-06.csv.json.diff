@@ -1,0 +1,521 @@
+--- old.json	2014-08-07 11:35:36.290756354 +1000
++++ new.json	2014-08-07 11:34:49.126349290 +1000
+@@ -70,6 +70,34 @@
+                 "pre-full": [
+                     "\nSeems to be ok on all formats. I assume you removed the grid option due to issues?\n"
+                 ]
++            },
++            "hc3": {
++                "author": "adam.col...@gmail.com",
++                "date": "Tue Aug  5 22:49:50 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\nGrid option was an option of openlayers.  No longer using openlayers.  Is it worth adding?\n"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\nGrid option was an option of openlayers.  No longer using openlayers.  Is it worth adding?\n"
++                ]
++            },
++            "hc4": {
++                "author": "leebel...@gmail.com",
++                "date": "Wed Aug  6 01:10:43 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\nProbably not.\n"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\nProbably not.\n"
++                ]
+             }
+         },
+         "project": "SpatialPortal"
+@@ -1098,8 +1126,8 @@
+             },
+             "hc3": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6740003000&name=My_Area_3_SHP.zip&token=ABZ6GAd6Jwfem3R_ak50TCTlM5Nq9lUDqA%3A1407294795263",
+-                    "//ala.googlecode.com/issues/attachment?aid=6740003001&name=My_Area_3_KML.zip&token=ABZ6GAdYcGkxh6G2VDQu64XdODdwFhX_YA%3A1407294795263"
++                    "//ala.googlecode.com/issues/attachment?aid=6740003000&name=My_Area_3_SHP.zip&token=ABZ6GAcHB2dTL8eDschmOZ8AQp95vp-1Vw%3A1407375002831",
++                    "//ala.googlecode.com/issues/attachment?aid=6740003001&name=My_Area_3_KML.zip&token=ABZ6GAfUC2E_9HE3bAVBZFHHc9CahIDJ8A%3A1407375002832"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Wed Jun 18 16:16:04 2014",
+@@ -1213,10 +1241,10 @@
+             },
+             "hc7": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6740007000&name=Capture.jpg&token=ABZ6GAcuGBOrMsRQKj19_stvTYQ5jVbm-A%3A1407294795263&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=6740007000&name=Capture.jpg&token=ABZ6GAcuGBOrMsRQKj19_stvTYQ5jVbm-A%3A1407294795263",
+-                    "//ala.googlecode.com/issues/attachment?aid=6740007001&name=My_Area_1-3_SHP.zip&token=ABZ6GAdKZV0BY2RF-Ep_UGi07MuHD3yipg%3A1407294795263",
+-                    "//ala.googlecode.com/issues/attachment?aid=6740007002&name=My_Area_1-3_KML.kml&token=ABZ6GAcaAcNQt0BusICfGJowZQW059uShQ%3A1407294795263"
++                    "//ala.googlecode.com/issues/attachment?aid=6740007000&name=Capture.jpg&token=ABZ6GAfkYyTdvomZOa6Dta6Z5b7GbT3IIA%3A1407375002832&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=6740007000&name=Capture.jpg&token=ABZ6GAfkYyTdvomZOa6Dta6Z5b7GbT3IIA%3A1407375002832",
++                    "//ala.googlecode.com/issues/attachment?aid=6740007001&name=My_Area_1-3_SHP.zip&token=ABZ6GAc-KWJIem8dhMBohEihskl-WZt0mg%3A1407375002832",
++                    "//ala.googlecode.com/issues/attachment?aid=6740007002&name=My_Area_1-3_KML.kml&token=ABZ6GAdUM_RPlcqI20Q19GX1OkTHC3ir9w%3A1407375002832"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Mon Aug  4 17:49:03 2014",
+@@ -1245,6 +1273,35 @@
+                     "\n Started\n \n ",
+                     "\n \n "
+                 ]
++            },
++            "hc8": {
++                "author": "adam.col...@gmail.com",
++                "date": "Wed Aug  6 14:55:00 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\nFixed the shape file import for shape files with > 1 area and no area attributes.\r\n\r\n'layer unavailable' is a geoserver issue.  I'm going to say this is because it is on dev.\n"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\nFixed the shape file import for shape files with > 1 area and no area attributes.\r\n\r\n'layer unavailable' is a geoserver issue.  I'm going to say this is because it is on dev.\n"
++                ],
++                "updates-elements": [
++                    {
++                        "b": {
++                            "text": "Status:"
++                        }
++                    },
++                    {
++                        "br": {}
++                    }
++                ],
++                "updates-full": [
++                    "\n \n ",
++                    "\n OnDev\n \n ",
++                    "\n \n "
++                ]
+             }
+         },
+         "project": "SpatialPortal"
+@@ -1397,6 +1454,35 @@
+                     "\n Started\n \n ",
+                     "\n \n "
+                 ]
++            },
++            "hc7": {
++                "author": "adam.col...@gmail.com",
++                "date": "Wed Aug  6 14:56:48 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\nAdd to map | Species has the checkbox option for 'Include Expert Distribution areas'.  Default is ticked.\n"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\nAdd to map | Species has the checkbox option for 'Include Expert Distribution areas'.  Default is ticked.\n"
++                ],
++                "updates-elements": [
++                    {
++                        "b": {
++                            "text": "Status:"
++                        }
++                    },
++                    {
++                        "br": {}
++                    }
++                ],
++                "updates-full": [
++                    "\n \n ",
++                    "\n OnDev\n \n ",
++                    "\n \n "
++                ]
+             }
+         },
+         "project": "SpatialPortal"
+@@ -1925,8 +2011,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6830000000&name=Screenshot_1.jpg&token=ABZ6GAc_6g_POo65WL5Xtj5YrxcRzdAyhA%3A1407294807424&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=6830000000&name=Screenshot_1.jpg&token=ABZ6GAc_6g_POo65WL5Xtj5YrxcRzdAyhA%3A1407294807424"
++                    "//ala.googlecode.com/issues/attachment?aid=6830000000&name=Screenshot_1.jpg&token=ABZ6GAfreB7CfwkDZKbk6qF444ulJaX2mw%3A1407375013377&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=6830000000&name=Screenshot_1.jpg&token=ABZ6GAfreB7CfwkDZKbk6qF444ulJaX2mw%3A1407375013377"
+                 ],
+                 "author": "CoolDa...@gmail.com",
+                 "date": "Tue May 27 20:15:40 2014",
+@@ -2283,7 +2369,7 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6650000000&name=Program+dashboard_DoE+comments+20140506.docx&token=ABZ6GAf8HZFZh3uKh4NqA2ebHXZ09iXdIw%3A1407294815091"
++                    "//ala.googlecode.com/issues/attachment?aid=6650000000&name=Program+dashboard_DoE+comments+20140506.docx&token=ABZ6GAfWYdIQOxsLhBeQM7VE2deabwQO6Q%3A1407375018373"
+                 ],
+                 "author": "CoolDa...@gmail.com",
+                 "date": "Thu May  8 17:16:49 2014",
+@@ -2791,7 +2877,7 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=5110000000&name=Area_Report_PDF_08Jan14.docx&token=ABZ6GAd3gciRohy0Akle7j77o5SBFbKxIg%3A1407294825983"
++                    "//ala.googlecode.com/issues/attachment?aid=5110000000&name=Area_Report_PDF_08Jan14.docx&token=ABZ6GAeFsxUUB9X4PvwY8aoOxXMPmb9-gw%3A1407375025706"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Sun Jan 12 16:45:14 2014",
+@@ -2847,7 +2933,7 @@
+             },
+             "hc2": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=5110002000&name=Area_Report_PDF.docx&token=ABZ6GAfNWZI3rk_LC3jWlKspQDHA0T_Q2A%3A1407294825984"
++                    "//ala.googlecode.com/issues/attachment?aid=5110002000&name=Area_Report_PDF.docx&token=ABZ6GAdyoOJAAWyWDeZPUztmB7shBd7V2A%3A1407375025707"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Thu Jan 16 18:06:15 2014",
+@@ -3047,7 +3133,7 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6500000000&name=Assertions.xlsx&token=ABZ6GAeaD_y6ggW3q4IgRKDARPaUw0hUjQ%3A1407294830763"
++                    "//ala.googlecode.com/issues/attachment?aid=6500000000&name=Assertions.xlsx&token=ABZ6GAd95y_3f5lfawe26CHEupOIeB351A%3A1407375029529"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Sun Apr 27 15:59:51 2014",
+@@ -3162,7 +3248,7 @@
+             },
+             "hc3": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6500003000&name=assertions.xlsx&token=ABZ6GAe6iayXzur-E-9MSJ7NGWb5G2dhyg%3A1407294830764"
++                    "//ala.googlecode.com/issues/attachment?aid=6500003000&name=assertions.xlsx&token=ABZ6GAdpdLubWauju8isPaAgFpmef9w5Vg%3A1407375029530"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Mon Jun  9 00:40:07 2014",
+@@ -3311,8 +3397,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=7090000000&name=Capture.jpg&token=ABZ6GAcyxqOi6s1eunJZ0il0sFYED_Ytlg%3A1407294834462&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=7090000000&name=Capture.jpg&token=ABZ6GAcyxqOi6s1eunJZ0il0sFYED_Ytlg%3A1407294834462"
++                    "//ala.googlecode.com/issues/attachment?aid=7090000000&name=Capture.jpg&token=ABZ6GAfw5R05XuoNUjkzaKrspvkVS4mb-Q%3A1407375035467&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=7090000000&name=Capture.jpg&token=ABZ6GAfw5R05XuoNUjkzaKrspvkVS4mb-Q%3A1407375035467"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Tue Jun 17 23:00:31 2014",
+@@ -4319,6 +4405,35 @@
+                     "\n Started\n \n ",
+                     "\n \n "
+                 ]
++            },
++            "hc4": {
++                "author": "adam.col...@gmail.com",
++                "date": "Wed Aug  6 15:00:55 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\ntest import column order is maintained.  Duplicates and superflous contextuals are removed.\n"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\ntest import column order is maintained.  Duplicates and superflous contextuals are removed.\n"
++                ],
++                "updates-elements": [
++                    {
++                        "b": {
++                            "text": "Status:"
++                        }
++                    },
++                    {
++                        "br": {}
++                    }
++                ],
++                "updates-full": [
++                    "\n \n ",
++                    "\n OnDev\n \n ",
++                    "\n \n "
++                ]
+             }
+         },
+         "project": "SpatialPortal"
+@@ -5784,8 +5899,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=5790000000&name=Activity-sites+workflow+improvement.jpg&token=ABZ6GAcLv9FG8_KfF6mMVS5f2nOmr3PryQ%3A1407294875037&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=5790000000&name=Activity-sites+workflow+improvement.jpg&token=ABZ6GAcLv9FG8_KfF6mMVS5f2nOmr3PryQ%3A1407294875037"
++                    "//ala.googlecode.com/issues/attachment?aid=5790000000&name=Activity-sites+workflow+improvement.jpg&token=ABZ6GAfVAu32MSzv8_KM-a7QRJ_tGv6StQ%3A1407375079586&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=5790000000&name=Activity-sites+workflow+improvement.jpg&token=ABZ6GAfVAu32MSzv8_KM-a7QRJ_tGv6StQ%3A1407375079586"
+                 ],
+                 "author": "CoolDa...@gmail.com",
+                 "date": "Wed Feb 12 16:45:02 2014",
+@@ -7235,8 +7350,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=2810000000&name=incomplete+box+from+IE.PNG&token=ABZ6GAfiOX6tVX2tl-w0MQRDuJ5mUnhhMw%3A1407294909603&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=2810000000&name=incomplete+box+from+IE.PNG&token=ABZ6GAfiOX6tVX2tl-w0MQRDuJ5mUnhhMw%3A1407294909603"
++                    "//ala.googlecode.com/issues/attachment?aid=2810000000&name=incomplete+box+from+IE.PNG&token=ABZ6GAfzWsPBjrb_21onD1TX5x9wSBU03Q%3A1407375126788&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=2810000000&name=incomplete+box+from+IE.PNG&token=ABZ6GAfzWsPBjrb_21onD1TX5x9wSBU03Q%3A1407375126788"
+                 ],
+                 "author": "john.t...@austmus.gov.au",
+                 "date": "Tue Nov  5 15:12:32 2013",
+@@ -7260,8 +7375,8 @@
+             },
+             "hc1": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=2810001000&name=spinning+wheel.PNG&token=ABZ6GAd_kKCvVvwxwX_HNnQhaUOV9jQ5Kw%3A1407294909603&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=2810001000&name=spinning+wheel.PNG&token=ABZ6GAd_kKCvVvwxwX_HNnQhaUOV9jQ5Kw%3A1407294909603"
++                    "//ala.googlecode.com/issues/attachment?aid=2810001000&name=spinning+wheel.PNG&token=ABZ6GAdIJZpO1UfeG5ka4dnPgfqsHTtRzA%3A1407375126788&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=2810001000&name=spinning+wheel.PNG&token=ABZ6GAdIJZpO1UfeG5ka4dnPgfqsHTtRzA%3A1407375126788"
+                 ],
+                 "author": "john.t...@austmus.gov.au",
+                 "date": "Tue Nov  5 15:13:16 2013",
+@@ -10307,8 +10422,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "../../ala/issues/attachmentText?id=521&aid=5210000000&name=brigalow+belt+bird+species+lists.csv&token=ABZ6GAcKGQnibg-0YIjl1t84HqsO55Tk8Q%3A1407294965317",
+-                    "//ala.googlecode.com/issues/attachment?aid=5210000000&name=brigalow+belt+bird+species+lists.csv&token=ABZ6GAcKGQnibg-0YIjl1t84HqsO55Tk8Q%3A1407294965317"
++                    "../../ala/issues/attachmentText?id=521&aid=5210000000&name=brigalow+belt+bird+species+lists.csv&token=ABZ6GAdySkFPM2khSXK_3hntigZVxa63hA%3A1407375174808",
++                    "//ala.googlecode.com/issues/attachment?aid=5210000000&name=brigalow+belt+bird+species+lists.csv&token=ABZ6GAdySkFPM2khSXK_3hntigZVxa63hA%3A1407375174808"
+                 ],
+                 "author": "milo_nic...@hotmail.com",
+                 "date": "Tue Jan 14 17:12:30 2014",
+@@ -10826,8 +10941,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6160000000&name=Capture.jpg&token=ABZ6GAf1JlaW7VaLgO1bBQ08LZQVJGLU7g%3A1407294976686&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=6160000000&name=Capture.jpg&token=ABZ6GAf1JlaW7VaLgO1bBQ08LZQVJGLU7g%3A1407294976686"
++                    "//ala.googlecode.com/issues/attachment?aid=6160000000&name=Capture.jpg&token=ABZ6GAcpdc6wDJqD4OUcxboGNz1KPk7pzw%3A1407375184265&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=6160000000&name=Capture.jpg&token=ABZ6GAcpdc6wDJqD4OUcxboGNz1KPk7pzw%3A1407375184265"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Thu Mar 20 16:52:14 2014",
+@@ -11024,8 +11139,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6450000000&name=Capture.jpg&token=ABZ6GAcBuHBcmUAiWnx33zpFLxQ-7zZXZA%3A1407294980329&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=6450000000&name=Capture.jpg&token=ABZ6GAcBuHBcmUAiWnx33zpFLxQ-7zZXZA%3A1407294980329"
++                    "//ala.googlecode.com/issues/attachment?aid=6450000000&name=Capture.jpg&token=ABZ6GAc6dvyP-294BOpX-UdzZ3XIWj3qFQ%3A1407375187795&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=6450000000&name=Capture.jpg&token=ABZ6GAc6dvyP-294BOpX-UdzZ3XIWj3qFQ%3A1407375187795"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Tue Apr 22 00:15:51 2014",
+@@ -11251,7 +11366,7 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6610000000&name=Start_of_update_load_not_replace.patch&token=ABZ6GAcHHK6OZ_RRunZGdAqg0nVqyQNvjA%3A1407294983767"
++                    "//ala.googlecode.com/issues/attachment?aid=6610000000&name=Start_of_update_load_not_replace.patch&token=ABZ6GAee9XzRA99FMopW_jnAmSrWBysvQw%3A1407375192417"
+                 ],
+                 "author": "natasha....@csiro.au",
+                 "date": "Thu May  1 22:56:56 2014",
+@@ -11409,8 +11524,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6860000000&name=Capture.jpg&token=ABZ6GAfsGG7tFm_LJ703sgaa8cNI9myluQ%3A1407294985818&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=6860000000&name=Capture.jpg&token=ABZ6GAfsGG7tFm_LJ703sgaa8cNI9myluQ%3A1407294985818"
++                    "//ala.googlecode.com/issues/attachment?aid=6860000000&name=Capture.jpg&token=ABZ6GAe_S59rYM_YBGvTUQK8qgxRcFFXrg%3A1407375194121&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=6860000000&name=Capture.jpg&token=ABZ6GAe_S59rYM_YBGvTUQK8qgxRcFFXrg%3A1407375194121"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Mon Jun  2 15:12:42 2014",
+@@ -11619,8 +11734,8 @@
+             },
+             "hc1": {
+                 "attachments": [
+-                    "../../ala/issues/attachmentText?id=750&aid=7500001000&name=explanatoryNotes.txt&token=ABZ6GAdCUIFUoD5AvjcmPTQdV_ZtJQ_B2w%3A1407294987728",
+-                    "//ala.googlecode.com/issues/attachment?aid=7500001000&name=explanatoryNotes.txt&token=ABZ6GAdCUIFUoD5AvjcmPTQdV_ZtJQ_B2w%3A1407294987728"
++                    "../../ala/issues/attachmentText?id=750&aid=7500001000&name=explanatoryNotes.txt&token=ABZ6GAewIf2x6jvYaXF1ksLpaVQMUPtJSg%3A1407375195869",
++                    "//ala.googlecode.com/issues/attachment?aid=7500001000&name=explanatoryNotes.txt&token=ABZ6GAewIf2x6jvYaXF1ksLpaVQMUPtJSg%3A1407375195869"
+                 ],
+                 "author": "ecos.sci...@gmail.com",
+                 "date": "Wed Jul 23 00:55:59 2014",
+@@ -11637,9 +11752,9 @@
+             },
+             "hc2": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=7500002000&name=Capture.jpg&token=ABZ6GAdFF3yAC8h7i9QfTjUo5yq54JwD1g%3A1407294987729&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=7500002000&name=Capture.jpg&token=ABZ6GAdFF3yAC8h7i9QfTjUo5yq54JwD1g%3A1407294987729",
+-                    "//ala.googlecode.com/issues/attachment?aid=7500002001&name=SoilAtlas2M_ASC.zip&token=ABZ6GAc315GHlRvbTpW3vmkROQhdZMU7bg%3A1407294987729"
++                    "//ala.googlecode.com/issues/attachment?aid=7500002000&name=Capture.jpg&token=ABZ6GAeD3QxNL8KFW3E3X7N6j4ElnzpyxQ%3A1407375195870&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=7500002000&name=Capture.jpg&token=ABZ6GAeD3QxNL8KFW3E3X7N6j4ElnzpyxQ%3A1407375195870",
++                    "//ala.googlecode.com/issues/attachment?aid=7500002001&name=SoilAtlas2M_ASC.zip&token=ABZ6GAeijA1Kwn2C382TkV1Fbrdd-Qf3Ug%3A1407375195870"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Wed Jul 23 18:13:07 2014",
+@@ -12884,8 +12999,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=6330000000&name=GER+layer+in+spatial+portal.jpg&token=ABZ6GAddErgmc1uVRr10pwhARvUSkdiueQ%3A1407295007078&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=6330000000&name=GER+layer+in+spatial+portal.jpg&token=ABZ6GAddErgmc1uVRr10pwhARvUSkdiueQ%3A1407295007078"
++                    "//ala.googlecode.com/issues/attachment?aid=6330000000&name=GER+layer+in+spatial+portal.jpg&token=ABZ6GAeeolKMK49RBCJBmrsVlX7pOf0INw%3A1407375211359&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=6330000000&name=GER+layer+in+spatial+portal.jpg&token=ABZ6GAeeolKMK49RBCJBmrsVlX7pOf0INw%3A1407375211359"
+                 ],
+                 "author": "CoolDa...@gmail.com",
+                 "date": "Wed Apr  9 21:55:02 2014",
+@@ -13413,7 +13528,7 @@
+             },
+             "hc1": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=7010001000&name=32366_georegions.zip&token=ABZ6GAee3uRxy0kR_0Io1UJz7IunpUQWpA%3A1407295014266"
++                    "//ala.googlecode.com/issues/attachment?aid=7010001000&name=32366_georegions.zip&token=ABZ6GAeWKwSIVhoE3eZM-gu2oPFcqr-CyQ%3A1407375220575"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Sun Jun 15 19:23:24 2014",
+@@ -15570,6 +15685,35 @@
+                 "pre-full": [
+                     "\nIt would be handy for MERIT in particular if the spatial portal could accept (via the upload function) shapefiles with a CRS other than WGS84.  GDA 94 has come up a couple of times.\r\n\r\n\n"
+                 ]
++            },
++            "hc1": {
++                "author": "adam.col...@gmail.com",
++                "date": "Wed Aug  6 15:03:08 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\nAdded support for non-WGS84 shapefile uploads.  If the prj file is missing WGS84 is assumed.\n"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\nAdded support for non-WGS84 shapefile uploads.  If the prj file is missing WGS84 is assumed.\n"
++                ],
++                "updates-elements": [
++                    {
++                        "b": {
++                            "text": "Status:"
++                        }
++                    },
++                    {
++                        "br": {}
++                    }
++                ],
++                "updates-full": [
++                    "\n \n ",
++                    "\n OnDev\n \n ",
++                    "\n \n "
++                ]
+             }
+         },
+         "project": "SpatialPortal"
+@@ -16397,6 +16541,41 @@
+                     "\n -Priority-Medium Priority-Low\n \n ",
+                     "\n \n "
+                 ]
++            },
++            "hc3": {
++                "author": "adam.col...@gmail.com",
++                "date": "Wed Aug  6 15:04:22 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\n"
++                        }
++                    },
++                    {
++                        "i": {
++                            "text": "(No comment was entered for this change.)"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\n",
++                    "\n"
++                ],
++                "updates-elements": [
++                    {
++                        "b": {
++                            "text": "Owner:"
++                        }
++                    },
++                    {
++                        "br": {}
++                    }
++                ],
++                "updates-full": [
++                    "\n \n ",
++                    "\n adam.col...@gmail.com\n \n ",
++                    "\n \n "
++                ]
+             }
+         },
+         "project": "SpatialPortal"
+@@ -18059,8 +18238,8 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=4140000000&name=error.jpg&token=ABZ6GAdnyQLVkPIlwiPfFAes4BNAlVhasQ%3A1407295079246&inline=1",
+-                    "//ala.googlecode.com/issues/attachment?aid=4140000000&name=error.jpg&token=ABZ6GAdnyQLVkPIlwiPfFAes4BNAlVhasQ%3A1407295079246"
++                    "//ala.googlecode.com/issues/attachment?aid=4140000000&name=error.jpg&token=ABZ6GAdkvKGI3QstBpim2IQbZnL6fl5Jzg%3A1407375306196&inline=1",
++                    "//ala.googlecode.com/issues/attachment?aid=4140000000&name=error.jpg&token=ABZ6GAdkvKGI3QstBpim2IQbZnL6fl5Jzg%3A1407375306196"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Sun Dec  8 14:04:27 2013",
+@@ -18296,11 +18475,7 @@
+         "Status": "Started",
+         "Summary": "Limits for batch intersect",
+         "Type": "Defect",
+-        "cc": [
+-            "adam.col...@gmail.com",
+-            "leebel...@gmail.com",
+-            "JJVanDerWal"
+-        ],
++        "cc": [],
+         "details": {
+             "hc0": {
+                 "author": "leebel...@gmail.com",
+@@ -18485,6 +18660,41 @@
+                 "pre-full": [
+                     "\nALA4R has changed to using the POST version of the service: no more 414 errors now.\r\n\n"
+                 ]
++            },
++            "hc8": {
++                "author": "adam.col...@gmail.com",
++                "date": "Wed Aug  6 15:05:13 2014",
++                "pre-elements": [
++                    {
++                        "pre": {
++                            "text": "\n"
++                        }
++                    },
++                    {
++                        "i": {
++                            "text": "(No comment was entered for this change.)"
++                        }
++                    }
++                ],
++                "pre-full": [
++                    "\n",
++                    "\n"
++                ],
++                "updates-elements": [
++                    {
++                        "b": {
++                            "text": "Status:"
++                        }
++                    },
++                    {
++                        "br": {}
++                    }
++                ],
++                "updates-full": [
++                    "\n \n ",
++                    "\n Done\n \n ",
++                    "\n \n "
++                ]
+             }
+         },
+         "project": "SpatialPortal"
+@@ -19375,7 +19585,7 @@
+         "details": {
+             "hc0": {
+                 "attachments": [
+-                    "//ala.googlecode.com/issues/attachment?aid=5100000000&name=Area_Report_on-screen.docx&token=ABZ6GAeZk1W7LL4k3G_IyvfGAzwXiCf2_w%3A1407295091083"
++                    "//ala.googlecode.com/issues/attachment?aid=5100000000&name=Area_Report_on-screen.docx&token=ABZ6GAd-DGLZ_gWX-ywRuF7zs2-0LTkWAw%3A1407375317853"
+                 ],
+                 "author": "leebel...@gmail.com",
+                 "date": "Sun Jan 12 16:34:48 2014",
