@@ -156,6 +156,7 @@ Mapping from code.google.com JSON issue:
 }
 ```
 
+##### github API create issue
 |code.google.com    |github API    |
 |:------------------|:-------------|
 |Summary            |title         |
@@ -174,6 +175,19 @@ Mapping from code.google.com JSON issue:
   - wontfix
 
   Custom labels need to be created for the existing code.google.com ALA issue labels, for example: Priority, Status, (some) Type
+
+##### gihub API comment on an issue
+```JSON
+{
+    "body": "This is the very first comment on an issue created from the commandline using the github api v3, ladies and gentlemen."
+}
+```
+|code.google.com    |github API    |
+|:------------------|:-------------|
+|details/hc1/pre [1]|body          |
+1. body: is created from the info stored in details/hc1/pre-elements + details/hc1/pre-full
+
+  The comment on an issue needs to be done for each of the code.google.com issue comments (stored in hc1, hc2 ... hcN)
 
 
 
