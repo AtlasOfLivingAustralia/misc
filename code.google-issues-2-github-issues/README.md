@@ -156,6 +156,13 @@ Mapping from code.google.com JSON issue:
 }
 ```
 
+|code.google.com|github API    |
+|:--------------|:-------------|
+|Summary        |title         |
+|details/hc0/pre|body          |
+|Owner          |assignee      |
+|AllLabels      |labels        |
+
 ---
 OLDER info:
 
