@@ -147,7 +147,7 @@ Mapping from code.google.com JSON issue:
 ```JSON
 {
    "title": "Ability to change the site associated with an activity",
-   "body": "DoE [ issue 62 ](/p/ala/issues/detail?id=62) \nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n",
+   "body": "DoE [ issue 62 ](https://code.google.com/p/ala/issues/detail?id=62) \nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n",
    "assignee": "chris.godwin.ala@gmail.com",
    "labels": [
            "Priority-Critical",
