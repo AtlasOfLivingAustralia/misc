@@ -5,27 +5,35 @@ Migrate [Atlas of Living Australia](http://www.ala.org.au) issues (issue tracker
 Google did disable the API for google code issues one year ago, so we can't simply use their API to get the issues in JSON format - we will have to roll our own, and most likely 'scrape' the information we want to migrate from the google code issues HTML pages.
 
 ###SOLUTION
-Some preliminary investigation in case google does not give us access to their deprecated/disabled issues API
-##### extracting issue IDs
+1. Download your google issues (for example: [https://code.google.com/p/ala/issues](https://code.google.com/p/ala/issues)) in CSV format:
 ```BASH
-curl https://code.google.com/p/ala/issues/list > ala_issues.out
-grep 'id: ' ala_issues.out
-grep 'id: ' ala_issues.out | sort | uniq | wc -l => 100
+# easy way to download "all" issues as one CSV file (we have 321 issues in total,
+# the following will attempt to download up to 500 into one .csv file)
+wget -O `date "+%Y-%m-%d"`-ala-google-code-issues-raw.csv https://code.google.com/p/ala/issues/csv?num=500
+
+# or using curl:
+curl -s https://code.google.com/p/ala/issues/csv?num=500 > `date "+%Y-%m-%d"`-ala-google-code-issues-raw.csv
 ```
-##### to cleanup the id string info from " id: 539}," to "539" (that is sort-able, etc.)
+2. Chop off the first line form the CSV file (it contains the keys - column names)
 ```BASH
-grep 'id: ' ala_issues.out | sed -e "s/^.*id: //g" -e "s/},*//g"|sort -h
+# NOTE: one could modify the python script to use the first line to read the key
+# names instead of having them hardcoded in the python; that would eliminate the
+# need for this deletion too.
+tail -n +2 2014-08-06-ala-google-code-issues-raw.csv > 2014-08-06-ala-google-code-issues.csv
 ```
-##### good news the google issue page offers download of the issues summary table in CSV format; [see the CSV link in the right bottom corner](https://code.google.com/p/ala/issues/list)
-##### join the 4 separate .csv file-s downloaded from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list)
+3. Pass the CVS file to [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py) script to scrape the issue details from code.google.com this will generate a JSON file containing the scraped issues:
 ```BASH
-cat ala-issues.csv ala-issues\ \(1\).csv ala-issues\ \(2\).csv ala-issues\ \(3\).csv >> ala-issues-all-2014-07-15.csv
+python csv2json.py 2014-08-06-ala-google-code-issues.csv > 2014-08-06-ala-google-code-issues.csv-scrape-report.html
+# creates:
+#    2014-08-06-ala-google-code-issues.csv.json
+#    2014-08-06-ala-google-code-issues.csv-scrape-report.html (a HTML table/report about errors/problems found) 
 ```
-##### single issue page/details is accessible like:
-```BASH
-curl https://code.google.com/p/ala/issues/detail?id=77 >> issue-77.html
-```
-##### wrote [csv2json.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/csv2json.py)
+see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/cb72362cbe0577e1a88c1c04c1cfb29e6fad208c/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-06.csv.json) for an example.
+
+4. migrate (map & upload) the issues from the JSON file to your github issues using the [github api v3](https://developer.github.com/v3)
+
+OLDER info:
+---
 ```BASH
 # that generates
 #    - ala-issues-all-2014-07-15.csv.json for migration
