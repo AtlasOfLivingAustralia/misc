@@ -68,20 +68,19 @@ def extract_project_labels(issue):
         if not "SpatialPortal" in project:
             project.append("SpatialPortal")
 
+    if len(project) == 1:
+        issue["project"] = project[0]
+        return True
+
     # for issues that have 0 or multiple number of projects, print them out:
-    if len(project) != 1:
-        #print 'id: {}, project_label({}): {}'.format(issue["ID"], len(project), project)
-        if len(project) == 0:
-            err = "NO PROJECT"
+    if len(project) == 0:
+        err = "NO PROJECT"
                 
-        if len(project) > 1:
-            err = "MULTIPLE PROJECTS ({})".format(project);
+    if len(project) > 1:
+        err = "MULTIPLE PROJECTS ({})".format(project);
 
-        print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
-        return False
-
-    issue["project"] = project[0]
-    return True
+    print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
+    return False
 
 def get_issue_details(issue):
 
