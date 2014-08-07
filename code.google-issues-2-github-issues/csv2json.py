@@ -68,12 +68,6 @@ def extract_project_labels(issue):
         if not "SpatialPortal" in project:
             project.append("SpatialPortal")
 
-    return project
-
-def get_issue_details(issue):
-
-    project = extract_project_labels(issue);
-
     # for issues that have 0 or multiple number of projects, print them out:
     if len(project) != 1:
         #print 'id: {}, project_label({}): {}'.format(issue["ID"], len(project), project)
@@ -84,7 +78,14 @@ def get_issue_details(issue):
             err = "MULTIPLE PROJECTS ({})".format(project);
 
         print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
+        return False
 
+    issue["project"] = project[0]
+    return True
+
+def get_issue_details(issue):
+
+    if not extract_project_labels(issue):
         return
 
     page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + issue["ID"])
@@ -138,7 +139,6 @@ def get_issue_details(issue):
         details['hc{}'.format(str(i))] = result
         i += 1
 
-    issue["project"] = project[0]
     issue["details"] = details
 
     # NOTE: find out why '//*[@id="meta-float"]/table/tbody/tr[3]/td/a[@class="userlink"]/text()' does not work
