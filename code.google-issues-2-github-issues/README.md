@@ -322,8 +322,8 @@ nickdos
 - translate links to other issues (where possible, useful)
 
 Adding meta info about the migration to migrated issue:
-<table>
-<tr>migrated from</tr>
+<table border="2">
+<tr>migrated from:</tr>
 <tr>https://code.google.com/p/ala/issues/detail?id=583</tr>
 </table>
 
