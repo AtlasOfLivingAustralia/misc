@@ -192,7 +192,77 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
 
   Custom labels need to be created for the existing code.google.com ALA issue labels, for example: Priority, Status, (some) Type. NOTE: Original priority was Priority-High (we can determine that only from the next comment hc1 `details/hc1/updates-full` & `details/hc1/updates-full` fields where we see that `Labels` changed `-Priority-High Priority-Critical` (existing `Priority-High` was replaced with `Priority-Critical`)); Again like with the `assignee` we can either set the custom label Priotity label either to the current (most recent one), or re-play it starting from the initial one.
 
-TODO: describe return JSON/message github REST API returns in response to the issue creation - part of the information (mainly the newly created github issue ID) is crucial because it is required for any past commenting, modifications on that issue.
+#####github API create issue return message
+```JSON
+{
+  "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1",
+  "labels_url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1/labels{/name}",
+  "comments_url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1/comments",
+  "events_url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1/events",
+  "html_url": "https://github.com/AtlasOfLivingAustralia/fieldcapture/issues/1",
+  "id": 39793215,
+  "number": 1,
+  "title": "Ability to change the site associated with an activity",
+  "user": {
+    "login": "mbohun",
+    "id": 1772897,
+    "avatar_url": "https://avatars.githubusercontent.com/u/1772897?v=2",
+    "gravatar_id": "dcdbc4e57c547efe72932b586079d9d6",
+    "url": "https://api.github.com/users/mbohun",
+    "html_url": "https://github.com/mbohun",
+    "followers_url": "https://api.github.com/users/mbohun/followers",
+    "following_url": "https://api.github.com/users/mbohun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/mbohun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/mbohun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/mbohun/subscriptions",
+    "organizations_url": "https://api.github.com/users/mbohun/orgs",
+    "repos_url": "https://api.github.com/users/mbohun/repos",
+    "events_url": "https://api.github.com/users/mbohun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/mbohun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/enhancement",
+      "name": "enhancement",
+      "color": "84b6eb"
+    },
+    {
+      "url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/labels/Priority-High",
+      "name": "Priority-High",
+      "color": "ededed"
+    }
+  ],
+  "state": "open",
+  "assignee": {
+    "login": "mbohun",
+    "id": 1772897,
+    "avatar_url": "https://avatars.githubusercontent.com/u/1772897?v=2",
+    "gravatar_id": "dcdbc4e57c547efe72932b586079d9d6",
+    "url": "https://api.github.com/users/mbohun",
+    "html_url": "https://github.com/mbohun",
+    "followers_url": "https://api.github.com/users/mbohun/followers",
+    "following_url": "https://api.github.com/users/mbohun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/mbohun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/mbohun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/mbohun/subscriptions",
+    "organizations_url": "https://api.github.com/users/mbohun/orgs",
+    "repos_url": "https://api.github.com/users/mbohun/repos",
+    "events_url": "https://api.github.com/users/mbohun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/mbohun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2014-08-08T05:20:17Z",
+  "updated_at": "2014-08-08T05:20:17Z",
+  "closed_at": null,
+  "body": "\nDoE [ issue 62 ](https://code.google.com/p/ala/issues/detail?id=62) \r\nWhen a plan has been approved and the recipient goes to report, they cant go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n",
+  "closed_by": null
+}
+```
 
 ##### gihub API comment on an issue
 `details/hc1` _(representing the 1st comment on the issue AND 1st change to the issue)_
