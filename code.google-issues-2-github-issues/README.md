@@ -156,7 +156,11 @@ Mapping from code.google.com JSON issue:
 ... to github API JSON (step by step):
 
 hc0 (representing the original/initial issue description)
-```JSON
+
+```BASH
+curl --user "mbohun"
+     --request POST
+     --data '``` ```JSON
 {
    "title": "Ability to change the site associated with an activity",
    "body": "\nDoE [ issue 62 ](https://code.google.com/p/ala/issues/detail?id=62) \r\nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n",
@@ -166,17 +170,20 @@ hc0 (representing the original/initial issue description)
            "enhancement"
    ]
 }
-```
+``` ```BASH ' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues```[1]
+
 ##### github API create issue
 |code.google.com       |github API|
 |:---------------------|:---------|
+|project               |https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues|
 |Summary               |title     |
-|details/hc0/pre [1]   |body      |
-|details/hc0/author [2]|assignee  |
-|AllLabels [3]         |labels    |
-1. body: is created from the info stored in details/hc0/pre-elements + details/hc0/pre-full 
-2. assignee: can be either directly assigned to the (current) Owner or to the (original) details/hc0/author (and change latter replicating the change of Owner as it was done on code.google.com); NOTE: The original details/hc0/author `CoolDa...@gmail.com` maps into his github username `pbrenton`.
-3. labels: github API supports by default the following labels:
+|details/hc0/pre [2]   |body      |
+|details/hc0/author [3]|assignee  |
+|AllLabels [4]         |labels    |
+1. code.google.com `FieldCapture` project maps into github project `https://api.github.com/repos/atlasoflivingaustralia/fieldcapture`
+2. body: is created from the info stored in details/hc0/pre-elements + details/hc0/pre-full
+3. assignee: can be either directly assigned to the (current) Owner or to the (original) details/hc0/author (and change latter replicating the change of Owner as it was done on code.google.com); NOTE: The original details/hc0/author `CoolDa...@gmail.com` maps into his github username `pbrenton`.
+4. labels: github API supports by default the following labels:
   - bug
   - duplicate
   - enhancement
