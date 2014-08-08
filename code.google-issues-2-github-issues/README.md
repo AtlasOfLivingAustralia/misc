@@ -30,7 +30,8 @@ python csv2json.py 2014-08-06-ala-google-code-issues.csv > 2014-08-06-ala-google
 ```
 see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/cb72362cbe0577e1a88c1c04c1cfb29e6fad208c/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-06.csv.json) for an example.
 
-#####Migrate (map & upload) the issues from the JSON file to your github issues using the [github api v3](https://developer.github.com/v3)
+#####Migrate
+(map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
 Mapping from code.google.com JSON issue:
 ```JSON
