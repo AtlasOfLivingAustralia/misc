@@ -175,7 +175,7 @@ curl --user "mbohun"
 ```
 ```BASH
 ' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues
-```[1]
+``` [1]
 
 ##### github API create issue
 |code.google.com       |github API|
