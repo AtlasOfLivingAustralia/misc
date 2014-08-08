@@ -30,6 +30,15 @@ python csv2json.py 2014-08-06-ala-google-code-issues.csv > 2014-08-06-ala-google
 ```
 see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/cb72362cbe0577e1a88c1c04c1cfb29e6fad208c/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-06.csv.json) for an example.
 
+#####Normalize (AllLabels strings)
+examples:
+"Priority-High, SpatialPortal, Type-Defect"
+"Layers, Priority-High, Spatial-Portal, SpatialPortal, Type-Enhancement"
+"Priority-Medium, Spatial-Portal, SpatialPortal, Type-Task"
+"FieldCapture, Milestone-EndJan, Priority-Medium, Type-Enhancement"
+"FieldCapture, Milestone-Dec16, Priority-Medium, Type-Defect"
+NOTE: drop Milestone-s for now
+
 #####Migrate
 (map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
@@ -144,28 +153,29 @@ Mapping from code.google.com JSON issue:
     }
 ```
 
-... to github API JSON:
+... to github API JSON (step by step):
+
+hc0 (representing the original/initial issue description)
 ```JSON
 {
    "title": "Ability to change the site associated with an activity",
    "body": "\nDoE [ issue 62 ](https://code.google.com/p/ala/issues/detail?id=62) \r\nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n",
-   "assignee": "chris.godwin.ala@gmail.com",
+   "assignee": "pbrenton",
    "labels": [
-           "Priority-Critical",
+           "Priority-High",
            "enhancement"
    ]
 }
 ```
-
 ##### github API create issue
-|code.google.com    |github API    |
-|:------------------|:-------------|
-|Summary            |title         |
-|details/hc0/pre [1]|body          |
-|Owner           [2]|assignee      |
-|AllLabels       [3]|labels        |
+|code.google.com       |github API|
+|:---------------------|:---------|
+|Summary               |title     |
+|details/hc0/pre [1]   |body      |
+|details/hc0/author [2]|assignee  |
+|AllLabels [3]         |labels    |
 1. body: is created from the info stored in details/hc0/pre-elements + details/hc0/pre-full 
-2. assignee: can be either directly assigned to the (current) Owner or to the original Owner (and change latter replicating the change of Owner as it was done on code.google.com) 
+2. assignee: can be either directly assigned to the (current) Owner or to the (original) details/hc0/author (and change latter replicating the change of Owner as it was done on code.google.com); NOTE: The original details/hc0/author `CoolDa...@gmail.com` maps into his github username `pbrenton`.
 3. labels: github API supports by default the following labels:
   - bug
   - duplicate
@@ -175,8 +185,10 @@ Mapping from code.google.com JSON issue:
   - question
   - wontfix
 
-  Custom labels need to be created for the existing code.google.com ALA issue labels, for example: Priority, Status, (some) Type
+  Custom labels need to be created for the existing code.google.com ALA issue labels, for example: Priority, Status, (some) Type. NOTE: Original priority was Priority-High (we can determine that only from the next comment hc1 `details/hc1/updates-full` & `details/hc1/updates-full` fields where we see that `Labels` changed `-Priority-High Priority-Critical` (existing `Priority-High` was replaced with `Priority-Critical`)); Again like with the `assignee` we can either set the custom label Priotity label either to the current (most recent one), or re-play it starting from the initial one.
 
+The comment on an issue needs to be done for each of the code.google.com issue comments (stored in hc1, hc2 ... hcN)
+hc1 (representing 1st comment/change to the issue)
 ##### gihub API comment on an issue
 ```JSON
 {
@@ -188,7 +200,29 @@ Mapping from code.google.com JSON issue:
 |details/hc1/pre [1]|body          |
 1. body: is created from the info stored in details/hc1/pre-elements + details/hc1/pre-full
 
-  The comment on an issue needs to be done for each of the code.google.com issue comments (stored in hc1, hc2 ... hcN)
+github API change issue label (priority changes from the original Priority-High to Priority-Critical), other existing labels (in this case `enhancement`) need to be preserved!
+```JSON
+{
+    "labels": [
+            "Priority-Critical",
+	    enhancement
+    ]
+}
+```
+
+hc2 (representing 2nd comment/change to the issue)
+##### gihub API comment on an issue
+```JSON
+{
+    "body": "\n[ Issue 457 ](https://code.google.com/p/ala/issues/detail?id=457) has been merged into this issue.\n"
+}
+
+NOT SUPPORTED:
+github API change issue (to add/notify other github users); on github the users have to subscribe to the issue / project.
+CoolDa...@gmail.com
+mark.woo...@csiro.au
+moyesyside
+nickdos
 
 # TODO:
 - design/describe how to construct some 'meta' block that will hold important info about/links to the original issue on code.google.com
