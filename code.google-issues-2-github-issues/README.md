@@ -157,7 +157,7 @@ Mapping from code.google.com JSON issue:
 
 hc0 (representing the original/initial issue description)
 ```BASH
-curl --user "mbohun" --request POST --data '{ "title": "Ability to change the site associated with an activity", "body": "\nDoE [ issue 62 ](https://code.google.com/p/ala/issues/detail?id=62) \r\nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n", "assignee": "pbrenton", "labels": ["Priority-High", "enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues
+curl --user "mbohun" --request POST --data '{ "title": "Ability to change the site associated with an activity", "body": "\nDoE [ issue 62 ](https://code.google.com/p/ala/issues/detail?id=62) \r\nWhen a plan has been approved and the recipient goes to report, they can\'t go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n", "assignee": "pbrenton", "labels": ["Priority-High", "enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues
 ```
 ```JSON
 {
