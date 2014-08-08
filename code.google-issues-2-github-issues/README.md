@@ -181,7 +181,7 @@ curl --user "mbohun"
 ##### github API create issue
 |code.google.com       |github API|
 |:---------------------|:---------|
-|project               |https://api.github.com/repos/atlasoflivingaustralia/*fieldcapture*/issues|
+|project               |https://api.github.com/repos/atlasoflivingaustralia/fieldcapture|
 |Summary               |title     |
 |details/hc0/pre [2]   |body      |
 |details/hc0/author [3]|assignee  |
