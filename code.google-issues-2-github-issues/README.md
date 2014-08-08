@@ -321,6 +321,11 @@ nickdos
 - handle/migrate issue attachments
 - translate links to other issues (where possible, useful)
 
+Adding meta info about the migration to migrated issue:
+|migrated from|
+|:------------|
+|https://code.google.com/p/ala/issues/detail?id=583|
+
 
 
 ---
