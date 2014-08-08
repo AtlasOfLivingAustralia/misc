@@ -173,13 +173,12 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
 ```
 |code.google.com       |github API|
 |:---------------------|:---------|
-|project               |HTTP POST to https://api.github.com/repos/atlasoflivingaustralia/fieldcapture|
+|project               |HTTP POST to https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues|
 |Summary               |title     |
 |details/hc0/pre [2]   |body      |
 |details/hc0/author [3]|assignee  |
 |AllLabels [4]         |labels    |
-1. code.google.com `FieldCapture` project maps into github project `fieldcapture`
-  (github REST API URL: `https://api.github.com/repos/atlasoflivingaustralia/fieldcapture`)
+1. code.google.com `FieldCapture` project maps into github project `fieldcapture` (github REST API URL: `https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues`)
 2. body: is created from the info stored in details/hc0/pre-elements + details/hc0/pre-full
 3. assignee: can be either directly assigned to the (current) Owner or to the (original) details/hc0/author (and change latter replicating the change of Owner as it was done on code.google.com); NOTE: The original details/hc0/author `CoolDa...@gmail.com` maps into his github username `pbrenton`.
 4. labels: github API supports by default the following labels:
