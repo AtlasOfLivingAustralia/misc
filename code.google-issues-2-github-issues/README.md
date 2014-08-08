@@ -323,8 +323,7 @@ nickdos
 
 Adding meta info about the migration to migrated issue:
 <table border="2">
-<tr><td>migrated from:</td></tr>
-<tr><td>https://code.google.com/p/ala/issues/detail?id=583</td></tr>
+<tr><td>migrated from:</td><td>https://code.google.com/p/ala/issues/detail?id=583</td></tr>
 </table>
 
 
