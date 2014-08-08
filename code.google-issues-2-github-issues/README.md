@@ -205,7 +205,7 @@ github API change issue label (priority changes from the original Priority-High 
 {
     "labels": [
             "Priority-Critical",
-	    enhancement
+            enhancement
     ]
 }
 ```
@@ -216,6 +216,7 @@ hc2 (representing 2nd comment/change to the issue)
 {
     "body": "\n[ Issue 457 ](https://code.google.com/p/ala/issues/detail?id=457) has been merged into this issue.\n"
 }
+```
 
 NOT SUPPORTED:
 github API change issue (to add/notify other github users); on github the users have to subscribe to the issue / project.
