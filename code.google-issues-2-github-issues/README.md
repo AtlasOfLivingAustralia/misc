@@ -195,6 +195,9 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
 The comment on an issue needs to be done for each of the code.google.com issue comments (stored in hc1, hc2 ... hcN)
 hc1 (representing 1st comment/change to the issue)
 ##### gihub API comment on an issue
+```BASH
+curl --user "mbohun" --request POST --data '{ "body": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n" }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues/42/comments
+```
 ```JSON
 {
     "body": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
@@ -206,6 +209,9 @@ hc1 (representing 1st comment/change to the issue)
 1. body: is created from the info stored in details/hc1/pre-elements + details/hc1/pre-full
 
 github API change issue label (priority changes from the original Priority-High to Priority-Critical), other existing labels (in this case `enhancement`) need to be preserved!
+```BASH
+curl --user "mbohun" --request POST --data '{ "labels": ["Priority-Critical", "enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues/42
+```
 ```JSON
 {
     "labels": [
@@ -217,6 +223,9 @@ github API change issue label (priority changes from the original Priority-High 
 
 hc2 (representing 2nd comment/change to the issue)
 ##### gihub API comment on an issue
+```BASH
+curl --user "mbohun" --request POST --data '{ "body": "\n[ Issue 457 ](https://code.google.com/p/ala/issues/detail?id=457) has been merged into this issue.\n" }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues/42/comments
+```
 ```JSON
 {
     "body": "\n[ Issue 457 ](https://code.google.com/p/ala/issues/detail?id=457) has been merged into this issue.\n"
