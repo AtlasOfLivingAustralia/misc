@@ -192,7 +192,10 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
 
   Custom labels need to be created for the existing code.google.com ALA issue labels, for example: Priority, Status, (some) Type. NOTE: Original priority was Priority-High (we can determine that only from the next comment hc1 `details/hc1/updates-full` & `details/hc1/updates-full` fields where we see that `Labels` changed `-Priority-High Priority-Critical` (existing `Priority-High` was replaced with `Priority-Critical`)); Again like with the `assignee` we can either set the custom label Priotity label either to the current (most recent one), or re-play it starting from the initial one.
 
+TODO: describe return JSON/message github REST API returns in response to the issue creation - part of the information (mainly the newly created github issue ID) is crucial because it is required for any past commenting, modifications on that issue.
+
 The comment on an issue needs to be done for each of the code.google.com issue comments (stored in hc1, hc2 ... hcN)
+
 hc1 (representing 1st comment/change to the issue)
 ##### gihub API comment on an issue
 ```BASH
