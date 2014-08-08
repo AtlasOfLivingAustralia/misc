@@ -264,6 +264,9 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
 }
 ```
 The `"url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1"` is going to be used for all following comments and changes on this issue.
+These URLs of the issues we created with the migration script need to be stored/preserved for later, at least to:
+- maintain a link between the original (code.google.com) and the migrated (github) issue
+- delete/roll-back some (or all) migrated issues from github in case we want to re-run the migration, etc.
 
 ##### gihub API comment on an issue
 `details/hc1` _(representing the 1st comment on the issue AND 1st change to the issue)_
@@ -317,9 +320,6 @@ nickdos
 - describe how `updates-elements` + `updates-full` are used to re-assemble the update-s in owner, cc, priority, etc
 - handle/migrate issue attachments
 - translate links to other issues (where possible, useful)
-- describe how github return messages are used to store data about the migration
- - this is required for the migration (create issue returns the created issue id, that is required to comment on an issue)
- - database/table of migrated/created github issues id-s will be required to for example delete & rre-migrate/upload them (without interferring/affecting new/manually created issues on github)
 
 
 
