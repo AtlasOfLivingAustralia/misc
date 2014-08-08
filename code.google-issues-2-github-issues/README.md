@@ -263,11 +263,12 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
   "closed_by": null
 }
 ```
+The `"url": "https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1"` is going to be used for all following comments and changes on this issue.
 
 ##### gihub API comment on an issue
 `details/hc1` _(representing the 1st comment on the issue AND 1st change to the issue)_
 ```BASH
-curl --user "mbohun" --request POST --data '{ "body": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n" }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues/42/comments
+curl --user "mbohun" --request POST --data '{ "body": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n" }' https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1/comments
 ```
 ```JSON
 {
@@ -282,7 +283,7 @@ curl --user "mbohun" --request POST --data '{ "body": "\nEscalating the priority
 #####github API change issue
 issue label (priority changes from the original Priority-High to Priority-Critical), other existing labels (in this case `enhancement`) need to be preserved!
 ```BASH
-curl --user "mbohun" --request POST --data '{ "labels": ["Priority-Critical", "enhancement"] }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues/42
+curl --user "mbohun" --request POST --data '{ "labels": ["Priority-Critical", "enhancement"] }' https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1
 ```
 ```JSON
 {
@@ -296,7 +297,7 @@ curl --user "mbohun" --request POST --data '{ "labels": ["Priority-Critical", "e
 ##### gihub API comment on an issue
 `details/hc2` _(representing 2nd comment/change to the issue)_
 ```BASH
-curl --user "mbohun" --request POST --data '{ "body": "\n[ Issue 457 ](https://code.google.com/p/ala/issues/detail?id=457) has been merged into this issue.\n" }' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues/42/comments
+curl --user "mbohun" --request POST --data '{ "body": "\n[ Issue 457 ](https://code.google.com/p/ala/issues/detail?id=457) has been merged into this issue.\n" }' https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1/comments
 ```
 ```JSON
 {
@@ -304,8 +305,7 @@ curl --user "mbohun" --request POST --data '{ "body": "\n[ Issue 457 ](https://c
 }
 ```
 
-NOT SUPPORTED:
-github API change issue (to add/notify other github users); on github the users have to subscribe to the issue / project.
+NOTE: NOT SUPPORTED github API change issue (to add/notify other github users); on github the users have themselves to subscribe to an issue / project.
 CoolDa...@gmail.com
 mark.woo...@csiro.au
 moyesyside
