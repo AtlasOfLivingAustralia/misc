@@ -155,8 +155,7 @@ Mapping from code.google.com JSON issue:
 
 ... to github API JSON (step by step):
 
-#TODO:
-ask all users to create and provide tokens so we can:
+TODO: ask all users to create and provide tokens so we can:
 1. do a lookup from user -> github token
 2. use the token: `curl -H "Authorization: token a592b876fbb2341112a23d6ab1f28d7" --request POST --data '{ ...` to create and modify issues on behalf of that user
 
