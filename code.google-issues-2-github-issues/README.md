@@ -175,12 +175,13 @@ curl --user "mbohun"
 ```
 ```BASH
 ' https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues
-``` [1]
+```
+[1]
 
 ##### github API create issue
 |code.google.com       |github API|
 |:---------------------|:---------|
-|project               |https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues|
+|project               |https://api.github.com/repos/atlasoflivingaustralia/*fieldcapture*/issues|
 |Summary               |title     |
 |details/hc0/pre [2]   |body      |
 |details/hc0/author [3]|assignee  |
