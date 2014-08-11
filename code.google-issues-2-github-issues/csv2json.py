@@ -8,7 +8,11 @@ from lxml import html
 #TODO: if element.attrib.has_key('href'): safer?
 
 def handler_element_a(element, result):
-    result.append({ "a" : { "text" : element.text.encode('utf8'), "link": element.get('href')}})
+    html_link = element.get('href')
+    if html_link.find("/p/ala/issues") == 0:
+        html_link = "https://code.google.com" + html_link
+
+    result.append({ "a" : { "text" : element.text.encode('utf8'), "link": html_link}})
 
 def handler_element_b(element, result):
     result.append({ "b" : { "text" : element.text.encode('utf8')}})
