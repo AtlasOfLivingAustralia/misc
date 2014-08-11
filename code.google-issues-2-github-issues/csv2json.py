@@ -63,6 +63,9 @@ def handle_element(element, result, handler_table):
     except KeyError:
         result.append({ "error" : { "text" : element.text.encode('utf8'), "error": element.tag}})
 
+# NOTE: the extraction/assignment of project label (for migration) does NOT have to be here in
+#       SCRAPING script, it should be (and it will be) moved in to the
+#       MIGRATION script
 def extract_project_labels(issue):
     text = unicodedata.normalize('NFKD', issue["AllLabels"]).encode('ascii', 'ignore')
     labels = text.strip().split(",")
