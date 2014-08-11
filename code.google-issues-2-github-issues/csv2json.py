@@ -43,10 +43,12 @@ def updates_handler_element_br(element, result):
     # nothing to do, <br> is only a separator in updates
     return
 
-# TODO: this is required for scenarios like https://code.google.com/p/ala/issues/detail?id=95,
-#       that has the old/previous Summary wrapped in <span>, review later.
+# NOTE: this is required for scenarios like https://code.google.com/p/ala/issues/detail?id=95,
+#       that has the old/previous Summary wrapped in <span>; see the "WAS:" handling in
+#       get_issue_details() bellow.
 def updates_handler_element_span(element, result):
-    return
+    was = 'WAS:{}'.format(element.text.encode('utf8').strip())
+    result.append(was)
 
 updates_handler_table = {
     "b"        : updates_handler_element_b,
@@ -156,6 +158,18 @@ def get_issue_details(issue):
             updates_keys = []
             for c in children:
                 handle_element(c, updates_keys, updates_handler_table)
+
+            # this is to handle the WAS: updates
+            was_index = -1
+            for uk in updates_keys:
+                if uk.find("WAS:") == 0:
+                    was_index = updates_keys.index(uk)
+                    break;
+
+            if was_index > 0: # the index has to be 1,2,3,etc.
+                value_index = was_index - 1;
+                # TODO: strip the "WAS:" from updates_keys.pop(was_index) before appending it to the value
+                updates_values[value_index] = updates_values[value_index] + updates_keys.pop(was_index)
 
             updates = {}
             for k, v in zip(updates_keys, updates_values):
