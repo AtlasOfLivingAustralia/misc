@@ -34,9 +34,29 @@ element_handler_table = {
     "pre"      : handler_element_pre
 }
 
-def handle_element(element, result):
+def updates_handler_element_b(element, result):
+    key = element.text.encode('utf8')
+    # strip the ":" from "Status:", "Cc:", "Owner:", "Labels:"
+    result.append(key.replace(":", ""))
+
+def updates_handler_element_br(element, result):
+    # nothing to do, <br> is only a separator in updates
+    return
+
+# TODO: this is required for scenarios like https://code.google.com/p/ala/issues/detail?id=95,
+#       that has the old/previous Summary wrapped in <span>, review later.
+def updates_handler_element_span(element, result):
+    return
+
+updates_handler_table = {
+    "b"        : updates_handler_element_b,
+    "br"       : updates_handler_element_br,
+    "span"     : updates_handler_element_span
+}
+
+def handle_element(element, result, handler_table):
     try:
-        element_handler_table[element.tag](element, result)
+        handler_table[element.tag](element, result)
 
     except KeyError:
         result.append({ "error" : { "text" : element.text.encode('utf8'), "error": element.tag}})
@@ -118,7 +138,7 @@ def get_issue_details(issue):
 
         r = []
         for di in comment_element[0].xpath('pre')[0].getiterator():
-            handle_element(di, r)
+            handle_element(di, r, element_handler_table)
 
         result["pre-elements"] = r
 
@@ -126,14 +146,23 @@ def get_issue_details(issue):
 
         # unlike the <pre> element in description/comments the updates are optional, and this is to guard against NO UPDATES case
         if len(updates_full_text):
-            result["updates-full"] = updates_full_text
+            updates_values = []
+            for u in updates_full_text:
+                stripped_u = u.strip()
+                if len(stripped_u):
+                    updates_values.append(stripped_u)
 
             children = comment_element[0].xpath('div[@class="updates"]/div[@class="box-inner"]')[0].getchildren()
-            updates_elements = []
+            updates_keys = []
             for c in children:
-                handle_element(c, updates_elements)
+                handle_element(c, updates_keys, updates_handler_table)
 
-            result["updates-elements"] = updates_elements
+            updates = {}
+            for k, v in zip(updates_keys, updates_values):
+                #print '{}: updates["{}"]={}'.format(issue["ID"], k, v)
+                updates[k] = v
+
+            result["updates"] = updates
 
         # NOTE: lxml XPath does not like/support the tbody element, that is the reason why it is omitted
         attachments = comment_element[0].xpath('div[@class="attachments"]/table/tr[1]/td[2]/a/@href')
