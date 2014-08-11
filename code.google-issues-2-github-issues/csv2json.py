@@ -108,6 +108,16 @@ def get_issue_details(issue):
         date = comment_element[0].xpath('div/span[@class="date"]/@title')
         result["date"] = date[0]
 
+        # the <pre> element of description/comments
+        pre_full_text = comment_element[0].xpath('pre/text()')
+        result["pre-full"] = pre_full_text
+
+        r = []
+        for di in comment_element[0].xpath('pre')[0].getiterator():
+            handle_element(di, r)
+
+        result["pre-elements"] = r
+
         updates_full_text = comment_element[0].xpath('div[@class="updates"]/div[@class="box-inner"]/text()')
 
         # unlike the <pre> element in description/comments the updates are optional, and this is to guard against NO UPDATES case
@@ -125,15 +135,6 @@ def get_issue_details(issue):
         attachments = comment_element[0].xpath('div[@class="attachments"]/table/tr[1]/td[2]/a/@href')
         if len(attachments):
             result["attachments"] = attachments
-
-        pre_full_text = comment_element[0].xpath('pre/text()')
-        result["pre-full"] = pre_full_text
-
-        r = []
-        for di in comment_element[0].xpath('pre')[0].getiterator():
-            handle_element(di, r)
-
-        result["pre-elements"] = r
 
         details['hc{}'.format(str(i))] = result
         i += 1
