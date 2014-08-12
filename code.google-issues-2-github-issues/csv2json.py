@@ -202,8 +202,25 @@ def get_issue_details(issue):
             result["updates"] = updates
 
         # NOTE: lxml XPath does not like/support the tbody element, that is the reason why it is omitted
-        attachments = comment_element[0].xpath('div[@class="attachments"]/table/tr[1]/td[2]/a/@href')
-        if len(attachments):
+        attachments_raw = comment_element[0].xpath('div[@class="attachments"]/table/tr[1]/td[2]/a/@href')
+        if len(attachments_raw):
+            attachments = []
+            for a in attachments_raw:
+                url=""
+
+                token_index = a.find("token=")
+                if token_index > -1:
+                    token_index_end = a.find("&", token_index)
+                    if token_index_end > -1:
+                        url = a[0:token_index] + a[token_index_end+1:]
+                    else:
+                        url = a[0:token_index-1]
+
+                else:
+                    url = a
+
+                attachments.append(url)
+
             result["attachments"] = attachments
 
         details['hc{}'.format(str(i))] = result
