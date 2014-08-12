@@ -219,6 +219,14 @@ def get_issue_details(issue):
                 else:
                     url = a
 
+                # fix URLs like: "../../ala/issues/attachmentText?id=750&aid=7500001000&name=explanatoryNotes.txt"
+                if url.find("../../ala/issues") == 0:
+                    url = "https://code.google.com/p/" + url[6:]
+
+                # fix URLs like: "//ala.googlecode.com/issues/attachment?aid=7500001000&name=explanatoryNotes.txt"
+                if url.find("//ala.googlecode.com/issues/attachment") == 0:
+                    url = "https:" + url
+
                 attachments.append(url)
 
             result["attachments"] = attachments
