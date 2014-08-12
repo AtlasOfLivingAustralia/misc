@@ -24,7 +24,7 @@ def handler_element_i(element, result):
     result.append({ "i" : { "text" : element.text.encode('utf8')}})
 
 def handler_element_pre(element, result):
-    result.append({ "pre" : { "text" : element.text.encode('utf8')}})
+    result.append({ "text" : element.text.encode('utf8')})
 
 element_handler_table = {
     "a"        : handler_element_a,
@@ -144,13 +144,28 @@ def get_issue_details(issue):
 
         # the <pre> element of description/comments
         pre_full_text = comment_element[0].xpath('pre/text()')
-        result["pre-full"] = pre_full_text
+        comment = []
 
-        r = []
-        for di in comment_element[0].xpath('pre')[0].getiterator():
-            handle_element(di, r, element_handler_table)
+        # if pre_full_text is a list containing exactly ONE string that means the <pre> contains only text,
+        # and has no sub-elements/children (<a>, <b>, <i>, <br>, etc.), no further processing is required
+        if len(pre_full_text) == 1:
+            comment.append({ "text": pre_full_text[0]})
 
-        result["pre-elements"] = r
+        else:
+            # this <pre> contains sub-elements/children (<a>, <b>, <i>, <br>, etc.), we need to combine
+            # the info in pre_full_text and the info from its sub-elements children
+            comment_elements = []
+            for di in comment_element[0].xpath('pre')[0].getiterator():
+                handle_element(di, comment_elements, element_handler_table)
+
+            element_index = 1 # NOTE: skip comment_elements[0] it is the same pre_full_text[0]
+            for c in pre_full_text:
+                comment.append({ "text": c})
+                if element_index < len(comment_elements):
+                        comment.append(comment_elements[element_index])
+                        element_index = element_index + 1
+
+        result["comment"] = comment
 
         updates_full_text = comment_element[0].xpath('div[@class="updates"]/div[@class="box-inner"]/text()')
 
