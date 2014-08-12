@@ -119,6 +119,11 @@ def get_issue_details(issue):
     page = requests.get("https://code.google.com/p/ala/issues/detail?id=" + issue["ID"])
     tree = html.fromstring(page.text)
 
+    # NOTE: find out why '//*[@id="meta-float"]/table/tbody/tr[3]/td/a[@class="userlink"]/text()' does not work
+    #       ANSWER: looks like lxml XPath engine does NOT like/support tbody element and tbody has to be omitted
+    cc = tree.xpath('//td[@id="issuemeta"]/div[@id="meta-float"]/table/tr[3]/td/a[@class="userlink"]/text()') #OR use @href?
+    issue["cc"] = cc
+
     details = {}
     i = 0
 
@@ -190,11 +195,6 @@ def get_issue_details(issue):
         i += 1
 
     issue["details"] = details
-
-    # NOTE: find out why '//*[@id="meta-float"]/table/tbody/tr[3]/td/a[@class="userlink"]/text()' does not work
-    #       ANSWER: looks like lxml XPath engine does NOT like/support tbody element and tbody has to be omitted
-    cc = tree.xpath('//td[@id="issuemeta"]/div[@id="meta-float"]/table/tr[3]/td/a[@class="userlink"]/text()') #OR use @href?
-    issue["cc"] = cc
 
 def create_json(file_name, column_names):
     csv_file = open(file_name[0], 'r')
