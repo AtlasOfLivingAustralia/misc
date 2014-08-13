@@ -842,6 +842,7 @@ Enter host password for user 'mbohun':
 }
 ```
 ##### POST to create issue or comment with an attachment - inline screenshot
+[see the result](https://github.com/AtlasOfLivingAustralia/biocache-hubs/issues/4#issuecomment-52013617)
 ```BASH
 bash-3.2$ curl --user "mbohun" --request POST --data '{ "body": "adding another comment with a screenshot:\n![level editor](http://users.on.net/~mbohun/src/tiled-screenshot-00.png)" }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
 Enter host password for user 'mbohun':
