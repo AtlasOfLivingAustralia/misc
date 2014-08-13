@@ -194,9 +194,10 @@ def create_json(file_name, column_names):
 
     data = json.loads(out)
 
+    counter_max = len(data) - 1 #if we count starting with 0;
     counter = 0
     for issue in data:
-        print 'scraping issue id={}\t\t({}/{})'.format(issue["ID"], counter, len(data))
+        print 'scraping issue id={}\t\t({}/{})'.format(issue["ID"], counter, counter_max)
         get_issue_details(issue)
         counter = counter + 1
 
