@@ -844,10 +844,10 @@ Enter host password for user 'mbohun':
 ##### POST to create issue or comment with an attachment - inline screenshot
 
 Limitation-s: As of today (2014-08-13) the github REST API does *not* support upload of images directly (unlike their web interface, that lets you to drag&drop an image into the issue editor); If you are using the github REST API you have to 'preload' your image on:
- 1. a 3rd party fileserver (you can use Amazon S3)
- 2. create a repo on github, upload/commit your screenshots/images there
- 3. create an orphan branch in a repo on github and store your images/screenshots/attachments there
- ```BASH
+ * a 3rd party fileserver (you can use Amazon S3)
+ * create a repo on github, upload/commit your screenshots/images there
+ * create an orphan branch in a repo on github and store your images/screenshots/attachments there:
+```BASH
 git clone git@github.com:AtlasOfLivingAustralia/fieldcapture.git
 cd fieldcapture
 git checkout --orphan fieldcapture-issues-attachments
