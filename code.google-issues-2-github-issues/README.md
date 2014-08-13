@@ -32,10 +32,12 @@ see [ala-issues-all-2014-08-11.csv.json](https://raw.githubusercontent.com/Atlas
 
 
 
-#####Migrate
+####Migrate
 (map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
-#####Normalize (AllLabels strings)
+#####TODO:
+```
+Normalize (AllLabels strings)
 examples:
 "Priority-High, SpatialPortal, Type-Defect"
 "Layers, Priority-High, Spatial-Portal, SpatialPortal, Type-Enhancement"
@@ -43,6 +45,7 @@ examples:
 "FieldCapture, Milestone-EndJan, Priority-Medium, Type-Enhancement"
 "FieldCapture, Milestone-Dec16, Priority-Medium, Type-Defect"
 NOTE: drop Milestone-s for now
+```
 
 Mapping from code.google.com JSON issue:
 ```JSON
