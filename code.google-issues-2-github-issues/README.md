@@ -28,7 +28,12 @@ python csv2json.py 2014-08-06-ala-google-code-issues.csv > 2014-08-06-ala-google
 #    2014-08-06-ala-google-code-issues.csv.json
 #    2014-08-06-ala-google-code-issues.csv-scrape-report.html (a HTML table/report about errors/problems found) 
 ```
-see [2014-08-06-ala-google-code-issues.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/cb72362cbe0577e1a88c1c04c1cfb29e6fad208c/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-06.csv.json) for an example.
+see [2014-08-11-ala-google-code-issues.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/cb72362cbe0577e1a88c1c04c1cfb29e6fad208c/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-11.csv.json) for an example.
+
+
+
+#####Migrate
+(map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
 #####Normalize (AllLabels strings)
 examples:
@@ -38,9 +43,6 @@ examples:
 "FieldCapture, Milestone-EndJan, Priority-Medium, Type-Enhancement"
 "FieldCapture, Milestone-Dec16, Priority-Medium, Type-Defect"
 NOTE: drop Milestone-s for now
-
-#####Migrate
-(map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
 Mapping from code.google.com JSON issue:
 ```JSON
@@ -63,93 +65,56 @@ Mapping from code.google.com JSON issue:
         "details": {
             "hc0": {
                 "author": "CoolDa...@gmail.com",
-                "date": "Thu Feb 13 16:54:53 2014",
-                "pre-elements": [
+                "comment": [
                     {
-                        "pre": {
-                            "text": "\nDoE "
-                        }
+                        "text": "\nDoE "
                     },
                     {
                         "a": {
-                            "link": "/p/ala/issues/detail?id=62",
+                            "link": "https://code.google.com/p/ala/issues/detail?id=62",
                             "text": " issue #62 "
                         }
+                    },
+                    {
+                        "text": "\r\nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n"
                     }
                 ],
-                "pre-full": [
-                    "\nDoE ",
-                    "\r\nWhen a plan has been approved and the recipient goes to report, they can't go back to the activity and re-assign the site to another site.\r\n\r\nComment - PB 
-14/2/14\r\nAbility to change the site associated with an activity is required, but need to handle the situation where photopoint data is attached to an activity.\n"
-                ]
+                "date": "Thu Feb 13 16:54:53 2014"
             },
             "hc1": {
                 "author": "CoolDa...@gmail.com",
+                "comment": [
+                    {
+                        "text": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
+                    }
+                ],
                 "date": "Thu Jul  3 16:14:34 2014",
-                "pre-elements": [
-                    {
-                        "pre": {
-                            "text": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
-                        }
-                    }
-                ],
-                "pre-full": [
-                    "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
-                ],
-                "updates-elements": [
-                    {
-                        "b": {
-                            "text": "Labels:"
-                        }
-                    },
-                    {
-                        "br": {}
-                    }
-                ],
-                "updates-full": [
-                    "\n \n ",
-                    "\n -Priority-High Priority-Critical\n \n ",
-                    "\n \n "
-                ]
+                "updates": {
+                    "Labels": "-Priority-High Priority-Critical"
+                }
             },
             "hc2": {
                 "author": "CoolDa...@gmail.com",
-                "date": "Sat Jul  5 05:06:25 2014",
-                "pre-elements": [
+                "comment": [
                     {
-                        "pre": {
-                            "text": "\n"
-                        }
+                        "text": "\n"
                     },
                     {
                         "a": {
-                            "link": "/p/ala/issues/detail?id=457",
+                            "link": "https://code.google.com/p/ala/issues/detail?id=457",
                             "text": " Issue 457 "
-                        }
-                    }
-                ],
-                "pre-full": [
-                    "\n",
-                    " has been merged into this issue.\n"
-                ],
-                "updates-elements": [
-                    {
-                        "b": {
-                            "text": "Cc:"
                         }
                     },
                     {
-                        "br": {}
+                        "text": " has been merged into this issue.\n"
                     }
                 ],
-                "updates-full": [
-                    "\n \n ",
-                    "\n CoolDa...@gmail.com mark.woo...@csiro.au moyesyside nickdos\n \n ",
-                    "\n \n "
-                ]
+                "date": "Sat Jul  5 05:06:25 2014",
+                "updates": {
+                    "Cc": "CoolDa...@gmail.com mark.woo...@csiro.au moyesyside nickdos"
+                }
             }
-        },
-        "project": "FieldCapture"
+        }
     }
 ```
 
@@ -177,15 +142,15 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
    ]
 }
 ```
-|code.google.com       |github API|
-|:---------------------|:---------|
-|project               |HTTP POST to https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues|
-|Summary               |title     |
-|details/hc0/pre [2]   |body      |
-|details/hc0/author [3]|assignee  |
-|AllLabels [4]         |labels    |
+|code.google.com        |github API|
+|:----------------------|:---------|
+|project                |HTTP POST to https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues|
+|Summary                |title     |
+|details/hc0/comment [2]|body      |
+|details/hc0/author [3] |assignee  |
+|AllLabels [4]          |labels    |
 1. code.google.com `FieldCapture` project maps into github project `fieldcapture` (github REST API URL: `https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues`)
-2. body: is created from the info stored in details/hc0/pre-elements + details/hc0/pre-full
+2. body: is created from the info stored in details/hc0/comment
 3. assignee: can be either directly assigned to the (current) Owner or to the (original) details/hc0/author (and change latter replicating the change of Owner as it was done on code.google.com); NOTE: The original details/hc0/author `CoolDa...@gmail.com` maps into his github username `pbrenton`.
 4. labels: github API supports by default the following labels:
   - bug
@@ -284,10 +249,10 @@ curl --user "mbohun" --request POST --data '{ "body": "\nEscalating the priority
     "body": "\nEscalating the priority on this as it is now floating to the top of the requested changes from DoE.\n"
 }
 ```
-|code.google.com    |github API    |
-|:------------------|:-------------|
-|details/hc1/pre [1]|body          |
-1. body: is created from the info stored in details/hc1/pre-elements + details/hc1/pre-full
+|code.google.com        |github API    |
+|:----------------------|:-------------|
+|details/hc1/comment [1]|body          |
+1. body: is created from the info stored in details/hc1/comment
 
 #####github API change issue
 issue label (priority changes from the original Priority-High to Priority-Critical), other existing labels (in this case `enhancement`) need to be preserved!
@@ -322,8 +287,6 @@ nickdos
 
 # TODO:
 - design/describe how to construct some 'meta' block that will hold important info about/links to the original issue on code.google.com
-- describe how `pre-elements` + `pre-full` are used to re-assemble the original issue text with formatting
-- describe how `updates-elements` + `updates-full` are used to re-assemble the update-s in owner, cc, priority, etc
 - handle/migrate issue attachments
 - translate links to other issues (where possible, useful)
 
