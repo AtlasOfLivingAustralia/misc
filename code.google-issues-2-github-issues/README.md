@@ -846,9 +846,6 @@ Enter host password for user 'mbohun':
 Limitation-s: As of today (2014-08-13) the github REST API does *not* support upload of images directly (unlike their web interface, that lets you to drag&drop an image into the issue editor); If you are using the github REST API you have to 'preload' your image on:
  1. a 3rd party fileserver (you can use Amazon S3)
  2. create a repo on github, upload/commit your screenshots/images there
- 3. create an orphan branch in a repo on github and store your images/screenshots/attachments there
- 
- ... and then to use their 'raw' URLs in the github REST API calls, as in the following example:
 ```BASH
 git clone git@github.com:AtlasOfLivingAustralia/fieldcapture.git
 cd fieldcapture
@@ -856,7 +853,9 @@ git checkout --orphan fieldcapture-issues-attachments
 git rm -rf .
 git push origin fieldcapture-issues-attachments
 ```
-
+ 3. create an orphan branch in a repo on github and store your images/screenshots/attachments there
+ 
+and then to use their 'raw' URLs in the github REST API calls, as in the following example:
 ```BASH
 bash-3.2$ curl --user "mbohun" --request POST --data '{ "body": "adding another comment with a screenshot:\n![level editor](http://users.on.net/~mbohun/src/tiled-screenshot-00.png)" }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
 Enter host password for user 'mbohun':
