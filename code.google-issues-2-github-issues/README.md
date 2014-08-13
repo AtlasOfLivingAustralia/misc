@@ -164,7 +164,7 @@ curl --user "mbohun" --request POST --data '{ "title": "Ability to change the si
   - question
   - wontfix
 
-  Custom labels need to be created for the existing code.google.com ALA issue labels, for example: Priority, Status, (some) Type. NOTE: Original priority was Priority-High (we can determine that only from the next comment hc1 `details/hc1/updates-full` & `details/hc1/updates-full` fields where we see that `Labels` changed `-Priority-High Priority-Critical` (existing `Priority-High` was replaced with `Priority-Critical`)); Again like with the `assignee` we can either set the custom label Priotity label either to the current (most recent one), or re-play it starting from the initial one.
+  Custom labels need to be created for the existing code.google.com ALA issue labels, for example: Priority, Status, (some) Type. NOTE: Original priority was Priority-High (we can determine that only from the next comment hc1 `details/hc1/updates` field where we see that `Labels` changed `-Priority-High Priority-Critical` (existing `Priority-High` was replaced with `Priority-Critical`)); Again like with the `assignee` we can either set the custom label Priotity label either to the current (most recent one), or re-play it starting from the initial one.
 
 #####github API create issue return message
 ```JSON
