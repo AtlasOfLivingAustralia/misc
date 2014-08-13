@@ -841,6 +841,39 @@ Enter host password for user 'mbohun':
   "closed_by": null
 }
 ```
+##### POST to create issue or comment with an attachment - inline screenshot
+```BASH
+bash-3.2$ curl --user "mbohun" --request POST --data '{ "body": "adding another comment with a screenshot:\n![level editor](http://users.on.net/~mbohun/src/tiled-screenshot-00.png)" }' https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs/issues/4/comments
+Enter host password for user 'mbohun':
+{
+  "url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/comments/52013617",
+  "html_url": "https://github.com/AtlasOfLivingAustralia/biocache-hubs/issues/4#issuecomment-52013617",
+  "issue_url": "https://api.github.com/repos/AtlasOfLivingAustralia/biocache-hubs/issues/4",
+  "id": 52013617,
+  "user": {
+    "login": "mbohun",
+    "id": 1772897,
+    "avatar_url": "https://avatars.githubusercontent.com/u/1772897?v=2",
+    "gravatar_id": "dcdbc4e57c547efe72932b586079d9d6",
+    "url": "https://api.github.com/users/mbohun",
+    "html_url": "https://github.com/mbohun",
+    "followers_url": "https://api.github.com/users/mbohun/followers",
+    "following_url": "https://api.github.com/users/mbohun/following{/other_user}",
+    "gists_url": "https://api.github.com/users/mbohun/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/mbohun/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/mbohun/subscriptions",
+    "organizations_url": "https://api.github.com/users/mbohun/orgs",
+    "repos_url": "https://api.github.com/users/mbohun/repos",
+    "events_url": "https://api.github.com/users/mbohun/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/mbohun/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "created_at": "2014-08-13T06:17:16Z",
+  "updated_at": "2014-08-13T06:17:16Z",
+  "body": "adding another comment with a screenshot:\n![level editor](http://users.on.net/~mbohun/src/tiled-screenshot-00.png)"
+}
+```
 ##### GET all (default) github issue labels
 ```BASH
 curl --user "mbohun" https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/labels
