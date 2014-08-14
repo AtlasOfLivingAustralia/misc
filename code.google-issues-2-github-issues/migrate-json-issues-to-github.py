@@ -47,11 +47,77 @@ def extract_project_labels(issue):
     print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
     return False
 
+def lookup_mapping(string, table):
+    try:
+        return table[string]
+
+    except KeyError:
+        return ""
+
 def migrate_issue(issue):
     if not extract_project_labels(issue):
         return
 
-    print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], issue["project"])
+    # TODO: make this lookup/mapping tables external JSON file
+    lookup_table_project = {
+        # "Alerts":         "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "ASBP":           "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "AUTH":           "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "AVH":            "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "BHL":            "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "BIE":            "https://api.github.com/repos/atlasoflivingaustralia/",
+        "biocache":       "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-biocache",
+        "Biocache":       "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-biocache",
+        # "Browser-All":    "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "BVP":            "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Collectory":     "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Component-UI":   "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Dashboard":      "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "f":              "https://api.github.com/repos/atlasoflivingaustralia/",
+        "FieldCapture":   "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-fieldcapture",
+        # "Geonetwork":     "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Hubs":           "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "ImageService":   "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "LayerServices":  "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "ListsTool":      "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "ListTool":       "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "NameMatching":   "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "names":          "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "OzAtlasAndroid": "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Regions":        "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Sandbox":        "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Sighitngs":      "https://api.github.com/repos/atlasoflivingaustralia/",
+        # "Sightings":      "https://api.github.com/repos/atlasoflivingaustralia/",
+        "SpatialPortal":  "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-spatial-portal"
+        # "WEBAPI":         "https://api.github.com/repos/atlasoflivingaustralia/"
+    }
+
+    github_repo_url        = lookup_mapping(issue["project"], lookup_table_project)
+    if len(github_repo_url) == 0:
+        err = 'NO MIGRATION DESTINATION for {}'.format(issue["project"])
+        print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
+        return
+
+    github_repo_issues_url = github_repo_url + "/issues"
+
+    # CREATE ISSUE
+    # example:
+    #
+    # curl --user    "mbohun"
+    #      --request POST
+    #      --data '{
+    #                  "title":    "issue title here",
+    #                  "body":     "issue body here",
+    #                  "assignee": "pbrenton",
+    #                  "labels": [
+    #                      "Priority-High",
+    #                      "enhancement"
+    #                  ]
+    #              }'
+    #
+    #       https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues
+
+    print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_issues_url)
 
 def migrate_json_issues(file_name):
     f = open(file_name[0], 'r')
