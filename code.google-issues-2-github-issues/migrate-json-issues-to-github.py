@@ -154,29 +154,13 @@ def migrate_issue(issue, github_password):
 
     github_repo_issues_url = github_repo_url + "/issues"
 
-    # CREATE ISSUE
-    # example:
-    #
-    # curl --user    "mbohun"
-    #      --request POST
-    #      --data '{
-    #                  "title":    "issue title here",
-    #                  "body":     "issue body here",
-    #                  "assignee": "pbrenton",
-    #                  "labels": [
-    #                      "Priority-High",
-    #                      "enhancement"
-    #                  ]
-    #              }'
-    #
-    #       https://api.github.com/repos/atlasoflivingaustralia/fieldcapture/issues
-
     body = create_issue_body(issue["details"]["hc0"]["comment"])
-    # print 'BODY: {}'.format(body)
-
     data = json.dumps({ 'title': issue["Summary"], 'body': body }) # TODO: assignee, labels
-    res = requests.post(github_repo_issues_url, data, auth=('mbohun', github_password))
 
+    res = requests.post(github_repo_issues_url, data, auth=('mbohun', github_password))
+    # TODO: we need to parse the return codes, id possible errors AND to extract important
+    #       information from the github API return JSON messages, for example the newly
+    #       created github issue ID
     print '>>> requests res: {}'.format(res)
 
     print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_issues_url)
