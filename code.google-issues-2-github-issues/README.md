@@ -23,10 +23,9 @@ tail -n +2 2014-08-06-ala-google-code-issues-raw.csv > 2014-08-06-ala-google-cod
 ```
 #####Pass the CVS file to [scrape-googlecode-issues.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/scrape-googlecode-issues.py) script to scrape the issue details from code.google.com this will generate a JSON output file containing the scraped issues:
 ```BASH
-python scrape-googlecode-issues.py 2014-08-06-ala-google-code-issues.csv > 2014-08-06-ala-google-code-issues.csv-scrape-report.html
+python scrape-googlecode-issues.py 2014-08-06-ala-google-code-issues.csv
 # creates:
 #    2014-08-06-ala-google-code-issues.csv.json
-#    2014-08-06-ala-google-code-issues.csv-scrape-report.html (a HTML table/report about errors/problems found) 
 ```
 see [ala-issues-all-2014-08-11.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/master/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-11.csv.json) for an example.
 
@@ -303,22 +302,12 @@ Adding meta info about the migration to migrated issue:
 ---
 OLDER info/notes:
 
-```BASH
-# that generates
-#    - ala-issues-all-2014-07-15.csv.json for migration
-#    - and HTML table problem report is stored in ala-issues-all-2014-07-15.csv.html
-#
-python csv2json.py ala-issues-all-2014-07-15.csv > ala-issues-all-2014-07-15.csv.html
-```
-##### translate the .csv into json format (creates ala-issues-all-2014-07-15.csv.json
-```BASH
-python csv2json.py ala-issues-all-2014-07-15.csv
-```
 ##### examine the output json file
 ```BASH
 cat ala-issues-all-2014-07-15.csv.json | python -m json.tool
 ```
 ##### get the name-s of all available project-s extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a destination - a github repo name where you want to migrate the issue for that project (for example all issues from our code.google.com issue tracker tagged with `"project": "FieldCapture"` will be migrated to [https://github.com/AtlasOfLivingAustralia/fieldcapture/issues](https://github.com/AtlasOfLivingAustralia/fieldcapture/issues))
+####NOTE: THIS IS OUTDATED, THE "project" JSON field creation/assignment was moved from SCRAPING to MIGRATION script
 ```BASH
 cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"project\"" | sort |uniq
         "project": "Alerts"
