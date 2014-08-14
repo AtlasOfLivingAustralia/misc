@@ -128,7 +128,7 @@ def migrate_issue(issue, github_password):
         # "Component-UI":   "https://api.github.com/repos/atlasoflivingaustralia/",
         # "Dashboard":      "https://api.github.com/repos/atlasoflivingaustralia/",
         # "f":              "https://api.github.com/repos/atlasoflivingaustralia/",
-        "FieldCapture":   "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-fieldcapture"
+        "FieldCapture":   "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-fieldcapture-01"
         # "Geonetwork":     "https://api.github.com/repos/atlasoflivingaustralia/",
         # "Hubs":           "https://api.github.com/repos/atlasoflivingaustralia/",
         # "ImageService":   "https://api.github.com/repos/atlasoflivingaustralia/",
@@ -152,18 +152,35 @@ def migrate_issue(issue, github_password):
         print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"].encode('utf8'))
         return
 
-    github_repo_issues_url = github_repo_url + "/issues"
+    github_repo_create_issue_url = github_repo_url + "/issues"
 
     body = create_issue_body(issue["details"]["hc0"]["comment"])
     data = json.dumps({ 'title': issue["Summary"], 'body': body }) # TODO: assignee, labels
 
-    res = requests.post(github_repo_issues_url, data, auth=('mbohun', github_password))
+    res = requests.post(github_repo_create_issue_url, data, auth=('mbohun', github_password))
+
     # TODO: we need to parse the return codes, id possible errors AND to extract important
     #       information from the github API return JSON messages, for example the newly
     #       created github issue ID
-    print '>>> requests res: {}'.format(res)
+    if res.status_code != 201: # TODO: make/use proper constant for HTTP_ACCEPTED
+        # TODO: log/report status_code err
+        return False
 
-    print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_issues_url)
+    created_issue_id = res.json()["number"]
+    github_repo_commenton_issue_url = github_repo_create_issue_url + "/" + str(created_issue_id) + "/comments"
+
+    number_of_comments = len(issue["details"])  # hc0 is the issue description, hc1, hc2 ... are the comment-s on the issue
+
+    for i in range(1, number_of_comments):
+        hc = 'hc{}'.format(i)
+        body = create_issue_body(issue["details"][hc]["comment"])
+        data = json.dumps({ 'body': body })
+
+        res = requests.post(github_repo_commenton_issue_url, data, auth=('mbohun', github_password))
+        # TODO: check response code for success, etc.
+       #print 'COMMENT: created comment {} on issue {}; {}'.format(i, created_issue_id, github_repo_commenton_issue_url)
+
+    print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_create_issue_url)
     return True
 
 def migrate_json_issues(args):
