@@ -207,5 +207,6 @@ def create_json(file_name, column_names):
     json_file = open(file_name[0] + ".json", 'w')
     json_file.write(out);
 
+# TODO: add some proper civilized, usage/help message & err handling
 if __name__=="__main__":
         create_json(sys.argv[1:], ["ID","Type","Status","Priority","Owner","Summary","AllLabels","Modified","ModifiedTimestamp"])
