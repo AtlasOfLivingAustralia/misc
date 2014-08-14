@@ -158,6 +158,7 @@ def get_issue_details(issue):
             for a in attachments_raw:
                 url=""
 
+                # strip/remove token param from the URLs
                 token_index = a.find("token=")
                 if token_index > -1:
                     token_index_end = a.find("&", token_index)
