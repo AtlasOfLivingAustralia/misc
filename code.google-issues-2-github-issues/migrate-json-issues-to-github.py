@@ -155,11 +155,11 @@ def migrate_issue(issue, lookup_table, github_password):
 
         github_token = lookup_mapping(issue["details"][hc]["author"], lookup_table["author"])
         if len(github_token) == 0:
-            res = requests.post(github_repo_create_issue_url, data, auth=('mbohun', github_password))
+            res = requests.post(github_repo_commenton_issue_url, data, auth=('mbohun', github_password))
 
         else:
             http_header = {'Authorization': 'token %s' % github_token}
-            res = requests.post(github_repo_create_issue_url, data, headers=http_header)
+            res = requests.post(github_repo_commenton_issue_url, data, headers=http_header)
 
     print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_create_issue_url)
     return True
