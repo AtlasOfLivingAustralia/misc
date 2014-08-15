@@ -9,7 +9,7 @@ from lxml import html
 
 def handler_element_a(element, result):
     html_link = element.get('href')
-    if html_link.find("/p/ala/issues") == 0:
+    if html_link.find("/p/ala/") == 0:
         html_link = "https://code.google.com" + html_link
 
     result.append({ "a" : { "text" : element.text.encode('utf8'), "link": html_link}})
