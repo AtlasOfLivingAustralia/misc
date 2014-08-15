@@ -111,45 +111,11 @@ def create_issue_body(arr_of_dict, meta_info=""):
     out_buffer.close()
     return body
 
-def migrate_issue(issue, github_password):
+def migrate_issue(issue, lookup_table, github_password):
     if not extract_project_labels(issue):
         return
 
-    # TODO: make this lookup/mapping tables external JSON file
-    lookup_table_project = {
-        # "Alerts":         "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "ASBP":           "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "AUTH":           "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "AVH":            "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "BHL":            "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "BIE":            "https://api.github.com/repos/atlasoflivingaustralia/",
-        #"biocache":       "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-biocache",
-        #"Biocache":       "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-biocache",
-        # "Browser-All":    "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "BVP":            "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Collectory":     "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Component-UI":   "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Dashboard":      "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "f":              "https://api.github.com/repos/atlasoflivingaustralia/",
-        "FieldCapture":   "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-fieldcapture-03"
-        # "Geonetwork":     "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Hubs":           "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "ImageService":   "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "LayerServices":  "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "ListsTool":      "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "ListTool":       "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "NameMatching":   "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "names":          "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "OzAtlasAndroid": "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Regions":        "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Sandbox":        "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Sighitngs":      "https://api.github.com/repos/atlasoflivingaustralia/",
-        # "Sightings":      "https://api.github.com/repos/atlasoflivingaustralia/",
-        #"SpatialPortal":  "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-spatial-portal"
-        # "WEBAPI":         "https://api.github.com/repos/atlasoflivingaustralia/"
-    }
-
-    github_repo_url        = lookup_mapping(issue["project"], lookup_table_project)
+    github_repo_url        = lookup_mapping(issue["project"], lookup_table["project"])
     if len(github_repo_url) == 0:
         err = 'NO MIGRATION DESTINATION for {}'.format(issue["project"])
         print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"].encode('utf8'))
@@ -193,6 +159,9 @@ def migrate_json_issues(args):
     data = json.load(f)
     print 'len(data):{}'.format(len(data))
 
+    lookup_table_file = open(args[1], 'r')
+    lookup_table = json.load(lookup_table_file);
+
     # simple report in HTML format into stdout
     print '<html>'
     print '<body>'
@@ -201,7 +170,7 @@ def migrate_json_issues(args):
 
     counter = 0
     for issue in data:
-        if migrate_issue(issue, args[1]):
+        if migrate_issue(issue, lookup_table, args[2]): # args[2] github password is optional - for example if github token-s are used
             counter += 1
             time.sleep(20) # careful we are limited to 60 request per hour, this should allow for 120 fieldcapture issues test migration
 
