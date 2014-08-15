@@ -127,7 +127,13 @@ def migrate_issue(issue, lookup_table, github_password):
     body = create_issue_body(issue["details"]["hc0"]["comment"], meta_info)
     data = json.dumps({ 'title': issue["Summary"], 'body': body }) # TODO: assignee, labels
 
-    res = requests.post(github_repo_create_issue_url, data, auth=('mbohun', github_password))
+    github_token = lookup_mapping(issue["details"]["hc0"]["author"], lookup_table["author"])
+    if len(github_token) == 0:
+        res = requests.post(github_repo_create_issue_url, data, auth=('mbohun', github_password))
+
+    else:
+        http_header = {'Authorization': 'token %s' % github_token}
+        res = requests.post(github_repo_create_issue_url, data, headers=http_header)
 
     # TODO: we need to parse the return codes, id possible errors AND to extract important
     #       information from the github API return JSON messages, for example the newly
@@ -147,9 +153,13 @@ def migrate_issue(issue, lookup_table, github_password):
         body = create_issue_body(issue["details"][hc]["comment"], meta_info)
         data = json.dumps({ 'body': body })
 
-        res = requests.post(github_repo_commenton_issue_url, data, auth=('mbohun', github_password))
-        # TODO: check response code for success, etc.
-       #print 'COMMENT: created comment {} on issue {}; {}'.format(i, created_issue_id, github_repo_commenton_issue_url)
+        github_token = lookup_mapping(issue["details"][hc]["author"], lookup_table["author"])
+        if len(github_token) == 0:
+            res = requests.post(github_repo_create_issue_url, data, auth=('mbohun', github_password))
+
+        else:
+            http_header = {'Authorization': 'token %s' % github_token}
+            res = requests.post(github_repo_create_issue_url, data, headers=http_header)
 
     print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_create_issue_url)
     return True
