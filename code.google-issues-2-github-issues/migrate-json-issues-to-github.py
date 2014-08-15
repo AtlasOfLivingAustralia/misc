@@ -98,8 +98,11 @@ def handle_element(element, result):
     except KeyError:
         print 'ERROR handle_element() does NOT know: {}'.format(key)
 
-def create_issue_body(arr_of_dict):
+def create_issue_body(arr_of_dict, meta_info=""):
     out_buffer = cStringIO.StringIO()
+
+    if len(meta_info):
+        out_buffer.write(meta_info)
 
     for a in arr_of_dict:
         handle_element(a, out_buffer)
@@ -128,7 +131,7 @@ def migrate_issue(issue, github_password):
         # "Component-UI":   "https://api.github.com/repos/atlasoflivingaustralia/",
         # "Dashboard":      "https://api.github.com/repos/atlasoflivingaustralia/",
         # "f":              "https://api.github.com/repos/atlasoflivingaustralia/",
-        "FieldCapture":   "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-fieldcapture-01"
+        "FieldCapture":   "https://api.github.com/repos/atlasoflivingaustralia/test-issue-migration-fieldcapture-03"
         # "Geonetwork":     "https://api.github.com/repos/atlasoflivingaustralia/",
         # "Hubs":           "https://api.github.com/repos/atlasoflivingaustralia/",
         # "ImageService":   "https://api.github.com/repos/atlasoflivingaustralia/",
@@ -154,7 +157,8 @@ def migrate_issue(issue, github_password):
 
     github_repo_create_issue_url = github_repo_url + "/issues"
 
-    body = create_issue_body(issue["details"]["hc0"]["comment"])
+    meta_info = '\n*migrated from:* https://code.google.com/p/ala/issues/detail?id={}\n*date:* {}\n*author:* {}\n ---\n'.format(issue["ID"], issue["details"]["hc0"]["date"], issue["details"]["hc0"]["author"])
+    body = create_issue_body(issue["details"]["hc0"]["comment"], meta_info)
     data = json.dumps({ 'title': issue["Summary"], 'body': body }) # TODO: assignee, labels
 
     res = requests.post(github_repo_create_issue_url, data, auth=('mbohun', github_password))
@@ -173,7 +177,8 @@ def migrate_issue(issue, github_password):
 
     for i in range(1, number_of_comments):
         hc = 'hc{}'.format(i)
-        body = create_issue_body(issue["details"][hc]["comment"])
+        meta_info = '\n*date:* {}\n*author:* {}\n ---\n'.format(issue["details"][hc]["date"], issue["details"][hc]["author"])
+        body = create_issue_body(issue["details"][hc]["comment"], meta_info)
         data = json.dumps({ 'body': body })
 
         res = requests.post(github_repo_commenton_issue_url, data, auth=('mbohun', github_password))
