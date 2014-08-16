@@ -4,6 +4,7 @@ import unicodedata
 import requests
 import cStringIO
 import time
+import re
 
 def extract_project_labels(issue):
     text = unicodedata.normalize('NFKD', issue["AllLabels"]).encode('ascii', 'ignore')
@@ -80,7 +81,9 @@ def handler_element_i(element, out_buffer):
     out_buffer.write("*")
 
 def handler_element_text(element, out_buffer):
-    out_buffer.write(element["text"].encode('utf8'))
+    # replace wrap strings like #22 in `` => `#22` so it is NOT a github issue reference/link to github issue 22
+    text = re.sub(r'#(\d+)', r'`#\1`', element["text"].encode('utf8'))
+    out_buffer.write(text)
 
 element_handler_table = {
     "a"         : handler_element_a,
