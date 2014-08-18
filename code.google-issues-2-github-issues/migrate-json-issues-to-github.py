@@ -177,7 +177,7 @@ def migrate_issue(issue, lookup_table, github_password):
             http_header = {'Authorization': 'token %s' % github_token}
             res = requests.post(github_repo_commenton_issue_url, data, headers=http_header)
 
-    print '<!-- migrating issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_create_issue_url)
+    print '<!-- migrated issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_create_issue_url)
     return True
 
 def migrate_json_issues(args):
