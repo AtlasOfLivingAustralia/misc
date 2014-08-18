@@ -297,19 +297,21 @@ Adding meta info about the migration to migrated issue:
 <tr><td>migrated from:</td><td>https://code.google.com/p/ala/issues/detail?id=583</td></tr>
 </table>
 
-# MANUAL EDITING/ADJUSTING of migrated issues
+#### MANUAL EDITING/ADJUSTING of migrated issues
 
 Some issues require/benefit manual adjustment, example:
 
-original: https://code.google.com/p/ala/issues/detail?id=656 
-migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/37 
+original: https://code.google.com/p/ala/issues/detail?id=656
+
+migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/37
+
 migrated and adjusted : https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache-01/issues/37 
 
 or:
 
-migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache-01/issues/46 
-migrated and adjusted: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/46 
+migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache-01/issues/46
 
+migrated and adjusted: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/46
 
 ---
 OLDER info/notes:
