@@ -301,9 +301,9 @@ Adding meta info about the migration to migrated issue:
 
 Some issues require/benefit manual adjustment, example:
 
-original: https://code.google.com/p/ala/issues/detail?id=656
-migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/37
-migrated and adjusted : https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache-01/issues/37
+original: https://code.google.com/p/ala/issues/detail?id=656 
+migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/37 
+migrated and adjusted : https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache-01/issues/37 
 
 ---
 OLDER info/notes:
