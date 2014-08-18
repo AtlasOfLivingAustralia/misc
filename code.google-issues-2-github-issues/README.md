@@ -305,6 +305,12 @@ original: https://code.google.com/p/ala/issues/detail?id=656
 migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/37 
 migrated and adjusted : https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache-01/issues/37 
 
+or:
+
+migrated only: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache-01/issues/46 
+migrated and adjusted: https://github.com/AtlasOfLivingAustralia/test-issue-migration-biocache/issues/46 
+
+
 ---
 OLDER info/notes:
 
