@@ -101,14 +101,17 @@ def handle_element(element, result):
     except KeyError:
         print 'ERROR handle_element() does NOT know: {}'.format(key)
 
-def create_issue_body(arr_of_dict, meta_info=""):
+def create_issue_body(arr_of_dict, meta_info_header="", meta_info_footer=""):
     out_buffer = cStringIO.StringIO()
 
-    if len(meta_info):
-        out_buffer.write(meta_info)
+    if len(meta_info_header):
+        out_buffer.write(meta_info_header)
 
     for a in arr_of_dict:
         handle_element(a, out_buffer)
+
+    if len(meta_info_footer):
+        out_buffer.write(meta_info_footer)
 
     body = out_buffer.getvalue()
     out_buffer.close()
@@ -126,8 +129,8 @@ def migrate_issue(issue, lookup_table, github_password):
 
     github_repo_create_issue_url = github_repo_url + "/issues"
 
-    meta_info = '\n*migrated from:* https://code.google.com/p/ala/issues/detail?id={}\n*date:* {}\n*author:* {}\n ---\n'.format(issue["ID"], issue["details"]["hc0"]["date"], issue["details"]["hc0"]["author"])
-    body = create_issue_body(issue["details"]["hc0"]["comment"], meta_info)
+    meta_info_header = '\n*migrated from:* https://code.google.com/p/ala/issues/detail?id={}\n*date:* {}\n*author:* {}\n ---\n'.format(issue["ID"], issue["details"]["hc0"]["date"], issue["details"]["hc0"]["author"])
+    body = create_issue_body(issue["details"]["hc0"]["comment"], meta_info_header)
     data = json.dumps({ 'title': issue["Summary"], 'body': body }) # TODO: assignee, labels
 
     github_token = lookup_mapping(issue["details"]["hc0"]["author"], lookup_table["author"])
@@ -152,8 +155,18 @@ def migrate_issue(issue, lookup_table, github_password):
 
     for i in range(1, number_of_comments):
         hc = 'hc{}'.format(i)
-        meta_info = '\n*date:* {}\n*author:* {}\n ---\n'.format(issue["details"][hc]["date"], issue["details"][hc]["author"])
-        body = create_issue_body(issue["details"][hc]["comment"], meta_info)
+        meta_info_header = '\n*date:* {}\n*author:* {}\n ---\n'.format(issue["details"][hc]["date"], issue["details"][hc]["author"])
+
+        meta_info_footer = ""
+        # updates are OPTIONAL, so first first check if there are any
+        if 'updates' in issue["details"][hc]:
+            updates = issue["details"][hc]["updates"]
+            updates_keys = sorted(updates.keys())
+            meta_info_footer = '\n ---\n**UPDATES:**\n'
+            for k in updates_keys:
+                meta_info_footer += '*{}:* {}\n'.format(k, updates[k])
+
+        body = create_issue_body(issue["details"][hc]["comment"], meta_info_header, meta_info_footer)
         data = json.dumps({ 'body': body })
 
         github_token = lookup_mapping(issue["details"][hc]["author"], lookup_table["author"])
