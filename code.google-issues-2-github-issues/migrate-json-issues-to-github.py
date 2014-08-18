@@ -69,7 +69,7 @@ def handler_element_a(element, out_buffer):
 
 def handler_element_b(element, out_buffer):
     out_buffer.write("**")
-    out_buffer.write(element["i"]["text"].encode('utf8'))
+    out_buffer.write(element["b"]["text"].encode('utf8'))
     out_buffer.write("**")
 
 def handler_element_br(element, out_buffer):
