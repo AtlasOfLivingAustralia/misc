@@ -177,6 +177,24 @@ def migrate_issue(issue, lookup_table, github_password):
             http_header = {'Authorization': 'token %s' % github_token}
             res = requests.post(github_repo_commenton_issue_url, data, headers=http_header)
 
+    # NOTE: at this point we created/migrated all comment-s, the last step is to assign
+    #       the MOST RECENT/CURRENT Owner, Priority, Status, and all the other label-s from googlecode.com
+
+    # TODO: although highly unlikely what if data_assignee lookup fails?
+    data_assignee = lookup_mapping(issue["Owner"], lookup_table["owner"])
+    data_labels = [
+        "Priority-{}".format(issue["Priority"]), # TODO: merge/normalize synonyms high/High/HIgh, low/Low
+        "Status-{}".format(issue["Status"]),
+        "Type-{}".format(issue["Type"]) # TODO: Type-Enhancement, Type-Defect can be mapped into github existing labels enhancement, bug
+    ]
+
+    data = json.dumps({ 'assignee': data_assignee, 'labels': data_labels})
+
+    github_repo_modify_issue_url = github_repo_create_issue_url + "/" + str(created_issue_id)
+    res = requests.post(github_repo_modify_issue_url, data, auth=('mbohun', github_password)) # TODO: decide whose/what credentials are going to be used for this step
+
+    # TODO: check/handle res
+
     print '<!-- migrated issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_create_issue_url)
     return True
 
