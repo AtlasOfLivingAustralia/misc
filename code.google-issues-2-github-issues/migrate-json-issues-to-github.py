@@ -5,6 +5,7 @@ import requests
 import cStringIO
 import time
 import re
+import io
 
 def extract_project_labels(issue):
     text = unicodedata.normalize('NFKD', issue["AllLabels"]).encode('ascii', 'ignore')
@@ -116,6 +117,8 @@ def create_issue_body(arr_of_dict, meta_info_header="", meta_info_footer=""):
     out_buffer.close()
     return body
 
+github_repos = {}
+
 def migrate_issue(issue, lookup_table, github_password, dry_run=False):
     if not extract_project_labels(issue):
         return
@@ -127,6 +130,22 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
         return
 
     print '<!-- LOOKUP PROJECT_NAME:{}\t\t\t\tGITHUB_URL:{} -->'.format(issue["project"], github_repo_url)
+
+    if not github_repo_url in github_repos:
+        github_repos[github_repo_url] = []
+
+        # NOTE: create googlecode.com label-s in this repo, UNFORTUNATELLY there seem to be a github label BUG
+        #       for example if "Priority-Medium" label exist-s the API will fail to create label "priority-medium",
+        #       HOWEVER later when you try to assign/use label "priority-medium" it is IGNORED and "Priority-Medium"
+        #       is NOT used - an unfortunate mix/combo of case sensitive AND case insensitive behaviour.
+        #       MOST LIKELY the only foolproof way is to HTTP GET existing labels and check them against your
+        #       label-s you want to create and use.
+        github_repo_create_label_url = github_repo_url + "/labels"
+        for lab in lookup_table["github-labels"]:
+            data = json.dumps({ 'name': lab})
+            res = requests.post(github_repo_create_label_url, data, auth=('mbohun', github_password))
+            # print 'CREATE LABEL {}: {}'.format(lab, res.json())
+            time.sleep(20)
 
     if dry_run:
         return
@@ -153,8 +172,10 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
         return False
 
     created_issue_id = res.json()["number"]
-    github_repo_commenton_issue_url = github_repo_create_issue_url + "/" + str(created_issue_id) + "/comments"
+    github_repo_modify_issue_url = github_repo_create_issue_url + "/" + str(created_issue_id)
+    github_repos[github_repo_url].append({"google": issue["ID"], "github": github_repo_modify_issue_url})
 
+    github_repo_commenton_issue_url = github_repo_create_issue_url + "/" + str(created_issue_id) + "/comments"
     number_of_comments = len(issue["details"])  # hc0 is the issue description, hc1, hc2 ... are the comment-s on the issue
 
     for i in range(1, number_of_comments):
@@ -186,20 +207,31 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
 
     # TODO: although highly unlikely what if data_assignee lookup fails?
     data_assignee = lookup_mapping(issue["Owner"], lookup_table["owner"])
-    data_labels = [
-        "Priority-{}".format(issue["Priority"]), # TODO: merge/normalize synonyms high/High/HIgh, low/Low
-        "Status-{}".format(issue["Status"]),
-        "Type-{}".format(issue["Type"]) # TODO: Type-Enhancement, Type-Defect can be mapped into github existing labels enhancement, bug
-    ]
+
+    data_labels = []
+    input_priority = issue["Priority"]
+    input_status   = issue["Status"]
+    input_type     = issue["Type"]
+
+    if len(input_priority):
+        # TODO: we could check if the lookup table knows this label?
+        data_labels.append("priority-{}".format(input_priority.lower()))
+
+    if len(input_status):
+        # TODO: we could check if the lookup table knows this label?
+        data_labels.append("status-{}".format(input_status.lower()))
+
+    if len(input_type):
+        # TODO: we could check if the lookup table knows this label?
+        data_labels.append("type-{}".format(input_type.lower()))
 
     data = json.dumps({ 'assignee': data_assignee, 'labels': data_labels})
 
-    github_repo_modify_issue_url = github_repo_create_issue_url + "/" + str(created_issue_id)
     res = requests.post(github_repo_modify_issue_url, data, auth=('mbohun', github_password)) # TODO: decide whose/what credentials are going to be used for this step
 
     # TODO: check/handle res
 
-    print '<!-- migrated issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_create_issue_url)
+    print '<!-- migrated issue id={}\t\tto: {} -->'.format(issue["ID"], github_repo_modify_issue_url)
     return True
 
 def migrate_json_issues(args):
@@ -232,6 +264,10 @@ def migrate_json_issues(args):
     print '</body>'
     print '</html>'
     print '<!-- MIGRATED: {} -->'.format(counter)
+
+    # NOTE: simple db/report of what was migrated and where it is on github
+    with io.open('report.json', 'w') as of:
+        of.write(unicode(json.dumps(github_repos, ensure_ascii=False)))
 
 if __name__=="__main__":
         migrate_json_issues(sys.argv[1:])
