@@ -48,7 +48,7 @@ def extract_project_labels(issue):
     if len(project) > 1:
         err = "MULTIPLE PROJECTS ({})".format(project);
 
-    print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"])
+    print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td><td>{}</td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"], issue["Owner"])
     return False
 
 def lookup_mapping(string, table):
@@ -117,14 +117,17 @@ def create_issue_body(arr_of_dict, meta_info_header="", meta_info_footer=""):
     out_buffer.close()
     return body
 
-def migrate_issue(issue, lookup_table, github_password):
+def migrate_issue(issue, lookup_table, github_password, dry_run=False):
     if not extract_project_labels(issue):
         return
 
     github_repo_url        = lookup_mapping(issue["project"], lookup_table["project"])
     if len(github_repo_url) == 0:
         err = 'NO MIGRATION DESTINATION for {}'.format(issue["project"])
-        print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"].encode('utf8'))
+        print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td><td>{}</td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"].encode('utf8'), issue["Owner"])
+        return
+
+    if dry_run:
         return
 
     github_repo_create_issue_url = github_repo_url + "/issues"
@@ -210,11 +213,17 @@ def migrate_json_issues(args):
     print '<html>'
     print '<body>'
     print '<table border="1">'
-    print '<tr><th>issue id</th><th>error description</th><th>link to issue</th></tr>'
+    print '<tr><th>issue id</th><th>error description</th><th>link to issue</th><th>owner</th></tr>'
+
+    dry_run_flag = False
+    if args[len(args)-1] == "--dry-run":
+        dry_run_flag = True
+
+    print '<!-- --dry-run={} -->'.format(dry_run_flag)
 
     counter = 0
     for issue in data:
-        if migrate_issue(issue, lookup_table, args[2]): # args[2] github password is optional - for example if github token-s are used
+        if migrate_issue(issue, lookup_table, args[2], dry_run_flag): # args[2] github password is optional - for example if github token-s are used
             counter += 1
             time.sleep(20) # careful we are limited to 60 request per hour, this should allow for 120 fieldcapture issues test migration
 
