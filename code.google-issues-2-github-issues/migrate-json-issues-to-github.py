@@ -37,16 +37,15 @@ def extract_project_labels(issue):
         if not "SpatialPortal" in project:
             project.append("SpatialPortal")
 
-    if len(project) == 1:
+    if len(project) > 0:
         issue["project"] = project[0]
+        if len(project) > 1:
+            print '<!-- MULTIPLE PROJECTS FOUND:{}, using the first one:{} for migration destination lookup.-->'.format(project, issue["project"])
         return True
 
     # for issues that have 0 or multiple number of projects, print them out:
     if len(project) == 0:
         err = "NO PROJECT"
-
-    if len(project) > 1:
-        err = "MULTIPLE PROJECTS ({})".format(project);
 
     print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td><td>{}</td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"], issue["Owner"])
     return False
