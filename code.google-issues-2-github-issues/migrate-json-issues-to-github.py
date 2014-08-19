@@ -126,6 +126,8 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
         print '<tr><td>{}</td><td>{}</td><td><a href="https://code.google.com/p/ala/issues/detail?id={}">{}</a></td><td>{}</td></tr>'.format(issue["ID"], err, issue["ID"], issue["Summary"].encode('utf8'), issue["Owner"])
         return
 
+    print '<!-- LOOKUP PROJECT_NAME:{}\t\t\t\tGITHUB_URL:{} -->'.format(issue["project"], github_repo_url)
+
     if dry_run:
         return
 
