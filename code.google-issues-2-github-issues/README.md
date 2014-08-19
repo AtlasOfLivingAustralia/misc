@@ -13,6 +13,9 @@ wget -O `date "+%Y-%m-%d"`-ala-google-code-issues-raw.csv https://code.google.co
 
 # or using curl:
 curl -s https://code.google.com/p/ala/issues/csv?num=500 > `date "+%Y-%m-%d"`-ala-google-code-issues-raw.csv
+
+# NOTE: this will sort the issues in the CSV by issue ID
+curl -s https://code.google.com/p/ala/issues/csv\?num=500\&colspec=ID%20Type%20Status%20Priority%20Owner%20Summary%20modified\&sort=id > data/ala-issues-all-2014-08-19.csv.raw
 ```
 #####Chop off the first line form the CSV file (it contains the keys - column names)
 ```BASH
