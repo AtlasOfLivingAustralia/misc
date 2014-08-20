@@ -37,6 +37,99 @@ see [ala-issues-all-2014-08-11.csv.json](https://raw.githubusercontent.com/Atlas
 ####Migrate
 (map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
+example:
+```BASH
+python migrate-json-issues-to-github.py data/ala-issues-all-2014-08-19.csv.json [MIGRATION LOOKUP TABLE in JSON] [GITHUB USER PASSWORD]
+
+# --dry-run (must be the last program argument if used) can be used to preview the migration config/setup, and to see what to expect
+python migrate-json-issues-to-github.py data/ala-issues-all-2014-08-19.csv.json [MIGRATION LOOKUP TABLE in JSON] [GITHUB USER PASSWORD] --dry-run
+```
+
+`[MIGRATION LOOKUP TABLE in JSON]` the mapping and migration is mostly driven by a JSON lookup table in the following format:
+```JSON
+{
+    "project": {
+	"Alerts":         "https://api.github.com/repos/atlasoflivingaustralia/alerts",
+	"ASBP":           "https://api.github.com/repos/atlasoflivingaustralia/asbp-hub",
+	"AUTH":           "https://api.github.com/repos/atlasoflivingaustralia/ala-cas",
+	"AVH":            "https://api.github.com/repos/atlasoflivingaustralia/avh-hub",
+	"BHL":            "https://api.github.com/repos/atlasoflivingaustralia/bhl-ftindexer",
+	"BIE":            "https://api.github.com/repos/atlasoflivingaustralia/bie-webapp2",
+	"biocache":       "https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs",
+	"Biocache":       "https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs",
+	"BVP":            "https://api.github.com/repos/atlasoflivingaustralia/volunteer-portal",
+	"Collectory":     "https://api.github.com/repos/atlasoflivingaustralia/collectory",
+	"Dashboard":      "https://api.github.com/repos/atlasoflivingaustralia/dashboard",
+	"FieldCapture":   "https://api.github.com/repos/atlasoflivingaustralia/fieldcapture",
+	"Geonetwork":     "https://api.github.com/repos/atlasoflivingaustralia/spatial-portal",
+	"Hubs":           "https://api.github.com/repos/atlasoflivingaustralia/biocache-hubs",
+	"ImageService":   "https://api.github.com/repos/atlasoflivingaustralia/image-service",
+	"LayerServices":  "https://api.github.com/repos/atlasoflivingaustralia/layers-service",
+	"Layers":         "https://api.github.com/repos/atlasoflivingaustralia/layers-service",
+	"ListsTool":      "https://api.github.com/repos/atlasoflivingaustralia/specieslist-webapp",
+	"ListTool":       "https://api.github.com/repos/atlasoflivingaustralia/specieslist-webapp",
+	"NameMatching":   "https://api.github.com/repos/atlasoflivingaustralia/ala-name-matching",
+	"names":          "https://api.github.com/repos/atlasoflivingaustralia/ala-name-matching",
+	"OzAtlasAndroid": "https://api.github.com/repos/atlasoflivingaustralia/ozatlas-android",
+	"Regions":        "https://api.github.com/repos/atlasoflivingaustralia/regions",
+	"Sandbox":        "https://api.github.com/repos/atlasoflivingaustralia/sandbox",
+	"Sighitngs":      "https://api.github.com/repos/atlasoflivingaustralia/sightings",
+	"Sightings":      "https://api.github.com/repos/atlasoflivingaustralia/sightings",
+	"SpatialPortal":  "https://api.github.com/repos/atlasoflivingaustralia/spatial-portal",
+	"WEBAPI":         "https://api.github.com/repos/atlasoflivingaustralia/webapi"
+    },
+    "author": {
+	"CoolDa...@gmail.com":   "3c--------users-github_token----------4c",
+	"adam.col...@gmail.com": "fb--------users-github_token----------be",
+	"chris.go...@gmail.com": "f5--------users-github_token----------1a",
+	"david.ba...@gmail.com": "76--------users-github_token----------85",
+	"leebel...@gmail.com"  : "43--------users-github_token----------b1",
+	"mark.woo...@csiro.au" : "0c--------users-github_token----------a2",
+	"moyesyside":            "a3--------users-github_token----------53",
+        "nickdos":               "a5--------users-github_token----------d7",
+	"Sathish....@gmail.com": "f8--------users-github_token----------b4",
+	"simon.b...@csiro.au"  : "82--------users-github_token----------bb"
+    },
+    "owner": {
+	"":                         "djtfmartin",
+	"adam.col...@gmail.com":    "adam-collins",
+	"chris.fl...@gmail.com":    "djtfmartin",
+	"chris.go...@gmail.com":    "chrisala",
+	"CoolDa...@gmail.com":      "pbrenton",
+	"david.ba...@gmail.com":    "davidbairdala",
+	"drdavema...@gmail.com":    "djtfmartin",
+	"john.t...@austmus.gov.au": "djtfmartin",
+	"Kristen....@csiro.au":     "djtfmartin",
+	"leebel...@gmail.com":      "Tasilee",
+	"mark.woo...@csiro.au":     "Markew",
+	"milo_nic...@hotmail.com":  "djtfmartin",
+	"moyesyside":               "djtfmartin",
+	"natasha....@csiro.au":     "djtfmartin",
+	"nickdos":                  "nickdos",
+	"Sathish....@gmail.com":    "sat01a",
+	"simon.b...@csiro.au":      "sbearcsiro",
+	"snom...@gmail.com":        "snomelf",
+	"waterand...@gmail.com":    "djtfmartin"
+    },
+    "github-labels" : [
+        "priority-critical",
+        "priority-high",
+        "priority-low",
+        "priority-medium",
+	"status-accepted",
+	"status-blocked",
+	"status-fixed",
+	"status-new",
+	"status-ondev",
+	"status-started",
+        "type-defect",
+        "type-enhancement",
+        "type-review",
+        "type-task"
+    ]
+}
+```
+
 #####TODO:
 ```
 Normalize (AllLabels strings)
