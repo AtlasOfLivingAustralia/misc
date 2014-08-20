@@ -117,6 +117,8 @@ def create_issue_body(arr_of_dict, meta_info_header="", meta_info_footer=""):
     out_buffer.close()
     return body
 
+# TODO: disgusting - get rid of this ugly last minute hack; in this form it has anyway only a limited use
+#       (if the script is interrupted the info in this {} is not persisted)
 github_repos = {}
 
 def migrate_issue(issue, lookup_table, github_password, dry_run=False):
@@ -135,7 +137,7 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
         return
 
     if not github_repo_url in github_repos:
-        github_repos[github_repo_url] = []
+        github_repos[github_repo_url] = [] # TODO: limited use - see the TODO above github_repos
 
         # NOTE: create googlecode.com label-s in this repo, UNFORTUNATELLY there seem to be a github label BUG
         #       for example if "Priority-Medium" label exist-s the API will fail to create label "priority-medium",
@@ -143,6 +145,9 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
         #       is NOT used - an unfortunate mix/combo of case sensitive AND case insensitive behaviour.
         #       MOST LIKELY the only foolproof way is to HTTP GET existing labels and check them against your
         #       label-s you want to create and use.
+        #
+        # TODO: at least add a simple REST GET existing repo labels and check if your label-s are already created
+        #       otherwise this is going to attampt to create in our case 14 label-s, using sleep(20) after each label
         github_repo_create_label_url = github_repo_url + "/labels"
         for lab in lookup_table["github-labels"]:
             data = json.dumps({ 'name': lab})
