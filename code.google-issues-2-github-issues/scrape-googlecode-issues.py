@@ -5,6 +5,9 @@ import unicodedata
 import requests
 from lxml import html
 
+#TODO: remove *ALL* project specific parts/string-s/URL-s from this script and make
+#      them either configurable/variables, and/or moved them into the migrate script
+# 
 #TODO: if element.attrib.has_key('href'): safer?
 
 def handler_element_a(element, result):
