@@ -131,6 +131,9 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
 
     print '<!-- LOOKUP PROJECT_NAME:{}\t\t\t\tGITHUB_URL:{} -->'.format(issue["project"], github_repo_url)
 
+    if dry_run:
+        return
+
     if not github_repo_url in github_repos:
         github_repos[github_repo_url] = []
 
@@ -146,9 +149,6 @@ def migrate_issue(issue, lookup_table, github_password, dry_run=False):
             res = requests.post(github_repo_create_label_url, data, auth=('mbohun', github_password))
             # print 'CREATE LABEL {}: {}'.format(lab, res.json())
             time.sleep(20)
-
-    if dry_run:
-        return
 
     github_repo_create_issue_url = github_repo_url + "/issues"
 
