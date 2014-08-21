@@ -131,34 +131,34 @@ python migrate-json-issues-to-github.py data/ala-issues-all-2014-08-19.csv.json 
 ```
 
 ```CSV
-ASBP,           asbp-hub
-AUTH,           ala-cas
-AVH,            avh-hub
-Alerts,         alerts
-BHL,            bhl-ftindexer
-BIE,            bie-webapp2
-BVP,            volunteer-portal
-Biocache,       biocache-hubs
-Collectory,     collectory
-Dashboard,      dashboard
-FieldCapture,   fieldcapture
-Geonetwork,     spatial-portal
-Hubs,           biocache-hubs
-ImageService,   image-service
-LayerServices,  layers-service
-Layers,         layers-service
-ListTool,       specieslist-webapp
-ListsTool,      specieslist-webapp
-NameMatching,   ala-name-matching
-OzAtlasAndroid, ozatlas-android
-Regions,        regions
-Sandbox,        sandbox
-Sighitngs,      sightings
-Sightings,      sightings
-SpatialPortal,  spatial-portal
-WEBAPI,         webapi
-biocache,       biocache-hubs
-names,          ala-name-matching
+"ASBP",           "asbp-hub"
+"AUTH",           "ala-cas"
+"AVH",            "avh-hub"
+"Alerts",         "alerts"
+"BHL",            "bhl-ftindexer"
+"BIE",            "bie-webapp2"
+"BVP",            "volunteer-portal"
+"Biocache",       "biocache-hubs"
+"Collectory",     "collectory"
+"Dashboard",      "dashboard"
+"FieldCapture",   "fieldcapture"
+"Geonetwork",     "spatial-portal"
+"Hubs",           "biocache-hubs"
+"ImageService",   "image-service"
+"LayerServices",  "layers-service"
+"Layers",         "layers-service"
+"ListTool",       "specieslist-webapp"
+"ListsTool",      "specieslist-webapp"
+"NameMatching",   "ala-name-matching"
+"OzAtlasAndroid", "ozatlas-android"
+"Regions",        "regions"
+"Sandbox",        "sandbox"
+"Sighitngs",      "sightings"
+"Sightings",      "sightings"
+"SpatialPortal",  "spatial-portal"
+"WEBAPI",         "webapi"
+"biocache",       "biocache-hubs"
+"names",          "ala-name-matching"
 ```
 
 #####TODO:
