@@ -130,7 +130,7 @@ python migrate-json-issues-to-github.py data/ala-issues-all-2014-08-19.csv.json 
 }
 ```
 
-``CSV
+```CSV
 ASBP,           asbp-hub
 AUTH,           ala-cas
 AVH,            avh-hub
@@ -159,7 +159,6 @@ SpatialPortal,  spatial-portal
 WEBAPI,         webapi
 biocache,       biocache-hubs
 names,          ala-name-matching
-
 ```
 
 #####TODO:
