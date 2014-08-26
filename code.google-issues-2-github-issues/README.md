@@ -32,8 +32,6 @@ python scrape-googlecode-issues.py 2014-08-06-ala-google-code-issues.csv
 ```
 see [ala-issues-all-2014-08-11.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/master/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-11.csv.json) for an example.
 
-
-
 ####Migrate
 (map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
