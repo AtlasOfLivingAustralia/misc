@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # TODO: run a requirements check? check for wget, curl, travis client, etc?
+# travis client is /usr/bin/travis2.0 on my openSUSE13.1 laptop, while the mac os x uses /usr/bin/travis
+TRAVIS_CLIENT=/usr/bin/travis2.0
+
+
 
 # WARNING: github is case insensitive, the travis/tavis client *IS* case sensitive
 #          i found out when: 'travis encrypt -r atlasoflivingaustralia/reponame ...' FAILED, while
@@ -44,7 +48,7 @@ rm -rf $TMP_DIR
 mkdir -p $TMP_DIR
 
 # TODO: check logins at the start, do not bother if they failed
-travis login --github-token $GITHUB_TOKEN
+$TRAVIS_CLIENT login --github-token $GITHUB_TOKEN
 
 for repo in `cat $TMPFILE | sed -e 's/^ *"name": "//g' -e 's/",$//g' | sort`
 do
@@ -71,7 +75,7 @@ do
 	for v in $VARS_TO_ENCRYPT
 	do
 	    # encrypt env variables, for example: TRAVIS_DEPLOY_USERNAME, TRAVIS_DEPLOY_PASSWORD, etc.
-	    travis encrypt -a -p -r $GITHUB_USER_ORG/$repo "$v"
+	    $TRAVIS_CLIENT encrypt -a -p -r $GITHUB_USER_ORG/$repo "$v"
 	done
 
 	git add .travis.yml
