@@ -70,8 +70,8 @@ do
 
 	# TODO: make this a proper loop for each "VAR_NAME=value"
 	# encrypt env variables, for example: TRAVIS_DEPLOY_USERNAME, TRAVIS_DEPLOY_PASSWORD, etc.
-	travis -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_USERNAME=deployment"
-	travis -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_PASSWORD=mavenrepo"
+	travis encrypt -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_USERNAME=deployment"
+	travis encrypt -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_PASSWORD=mavenrepo"
 
 	git commit .travis.yml -m "added .travis.yml; encrypted env vars"
     fi
