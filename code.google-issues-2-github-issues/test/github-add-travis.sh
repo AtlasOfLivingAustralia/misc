@@ -73,6 +73,7 @@ do
 	travis encrypt -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_USERNAME=deployment"
 	travis encrypt -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_PASSWORD=mavenrepo"
 
+	git add .travis.yml
 	git commit .travis.yml -m "added .travis.yml; encrypted env vars"
     fi
 
