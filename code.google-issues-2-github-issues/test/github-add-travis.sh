@@ -9,12 +9,12 @@
 GITHUB_USER_ORG="AtlasOfLivingAustralia"
 
 if [ -z "$1" ]; then
-    echo "usage: ./github-add-travis.sh [github-username] [github-token]"
+    echo "usage: ./github-add-travis.sh [github-token]"
     exit 1;
 fi
 
-GITHUB_USERNAME=$1
-GITHUB_TOKEN=$2
+# GITHUB_USERNAME=$1
+GITHUB_TOKEN=$1
 
 temp=`basename $0`
 TMPFILE=`mktemp /tmp/${temp}.XXXXXX` || exit 1
