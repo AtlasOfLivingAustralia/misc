@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: run a requirements check? check for wget, curl, travis client, etc?
+
 # WARNING: github is case insensitive, the travis/tavis client *IS* case sensitive
 #          i found out when: 'travis encrypt -r atlasoflivingaustralia/reponame ...' FAILED, while
 #          'travis encrypt -r AtlasOfLivingAustralia/reponame ...' works OK
@@ -37,15 +39,44 @@ else
 fi
 
 # TODO: remember PWD
-RESULT=./result.out
-echo "" > $RESULT
+TMP_DIR=/tmp/github-add-travis
+rm -rf $TMP_DIR
+mkdir -p $TMP_DIR
+
+# TODO: check logins at the start, do not bother if they failed
+travis login --github-token $GITHUB_TOKEN
 
 for repo in `cat $TMPFILE | sed -e 's/^ *"name": "//g' -e 's/",$//g' | sort`
 do
+    cd $TMP_DIR
+    rm -rf $repo
+
     git clone git@github.com:$GITHUB_USER_ORG/$repo.git
+
     cd $repo
-    if [ ! -e ".travis"]
+    if [ -e ".travis.yml" ]
     then
-	echo "$repo" >> $RESULT 
+	echo "$repo alrady has .travis.yml skipping..."
+	continue
     fi
+
+    # TODO: this should be case statement case: grails or java or whatever...
+
+    # TODO: make this check if is this a grails project safer/specific; grep for grails app?
+    if [ -e "application.properties" ]
+    then
+	# download/copy in the grails project .travis template
+	wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails_template.yml
+
+	# TODO: make this a proper loop for each "VAR_NAME=value"
+	# encrypt env variables, for example: TRAVIS_DEPLOY_USERNAME, TRAVIS_DEPLOY_PASSWORD, etc.
+	travis -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_USERNAME=deployment"
+	travis -a -p -r $GITHUB_USER_ORG/$repo "TRAVIS_DEPLOY_PASSWORD=mavenrepo"
+
+	git commit .travis.yml -m "added .travis.yml; encrypted env vars"
+    fi
+
+    # TODO: pom.xml
+    # if [ -e "pom.xml" ]
+
 done
