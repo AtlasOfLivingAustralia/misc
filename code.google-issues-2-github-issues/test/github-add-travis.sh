@@ -93,7 +93,8 @@ do
     # if README.md does NOT exist (yet) create one
     if [ -e "README.md" ]
     then
-	touch ./README.md
+	touch README.md
+	add README.md
     fi
 
     # does the README.md file already contain travis-i.org build status badge?
