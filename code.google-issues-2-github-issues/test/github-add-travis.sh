@@ -111,4 +111,10 @@ do
     # push/publish all the changes we made
     git push
 
+    # cleanup the working dir; current size of all AtlasOfLivingAustralia github repos clone is 1.8G
+    cd $TMP_DIR
+    rm -rf $repo
 done
+
+# cleanup, TODO: make/add a proper signal handler that is going to do the cleanup?
+rm -rf $TMP_DIR
