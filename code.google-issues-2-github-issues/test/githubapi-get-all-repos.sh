@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$1" ]; then
+if [ -z "$1" ] || [ -z "$2" ]; then
     echo "usage: ./githubapi-get-all-repos.sh [github username] [your github token]"
     exit 1;
 fi
