@@ -10,37 +10,22 @@ TRAVIS_CLIENT=/usr/bin/travis2.0
 #          i found out when: 'travis encrypt -r atlasoflivingaustralia/reponame ...' FAILED, while
 #          'travis encrypt -r AtlasOfLivingAustralia/reponame ...' works OK
 #
-GITHUB_USER_ORG="AtlasOfLivingAustralia"
-
-if [ -z "$1" ] || [ -z "$2" ] || [ ! -e "$2" ] ; then
-    echo "usage: ./github-add-travis.sh [github-token] [environment-variables-file]"
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ ! -e "$3" ] || [ -z "$4" ]; then
+    echo "usage: ./github-add-travis.sh [github-token] [github username/organization] [env var file] [repo0] [repo1] [repo2] ... [repoN]"
     exit 1;
 fi
 
 GITHUB_TOKEN=$1
-VARS_TO_ENCRYPT=`cat $2`
+GITHUB_USER_ORG=$2
+VARS_TO_ENCRYPT=`cat $3`
+
+# args 4, 5, 6 ... N are repo names, so skip the first 3 required/positional args to adjust $@
+shift 3
+GITHUB_REPOS="$@"
+echo $GITHUB_REPOS
 
 temp=`basename $0`
 TMPFILE=`mktemp /tmp/${temp}.XXXXXX` || exit 1
-
-# single page result-s (no pagination), have no Link: section, the grep result is empty
-last_page=`curl -s -I "https://api.github.com/users/$GITHUB_USER_ORG/repos" -H "Authorization: token $GITHUB_TOKEN" | grep '^Link:'`
-
-# does this result use pagination?
-if [ -z "$last_page" ]; then
-    # no - this result has only one page
-    curl -s -i "https://api.github.com/users/$GITHUB_USER_ORG/repos" -H "Authorization: token $GITHUB_TOKEN" | grep '"name":' >> $TMPFILE;
-
-else
-    # yes - this result is on multiple pages; extract the last_page number
-    last_page=`echo $last_page | sed -e 's/^Link:.*page=//g' -e 's/>.*$//g'`
-
-    p=1
-    while [ "$p" -le "$last_page" ]; do
-	curl -s -i "https://api.github.com/users/$GITHUB_USER_ORG/repos?page=$p" -H "Authorization: token $GITHUB_TOKEN" | grep '"name":' >> $TMPFILE
-	p=$(($p + 1))
-    done
-fi
 
 # TODO: remember PWD
 TMP_DIR=$PWD/github-add-travis
@@ -50,7 +35,7 @@ mkdir -p $TMP_DIR
 # TODO: check logins at the start, do not bother if they failed
 $TRAVIS_CLIENT login --github-token $GITHUB_TOKEN
 
-for repo in `cat $TMPFILE | sed -e 's/^ *"name": "//g' -e 's/",$//g' | sort`
+for repo in $GITHUB_REPOS
 do
     cd $TMP_DIR
     rm -rf $repo
@@ -61,6 +46,7 @@ do
     if [ -e ".travis.yml" ]
     then
 	echo "$repo alrady has .travis.yml skipping..."
+	echo
 	continue
     fi
 
@@ -114,7 +100,6 @@ do
     # cleanup the working dir; current size of all AtlasOfLivingAustralia github repos clone is 1.8G
     cd $TMP_DIR
     rm -rf $repo
-done
+    echo
 
-# cleanup, TODO: make/add a proper signal handler that is going to do the cleanup?
-rm -rf $TMP_DIR
+done
