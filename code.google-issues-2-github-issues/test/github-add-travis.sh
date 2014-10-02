@@ -43,7 +43,7 @@ else
 fi
 
 # TODO: remember PWD
-TMP_DIR=/tmp/github-add-travis
+TMP_DIR=$PWD/github-add-travis
 rm -rf $TMP_DIR
 mkdir -p $TMP_DIR
 
