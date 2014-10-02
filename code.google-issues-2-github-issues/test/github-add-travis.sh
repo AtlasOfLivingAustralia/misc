@@ -57,6 +57,10 @@ do
     then
 	# download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
 	wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails_template.yml
+
+	# TODO: for grails
+	#  < 2.3: echo "plugins.maven-publisher=0.8.1" >> application.properties
+	# >= 2.3: add 'build ":release:3.0.1"' to grails-app/conf/BuildConfig.groovy
     fi
 
     if [ -e "pom.xml" ]
