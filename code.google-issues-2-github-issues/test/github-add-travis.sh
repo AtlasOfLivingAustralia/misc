@@ -90,6 +90,18 @@ do
 
     # TODO: add support for more project types (android/gradle, etc.)
 
+    # this is a simple guard/check if we were successful in identifying/determing the type of app/project (for now only grails and pom.xml based apps/projects
+    # are supported/handled); in other words if at this stage there was no .travis.yml file created, there is not much we could do, as in no need to encrypt
+    # env vars, no need to add travis-ci.org build status badge to the README.md file; there are no new/added, nor any modified files, nothing to do, skip.
+    if [ ! -e ".travis.yml" ]
+    then
+	echo "$repo: project type unknown, skipping..."
+	echo
+	cd $TMP_DIR
+	rm -rf $repo
+	continue
+    fi
+
     # encrypt and add env variables to .travis.yml
     for v in $VARS_TO_ENCRYPT
     do
