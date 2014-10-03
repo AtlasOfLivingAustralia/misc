@@ -24,11 +24,7 @@ shift 3
 GITHUB_REPOS="$@"
 echo $GITHUB_REPOS
 
-temp=`basename $0`
-TMPFILE=`mktemp /tmp/${temp}.XXXXXX` || exit 1
-
-# TODO: remember PWD
-TMP_DIR=$PWD/github-add-travis
+TMP_DIR=/tmp/github-add-travis
 rm -rf $TMP_DIR
 mkdir -p $TMP_DIR
 
