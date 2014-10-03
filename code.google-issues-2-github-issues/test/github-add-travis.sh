@@ -107,6 +107,10 @@ do
 	continue
     fi
 
+    # enable travis-ci.org support for this github project; this is to avoid the need to use manually the travis-ci.org webinterface/GUI flipping
+    # the ON/OFF button to enable travis-ci.org; if travis-ci.org is already enabled this call has no effect.
+    $TRAVIS_CLIENT enable --org --no-interactive
+
     # encrypt and add env variables to .travis.yml
     for v in $VARS_TO_ENCRYPT
     do
