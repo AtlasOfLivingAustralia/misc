@@ -78,8 +78,13 @@ do
 	else
 	    echo "GRAILS NEW (>= 2.3)"
 	    # TODO: grep/check if the plugin is already included in grails-app/conf/BuildConfig.groovy, if not add it:
-	    sed -e 's/^    plugins {/    plugins {\n        build ":release:3\.0\.1"\n/g' \
-		grails-app/conf/BuildConfig.groovy > grails-app/conf/BuildConfig.groovy
+#	    cat grails-app/conf/BuildConfig.groovy | sed -e 's/^    plugins {/    plugins {\n        build ":release:3\.0\.1"\n/g' \
+#		> grails-app/conf/BuildConfig.groovy
+
+	    # NOTE: mac os x uses nonGNU sed, and that is refusing to use \n for newline in RHS
+	    cat grails-app/conf/BuildConfig.groovy | sed 's/^    plugins {/    plugins {~        build ":release:3\.0\.1"/; y/~/\n/;' > tmp.groovy
+	    mv tmp.groovy grails-app/conf/BuildConfig.groovy
+
 	fi
     fi
 
