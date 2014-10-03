@@ -47,6 +47,8 @@ do
     then
 	echo "$repo alrady has .travis.yml skipping..."
 	echo
+	cd $TMP_DIR
+	rm -rf $repo
 	continue
     fi
 
@@ -85,11 +87,11 @@ do
 	touch README.md
     fi
 
-    # does the README.md file already contain travis-i.org build status badge?
+    # does the README.md file already contain travis-ci.org build status badge?
     grep "\[\!\[Build Status\](https://travis-ci.org/$GITHUB_USER_ORG/$repo\.svg)\]" ./README.md
     if [ "$?" = "1" ]
     then
-	# NOTE: given this is not a fully automated process, we do not handle bracnhes, etc. the README.md needs to be adjusted manually
+	# NOTE: given this is not a fully automated process, we do not handle bracnhes, etc. the README.md may need to be adjusted manually
 	echo "### $repo   [![Build Status](https://travis-ci.org/$GITHUB_USER_ORG/$repo.svg?branch=master)](https://travis-ci.org/$GITHUB_USER_ORG/$repo)" >> ./HEADER.md
 	cat README.md >> HEADER.md
 	mv HEADER.md README.md
