@@ -74,6 +74,7 @@ do
 	    echo "GRAILS OLD ( < 2.3)"
 	    # TODO: grep/check if the plugin is already included in application.properties, if not add it:
 	    echo "plugins.maven-publisher=0.8.1" >> application.properties
+	    git add application.properties
 
 	else
 	    echo "GRAILS NEW (>= 2.3)"
@@ -84,6 +85,7 @@ do
 	    # NOTE: mac os x uses nonGNU sed, and that is refusing to use \n for newline in RHS
 	    cat grails-app/conf/BuildConfig.groovy | sed 's/^    plugins {/    plugins {~        build ":release:3\.0\.1"/; y/~/\n/;' > tmp.groovy
 	    mv tmp.groovy grails-app/conf/BuildConfig.groovy
+	    git add grails-app/conf/BuildConfig.groovy
 
 	fi
     fi
