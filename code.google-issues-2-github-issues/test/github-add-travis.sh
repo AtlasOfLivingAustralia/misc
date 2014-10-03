@@ -57,9 +57,6 @@ do
     # TODO: make this check if is this a grails project safer/specific; grep for grails app?
     if [ -e "application.properties" ]
     then
-	# download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
-	wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails_template.yml
-
 	# TODO: for grails
 	#  < 2.3: echo "plugins.maven-publisher=0.8.1" >> application.properties
 	# >= 2.3: add 'build ":release:3.0.1"' to grails-app/conf/BuildConfig.groovy
@@ -72,12 +69,20 @@ do
 
 	if [ "$GRAILS_VERSION_NUMBER" -lt "23" ]; then
 	    echo "GRAILS OLD ( < 2.3)"
+
+	    # download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
+	    wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails-old_template.yml
+
 	    # TODO: grep/check if the plugin is already included in application.properties, if not add it:
 	    echo "plugins.maven-publisher=0.8.1" >> application.properties
 	    git add application.properties
 
 	else
 	    echo "GRAILS NEW (>= 2.3)"
+
+	    # download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
+	    wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails-new_template.yml
+
 	    # TODO: grep/check if the plugin is already included in grails-app/conf/BuildConfig.groovy, if not add it:
 #	    cat grails-app/conf/BuildConfig.groovy | sed -e 's/^    plugins {/    plugins {\n        build ":release:3\.0\.1"\n/g' \
 #		> grails-app/conf/BuildConfig.groovy
