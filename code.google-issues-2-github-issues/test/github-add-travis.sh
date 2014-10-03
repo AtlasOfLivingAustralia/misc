@@ -63,6 +63,24 @@ do
 	# TODO: for grails
 	#  < 2.3: echo "plugins.maven-publisher=0.8.1" >> application.properties
 	# >= 2.3: add 'build ":release:3.0.1"' to grails-app/conf/BuildConfig.groovy
+	GRAILS_VERSION=`grep '^app\.grails\.version=' ./application.properties | sed -e 's/^app\.grails\.version=//g'`
+	echo "GRAILS_VERSION:$GRAILS_VERSION"
+
+	# GRAILS_VERSION_NUMBER:             2.3.11       => 2.3              => 23
+	GRAILS_VERSION_NUMBER=`echo $GRAILS_VERSION | sed -e 's/\.[0-9]*$//g' -e 's/\.//g'`
+	echo "GRAILS_VERSION_NUMBER:$GRAILS_VERSION_NUMBER"
+
+	if [ "$GRAILS_VERSION_NUMBER" -lt "23" ]; then
+	    echo "GRAILS OLD ( < 2.3)"
+	    # TODO: grep/check if the plugin is already included in application.properties, if not add it:
+	    echo "plugins.maven-publisher=0.8.1" >> application.properties
+
+	else
+	    echo "GRAILS NEW (>= 2.3)"
+	    # TODO: grep/check if the plugin is already included in grails-app/conf/BuildConfig.groovy, if not add it:
+	    sed -e 's/^    plugins {/    plugins {\n        build ":release:3\.0\.1"\n/g' \
+		grails-app/conf/BuildConfig.groovy > grails-app/conf/BuildConfig.groovy
+	fi
     fi
 
     if [ -e "pom.xml" ]
