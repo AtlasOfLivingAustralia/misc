@@ -79,10 +79,6 @@ do
 	    # download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
 	    wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails-new_template.yml
 
-	    # TODO: grep/check if the plugin is already included in grails-app/conf/BuildConfig.groovy, if not add it:
-#	    cat grails-app/conf/BuildConfig.groovy | sed -e 's/^    plugins {/    plugins {\n        build ":release:3\.0\.1"\n/g' \
-#		> grails-app/conf/BuildConfig.groovy
-
 	    # NOTE: mac os x uses nonGNU sed, and that is refusing to use \n for newline in RHS
 	    cat grails-app/conf/BuildConfig.groovy | sed 's/^    plugins {/    plugins {~        build ":release:3\.0\.1"/; y/~/\n/;' > tmp.groovy
 	    mv tmp.groovy grails-app/conf/BuildConfig.groovy
