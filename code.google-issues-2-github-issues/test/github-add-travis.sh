@@ -89,7 +89,34 @@ do
 
     if [ -e "pom.xml" ]
     then
+	# download/copy in the java (pom.xml based maven project) template
 	wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-java_template.yml
+
+	# does the pom.xml already have/contain <distributionManagement> ?; if not then add <distributionManagement>
+	grep '</distributionManagement>' ./pom.xml
+	if [ "$?" = "1" ]
+	then
+	    # remove the closing </project> tag first ...
+	    cat pom.xml | sed -e 's/<\/project>//g' > tmp.pom
+	    mv tmp.pom pom.xml
+
+	    # ... and append <distributionManagement> to the end of the pom.xml file
+	    echo "        <distributionManagement>"                                                                       >> pom.xml
+	    echo "                <repository>"                                                                           >> pom.xml
+	    echo "                        <id>ala-repo</id>"                                                              >> pom.xml
+	    echo "                        <name>Internal Releases</name>"                                                 >> pom.xml
+	    echo "                        <url>http://ala-wonder.it.csiro.au/nexus/content/repositories/releases/</url>"  >> pom.xml
+	    echo "                </repository>"                                                                          >> pom.xml
+	    echo "                <snapshotRepository>"                                                                   >> pom.xml
+	    echo "                        <id>ala-repo</id>"                                                              >> pom.xml
+	    echo "                        <name>Internal Releases</name>"                                                 >> pom.xml
+	    echo "                        <url>http://ala-wonder.it.csiro.au/nexus/content/repositories/snapshots/</url>" >> pom.xml
+	    echo "                </snapshotRepository>"                                                                  >> pom.xml
+	    echo "        </distributionManagement>"                                                                      >> pom.xml
+	    echo "</project>"                                                                                             >> pom.xml
+
+	    git add pom.xml
+	fi
     fi
 
     # TODO: add support for more project types (android/gradle, etc.)
