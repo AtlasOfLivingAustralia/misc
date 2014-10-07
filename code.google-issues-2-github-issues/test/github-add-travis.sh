@@ -153,7 +153,7 @@ do
     fi
 
     # does the README.md file already contain travis-ci.org build status badge?
-    grep "\[\!\[Build Status\](https://travis-ci.org/$GITHUB_USER_ORG/$repo\.svg)\]" ./README.md
+    grep 'https://travis-ci\.org/$GITHUB_USER_ORG/$repo\.svg' ./README.md
     if [ "$?" = "1" ]
     then
 	# NOTE: given this is not a fully automated process, we do not handle bracnhes, etc. the README.md may need to be adjusted manually
