@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# we need at least one arg: gihub user/organization
-if [ -z "$1" ]; then
+# we need at least two args: gihub user/organization AND at least one repo name
+if [ -z "$1" ] || [ -z "$2" ]; then
     echo "usage: $0 [github user/organization] repo0 repo1 repo2 ... repoN"
     exit 1;
 fi
