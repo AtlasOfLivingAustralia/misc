@@ -11,14 +11,9 @@ GITHUB_USER_ORG=$1
 # args 2, 3, 4 ... N are repo names, so skip arg1 required/positional args to adjust $@
 shift 1
 GITHUB_REPOS="$@"
-echo $GITHUB_REPOS
 
-TMP_DIR=/tmp/$0
-rm -rf $TMP_DIR
-mkdir -p $TMP_DIR
-
-SUMMARY=$TMP_DIR/summary.md
-rm -rf $SUMMARY
+temp=`basename $0`
+SUMMARY=`mktemp /tmp/${temp}.XXXXXX` || exit 1
 
 # create .md table header
 echo "|repo|travis build status|" >> $SUMMARY
@@ -26,24 +21,17 @@ echo "|:---|:------------------|" >> $SUMMARY
 
 for repo in $GITHUB_REPOS
 do
-    cd $TMP_DIR
-    rm -rf $repo
+    # use curl to check if the repo does have a .travis.yml file
+    http_status=`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/.travis.yml`
 
-    git clone git@github.com:$GITHUB_USER_ORG/$repo.git
-
-    cd $repo
-    if [ ! -e ".travis.yml" ]
+    if [ "$http_status" -ne "200" ]
     then
-	echo "|$repo|N/A|" >> $SUMMARY
+	echo "|[$repo](https://github.com/$GITHUB_USER_ORG/$repo)|N/A|" >> $SUMMARY
 
     else
 	echo "|[$repo](https://github.com/$GITHUB_USER_ORG/$repo)|[![Build Status](https://travis-ci.org/$GITHUB_USER_ORG/$repo.svg?branch=master)](https://travis-ci.org/$GITHUB_USER_ORG/$repo)|" >> $SUMMARY
 
     fi
-
-    # cleanup
-    cd $TMP_DIR
-    rm -rf $repo
 done
 
 cat $SUMMARY
