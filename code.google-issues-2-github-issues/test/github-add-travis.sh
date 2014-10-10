@@ -53,9 +53,9 @@ do
     # TODO: make this check if is this a grails project safer/specific; grep for grails app?
     if [ -e "application.properties" ]
     then
-	# TODO: for grails
-	#  < 2.3: echo "plugins.maven-publisher=0.8.1" >> application.properties
-	# >= 2.3: add 'build ":release:3.0.1"' to grails-app/conf/BuildConfig.groovy
+	# download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
+	wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails_template.yml
+
 	GRAILS_VERSION=`grep '^app\.grails\.version=' ./application.properties | sed -e 's/^app\.grails\.version=//g'`
 	echo "GRAILS_VERSION:$GRAILS_VERSION"
 
@@ -66,9 +66,6 @@ do
 	if [ "$GRAILS_VERSION_NUMBER" -lt "23" ]; then
 	    echo "GRAILS OLD ( < 2.3)"
 
-	    # download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
-	    wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails-old_template.yml
-
 	    # TODO: grep/check if the plugin is already included in application.properties, if not add it:
 	    echo "plugins.maven-publisher=0.8.1" >> application.properties
 	    git add application.properties
@@ -76,10 +73,6 @@ do
 	else
 	    echo "GRAILS NEW (>= 2.3)"
 
-	    # download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
-	    wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails-new_template.yml
-
-	    # NOTE: mac os x uses nonGNU sed, and that is refusing to use \n for newline in RHS
 	    cat grails-app/conf/BuildConfig.groovy | sed 's/^    plugins {/    plugins {~        build ":release:3\.0\.1"/; y/~/\n/;' > tmp.groovy
 	    mv tmp.groovy grails-app/conf/BuildConfig.groovy
 	    git add grails-app/conf/BuildConfig.groovy
