@@ -3,6 +3,7 @@
 # TODO: run a requirements check? check for wget, curl, travis client, etc?
 # travis client is /usr/bin/travis2.0 on my openSUSE13.1 laptop, while the mac os x uses /usr/bin/travis
 TRAVIS_CLIENT=/usr/bin/travis2.0
+OVERWRITE_MODE=0
 
 
 
@@ -41,11 +42,18 @@ do
     cd $repo
     if [ -e ".travis.yml" ]
     then
-	echo "$repo alrady has .travis.yml skipping..."
+	echo "$repo alrady has .travis.yml..."
 	echo
-	cd $TMP_DIR
-	rm -rf $repo
-	continue
+	if [ "$OVERWRITE_MODE" -eq "1" ]; then
+	    echo "OVERWRITE_MODE is ON, replacing/overwriting files..."
+
+	else
+	    echo "OVERWRITE_MODE is OFF, skipping..."
+	    cd $TMP_DIR
+	    rm -rf $repo
+	    continue
+
+	fi
     fi
 
     # TODO: this should be case statement case: grails or java or whatever...
@@ -56,27 +64,29 @@ do
 	# download/copy in the grails project .travis template, TODO: add support for a custom .travis.yml template/boilerplate later
 	wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-grails_template.yml
 
-	GRAILS_VERSION=`grep '^app\.grails\.version=' ./application.properties | sed -e 's/^app\.grails\.version=//g'`
-	echo "GRAILS_VERSION:$GRAILS_VERSION"
+	if [ "$OVERWRITE_MODE" -ne "1" ]; then
+	    GRAILS_VERSION=`grep '^app\.grails\.version=' ./application.properties | sed -e 's/^app\.grails\.version=//g'`
+	    echo "GRAILS_VERSION:$GRAILS_VERSION"
 
-	# GRAILS_VERSION_NUMBER:             2.3.11       => 2.3              => 23
-	GRAILS_VERSION_NUMBER=`echo $GRAILS_VERSION | sed -e 's/\.[0-9]*$//g' -e 's/\.//g'`
-	echo "GRAILS_VERSION_NUMBER:$GRAILS_VERSION_NUMBER"
+	    # GRAILS_VERSION_NUMBER:             2.3.11       => 2.3              => 23
+	    GRAILS_VERSION_NUMBER=`echo $GRAILS_VERSION | sed -e 's/\.[0-9]*$//g' -e 's/\.//g'`
+	    echo "GRAILS_VERSION_NUMBER:$GRAILS_VERSION_NUMBER"
 
-	if [ "$GRAILS_VERSION_NUMBER" -lt "23" ]; then
-	    echo "GRAILS OLD ( < 2.3)"
+	    if [ "$GRAILS_VERSION_NUMBER" -lt "23" ]; then
+		echo "GRAILS OLD ( < 2.3)"
 
-	    # TODO: grep/check if the plugin is already included in application.properties, if not add it:
-	    echo "plugins.maven-publisher=0.8.1" >> application.properties
-	    git add application.properties
+		# TODO: grep/check if the plugin is already included in application.properties, if not add it:
+		echo "plugins.maven-publisher=0.8.1" >> application.properties
+		git add application.properties
 
-	else
-	    echo "GRAILS NEW (>= 2.3)"
+	    else
+		echo "GRAILS NEW (>= 2.3)"
 
-	    cat grails-app/conf/BuildConfig.groovy | sed 's/^    plugins {/    plugins {~        build ":release:3\.0\.1"/; y/~/\n/;' > tmp.groovy
-	    mv tmp.groovy grails-app/conf/BuildConfig.groovy
-	    git add grails-app/conf/BuildConfig.groovy
+		cat grails-app/conf/BuildConfig.groovy | sed 's/^    plugins {/    plugins {~        build ":release:3\.0\.1"/; y/~/\n/;' > tmp.groovy
+		mv tmp.groovy grails-app/conf/BuildConfig.groovy
+		git add grails-app/conf/BuildConfig.groovy
 
+	    fi
 	fi
     fi
 
@@ -85,30 +95,32 @@ do
 	# download/copy in the java (pom.xml based maven project) template
 	wget -q -O .travis.yml https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/doc/travis-java_template.yml
 
-	# does the pom.xml already have/contain <distributionManagement> ?; if not then add <distributionManagement>
-	grep '</distributionManagement>' ./pom.xml
-	if [ "$?" = "1" ]
-	then
-	    # remove the closing </project> tag first ...
-	    cat pom.xml | sed -e 's/<\/project>//g' > tmp.pom
-	    mv tmp.pom pom.xml
+	if [ "$OVERWRITE_MODE" -ne "1" ]; then
+	    # does the pom.xml already have/contain <distributionManagement> ?; if not then add <distributionManagement>
+	    grep '</distributionManagement>' ./pom.xml
+	    if [ "$?" = "1" ]
+	    then
+		# remove the closing </project> tag first ...
+		cat pom.xml | sed -e 's/<\/project>//g' > tmp.pom
+		mv tmp.pom pom.xml
 
-	    # ... and append <distributionManagement> to the end of the pom.xml file
-	    echo "        <distributionManagement>"                                                                       >> pom.xml
-	    echo "                <repository>"                                                                           >> pom.xml
-	    echo "                        <id>ala-repo</id>"                                                              >> pom.xml
-	    echo "                        <name>Internal Releases</name>"                                                 >> pom.xml
-	    echo "                        <url>http://ala-wonder.it.csiro.au/nexus/content/repositories/releases/</url>"  >> pom.xml
-	    echo "                </repository>"                                                                          >> pom.xml
-	    echo "                <snapshotRepository>"                                                                   >> pom.xml
-	    echo "                        <id>ala-repo</id>"                                                              >> pom.xml
-	    echo "                        <name>Internal Releases</name>"                                                 >> pom.xml
-	    echo "                        <url>http://ala-wonder.it.csiro.au/nexus/content/repositories/snapshots/</url>" >> pom.xml
-	    echo "                </snapshotRepository>"                                                                  >> pom.xml
-	    echo "        </distributionManagement>"                                                                      >> pom.xml
-	    echo "</project>"                                                                                             >> pom.xml
+		# ... and append <distributionManagement> to the end of the pom.xml file
+		echo "        <distributionManagement>"                                                                       >> pom.xml
+		echo "                <repository>"                                                                           >> pom.xml
+		echo "                        <id>ala-repo</id>"                                                              >> pom.xml
+		echo "                        <name>Internal Releases</name>"                                                 >> pom.xml
+		echo "                        <url>http://ala-wonder.it.csiro.au/nexus/content/repositories/releases/</url>"  >> pom.xml
+		echo "                </repository>"                                                                          >> pom.xml
+		echo "                <snapshotRepository>"                                                                   >> pom.xml
+		echo "                        <id>ala-repo</id>"                                                              >> pom.xml
+		echo "                        <name>Internal Releases</name>"                                                 >> pom.xml
+		echo "                        <url>http://ala-wonder.it.csiro.au/nexus/content/repositories/snapshots/</url>" >> pom.xml
+		echo "                </snapshotRepository>"                                                                  >> pom.xml
+		echo "        </distributionManagement>"                                                                      >> pom.xml
+		echo "</project>"                                                                                             >> pom.xml
 
-	    git add pom.xml
+		git add pom.xml
+	    fi
 	fi
     fi
 
@@ -146,8 +158,8 @@ do
     fi
 
     # does the README.md file already contain travis-ci.org build status badge?
-    grep 'https://travis-ci\.org/$GITHUB_USER_ORG/$repo\.svg' ./README.md
-    if [ "$?" = "1" ]
+    grep "https://travis-ci\.org/$GITHUB_USER_ORG/$repo\.svg" ./README.md
+    if [ "$?" -eq "1" ]
     then
 	# NOTE: given this is not a fully automated process, we do not handle bracnhes, etc. the README.md may need to be adjusted manually
 	echo "### $repo   [![Build Status](https://travis-ci.org/$GITHUB_USER_ORG/$repo.svg?branch=master)](https://travis-ci.org/$GITHUB_USER_ORG/$repo)" >> ./HEADER.md
@@ -156,7 +168,7 @@ do
 	git add README.md
     fi
 
-    git commit -m "GENERATED: adding travis-ci.org support"
+    git commit -m "GENERATED: adding travis-ci.org support (OVERWRITE_MODE=$OVERWRITE_MODE)"
 
     # push/publish all the changes we made
     git push
