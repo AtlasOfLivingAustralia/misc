@@ -142,6 +142,15 @@ do
     # the ON/OFF button to enable travis-ci.org; if travis-ci.org is already enabled this call has no effect.
     $TRAVIS_CLIENT enable --org --no-interactive
 
+    # TODO: add support for setting (un-encrypted) env variables: '$TRAVIS_CLIENT env set NAME VALUE',
+    #       for example: '$TRAVIS_CLIENT env set ALA_MAVEN_REPO_HOST ala-wonder.it.csiro.au'
+    #       HOWEVER when i just tested this it *did* encrpyt the env vars too, so we might simply generate a list of those directly into
+    #       .travis.yml env global section at this spot (before running travis encrypt):
+    #       env:
+    #         global:
+    #           - ALA_MAVEN_REPO_HOST=ala-wonder.it.csiro.au
+    #           - ALA_MAVEN_REPO_PORT=80
+
     # encrypt and add env variables to .travis.yml
     for v in $VARS_TO_ENCRYPT
     do
