@@ -142,11 +142,14 @@ do
     # the ON/OFF button to enable travis-ci.org; if travis-ci.org is already enabled this call has no effect.
     $TRAVIS_CLIENT enable --org --no-interactive
 
+    # do NOT attempt a trais-ci.org build if there is no .travis.yml file present in the repo
+    $TRAVIS_CLIENT settings builds_only_with_travis_yml --enable --no-interactive
+
     # do NOT build pull requests from travis-ci.org, OR alternatively leave this setting enabled AND use the TRAVIS_PULL_REQUEST env var
     # passed/populated by travis-ci.org; for example if TRAVIS_PULL_REQUEST is set to "true" you can build a pull request BUT skip
     # the deployment from travis-ci.org into your (remote) maven repo.
     #
-    $TRAVIS_CLIENT settings build_pull_requests --disable
+    $TRAVIS_CLIENT settings build_pull_requests --disable --no-interactive
 
     # TODO: add support for setting (un-encrypted) env variables: '$TRAVIS_CLIENT env set NAME VALUE',
     #       for example: '$TRAVIS_CLIENT env set ALA_MAVEN_REPO_HOST ala-wonder.it.csiro.au'
