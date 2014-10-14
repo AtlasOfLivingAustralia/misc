@@ -138,6 +138,12 @@ do
 	continue
     fi
 
+    # do NOT build pull requests from travis-ci.org, OR alternatively leave this setting enabled AND use the TRAVIS_PULL_REQUEST env var
+    # passed/populated by travis-ci.org; for example if TRAVIS_PULL_REQUEST is set to "true" you can build a pull request BUT skip
+    # the deployment from travis-ci.org into your (remote) maven repo.
+    #
+    $TRAVIS_CLIENT settings build_pull_requests --disable
+
     # enable travis-ci.org support for this github project; this is to avoid the need to use manually the travis-ci.org webinterface/GUI flipping
     # the ON/OFF button to enable travis-ci.org; if travis-ci.org is already enabled this call has no effect.
     $TRAVIS_CLIENT enable --org --no-interactive
