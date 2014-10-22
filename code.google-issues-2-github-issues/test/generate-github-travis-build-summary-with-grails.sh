@@ -16,8 +16,8 @@ temp=`basename $0`
 SUMMARY=`mktemp /tmp/${temp}.XXXXXX` || exit 1
 
 # create .md table header
-echo "|repo|travis build status|grails|" >> $SUMMARY
-echo "|:---|:------------------|:-----|" >> $SUMMARY
+echo "|repo|version|travis build status|grails|" >> $SUMMARY
+echo "|:---|:------|:------------------|:-----|" >> $SUMMARY
 
 for repo in $GITHUB_REPOS
 do
@@ -38,15 +38,26 @@ do
     # default to N/A, not a grails project
     GRAILSVERSION="N/A"
 
+    # jar/war version number
+    ARTIFACT_VERSION_NUMBER="N/A"
+
     # use curl to check if the repo does have an application.properties file, and if yes extract the grails version number
     application_properties=`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/application.properties`
 
-    if [ "$application_properties" -eq "200" ]
-    then
+    # use curl to check if the repo does have an application.properties file
+    pom_xml=`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/pom.xml`
+
+    if [ "$application_properties" -eq "200" ]; then
 	GRAILSVERSION=`curl -s https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/application.properties | grep '^\s*app.grails.version' | sed -e 's/^\s*app\.grails\.version=//g' | tr -d "\r"`
+
+	ARTIFACT_VERSION_NUMBER=`curl -s https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/application.properties | grep '^\s*app.version' | sed -e 's/^\s*app\.version=//g' | tr -d "\r"`
+
+    elif [ "$pom_xml" -eq "200" ]; then
+	ARTIFACT_VERSION_NUMBER=`curl -s https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/pom.xml | grep -m 1 '^\s*<version>' | sed -e 's/^.*<version>//g' -e 's/<\/.*$//g' | tr -d "\r"`
+
     fi
 
-    echo "|[$repo](https://github.com/$GITHUB_USER_ORG/$repo)|$TRAVIS_BADGE|$GRAILSVERSION|" >> $SUMMARY
+    echo "|[$repo](https://github.com/$GITHUB_USER_ORG/$repo)|$ARTIFACT_VERSION_NUMBER|$TRAVIS_BADGE|$GRAILSVERSION|" >> $SUMMARY
 
 done
 
