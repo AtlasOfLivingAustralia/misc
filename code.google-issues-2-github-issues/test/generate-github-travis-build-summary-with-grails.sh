@@ -24,19 +24,22 @@ do
     # default to N/A, not available, no travi-ci.org build status badge
     TRAVIS_BADGE="N/A"
 
-    # default to N/A, not a grails project
-    GRAILSVERSION="N/A"
-
     # use curl to check if the repo does have a .travis.yml file
     http_status=`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/.travis.yml`
-
-    # use curl to check if the repo does have an application.properties file, and if yes extract the grails version number
-    application_properties=`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/application.properties`
 
     if [ "$http_status" -eq "200" ]
     then
 	TRAVIS_BADGE="[![Build Status](https://travis-ci.org/$GITHUB_USER_ORG/$repo.svg?branch=master)](https://travis-ci.org/$GITHUB_USER_ORG/$repo)"
+    else
+	# this is not a travis project
+	continue
     fi
+
+    # default to N/A, not a grails project
+    GRAILSVERSION="N/A"
+
+    # use curl to check if the repo does have an application.properties file, and if yes extract the grails version number
+    application_properties=`curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/$GITHUB_USER_ORG/$repo/master/application.properties`
 
     if [ "$application_properties" -eq "200" ]
     then
