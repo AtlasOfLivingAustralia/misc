@@ -202,7 +202,7 @@ git svn clone http://ala-volunteer.googlecode.com/svn --tags=tags --authors-file
 git svn clone http://ala-dashboard.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/dashboard -s dashboard.git
 
 git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/fielddata -s fielddata.git
-git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sightings -s sightings.git
+git svn clone http://ala-sightings.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/sightings/trunk -s sightings.git
 
 git svn clone http://ala-visualexplorer.googlecode.com/svn --tags=tags --authors-file=./authors-file.out --trunk=trunk/tviewer -s tviewer.git
 
