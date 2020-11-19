@@ -1,11 +1,11 @@
-###OBJECTIVE
+### OBJECTIVE
 Migrate [Atlas of Living Australia](http://www.ala.org.au) issues (issue tracker) from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list) to [https://github.com/AtlasOfLivingAustralia](https://github.com/AtlasOfLivingAustralia)
 
-###PROBLEM
+### PROBLEM
 Google did disable the API for google code issues one year ago, so we can't simply use their API to get the issues in JSON format - we will have to roll our own, and most likely 'scrape' the information we want to migrate from the google code issues HTML pages.
 
-###SOLUTION
-#####Download your google issues (for example: [https://code.google.com/p/ala/issues](https://code.google.com/p/ala/issues)) in CSV format:
+### SOLUTION
+##### Download your google issues (for example: [https://code.google.com/p/ala/issues](https://code.google.com/p/ala/issues)) in CSV format:
 ```BASH
 # easy way to download "all" issues as one CSV file (we have 321 issues in total,
 # the following will attempt to download up to 500 into one .csv file)
@@ -17,14 +17,14 @@ curl -s https://code.google.com/p/ala/issues/csv?num=500 > `date "+%Y-%m-%d"`-al
 # NOTE: this will sort the issues in the CSV by issue ID
 curl -s https://code.google.com/p/ala/issues/csv\?num=500\&colspec=ID%20Type%20Status%20Priority%20Owner%20Summary%20modified\&sort=id > data/ala-issues-all-2014-08-19.csv.raw
 ```
-#####Chop off the first line form the CSV file (it contains the keys - column names)
+##### Chop off the first line form the CSV file (it contains the keys - column names)
 ```BASH
 # NOTE: one could modify the python script to use the first line to read the key
 # names instead of having them hardcoded in the python; that would eliminate the
 # need for this deletion too.
 tail -n +2 2014-08-06-ala-google-code-issues-raw.csv > 2014-08-06-ala-google-code-issues.csv
 ```
-#####Pass the CVS file to [scrape-googlecode-issues.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/scrape-googlecode-issues.py) script to scrape the issue details from code.google.com this will generate a JSON output file containing the scraped issues:
+##### Pass the CVS file to [scrape-googlecode-issues.py](https://github.com/AtlasOfLivingAustralia/misc/blob/master/code.google-issues-2-github-issues/scrape-googlecode-issues.py) script to scrape the issue details from code.google.com this will generate a JSON output file containing the scraped issues:
 ```BASH
 python scrape-googlecode-issues.py 2014-08-06-ala-google-code-issues.csv
 # creates:
@@ -32,7 +32,7 @@ python scrape-googlecode-issues.py 2014-08-06-ala-google-code-issues.csv
 ```
 see [ala-issues-all-2014-08-11.csv.json](https://raw.githubusercontent.com/AtlasOfLivingAustralia/misc/master/code.google-issues-2-github-issues/data/ala-issues-all-2014-08-11.csv.json) for an example.
 
-####Migrate
+#### Migrate
 (map & upload) the issues from the JSON file to github issues using the [github api v3](https://developer.github.com/v3)
 
 example:
@@ -159,7 +159,7 @@ python migrate-json-issues-to-github.py data/ala-issues-all-2014-08-19.csv.json 
 "names",          "ala-name-matching"
 ```
 
-#####TODO:
+##### TODO:
 ```
 Normalize (AllLabels strings)
 examples:
@@ -381,7 +381,7 @@ curl --user "mbohun" --request POST --data '{ "body": "\nEscalating the priority
 |details/hc1/comment [1]|body          |
 1. body: is created from the info stored in details/hc1/comment
 
-#####github API change issue
+##### github API change issue
 issue label (priority changes from the original Priority-High to Priority-Critical), other existing labels (in this case `enhancement`) need to be preserved!
 ```BASH
 curl --user "mbohun" --request POST --data '{ "labels": ["Priority-Critical", "enhancement"] }' https://api.github.com/repos/AtlasOfLivingAustralia/fieldcapture/issues/1
@@ -446,7 +446,7 @@ OLDER info/notes:
 cat ala-issues-all-2014-07-15.csv.json | python -m json.tool
 ```
 ##### get the name-s of all available project-s extracted from [https://code.google.com/p/ala/issues/list](https://code.google.com/p/ala/issues/list); each of these has to be mapped into a destination - a github repo name where you want to migrate the issue for that project (for example all issues from our code.google.com issue tracker tagged with `"project": "FieldCapture"` will be migrated to [https://github.com/AtlasOfLivingAustralia/fieldcapture/issues](https://github.com/AtlasOfLivingAustralia/fieldcapture/issues))
-####NOTE: THIS IS OUTDATED, THE "project" JSON field creation/assignment was moved from SCRAPING to MIGRATION script
+#### NOTE: THIS IS OUTDATED, THE "project" JSON field creation/assignment was moved from SCRAPING to MIGRATION script
 ```BASH
 cat ala-issues-all-2014-07-17.csv.json | python -m json.tool | grep -e "\"project\"" | sort |uniq
         "project": "Alerts"
