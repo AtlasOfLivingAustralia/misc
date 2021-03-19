@@ -1,4 +1,4 @@
-###prepare
+### prepare
 1. `cd ~/src`
 2. `svn co http://ala-hubs.googlecode.com/svn ala-hubs_svn`
 3. `cd ala-hubs_svn`
@@ -18,7 +18,7 @@ chris.flemming.ala@gmail.com = cflemming <chris.flemming.github@gmail.com>
 ```
 the `authors-file.out` mapping file is used in the `git svn clone ...` step; see the step `3.` bellow. NOTE: _It is a good idea (in fact required if your svn repo contains commits from '(no author)' to set a mapping for '(no author)' as shown in the example above)._
 
-###migrate
+### migrate
 1. in the web browser go to your github page and create a new repository, in this case: `ala-hub` `git@github.com:AtlasOfLivingAustralia/ala-hub.git`
 2. `cd ~/src`
 3. `git svn clone http://ala-hubs.googlecode.com/svn --trunk=trunk/ala-hub --tags=tags --authors-file=./authors-file.out -s ala-hub.git`
@@ -29,16 +29,16 @@ the `authors-file.out` mapping file is used in the `git svn clone ...` step; see
 8. `git push origin --all`
 9. `git push origin --tags`
 
-###test
+### test
 * `cd ~/src`
 * `git clone git@github.com:AtlasOfLivingAustralia/ala-hub.git`
 * `cd ala-hub`
 * `git remote show origin`
 * etc.
 
-###advanced
+### advanced
 
-####pre-processing/filtering the svn repo with svndumpfilter prior to importing to git/github
+#### pre-processing/filtering the svn repo with svndumpfilter prior to importing to git/github
 
 ```BASH
 # PROBLEM:
